@@ -1,0 +1,35 @@
+{
+    "version": "0.0.1",
+    "words":[
+        {
+            "word": "Cardiology",
+            "prefix": "Cardio",
+            "root": "log",
+            "suffix": "y",
+            "meaning": "Study of the heart",
+            "explanation": "Cardio- means heart, -logy means study of",
+            "chineseTranslation": "心脏病学",
+            "category": "cardiovascular"
+        },
+        {
+            "word": "Hypertension",
+            "prefix": "Hyper",
+            "root": "tension",
+            "suffix": "",
+            "meaning": "High blood pressure",
+            "explanation": "Hyper- means high, -tension means pressure",
+            "chineseTranslation": "高血压",
+            "category": "cardiovascular"
+        },
+        {
+            "word": "Diabetes",
+            "prefix": "Diab",
+            "root": "etes",
+            "suffix": "",
+            "meaning": "High blood sugar",
+            "explanation": "Diab- means high, -etes means sugar",
+            "chineseTranslation": "糖尿病",
+            "category": "endocrine"
+        }
+    ]
+}
