@@ -26,7 +26,7 @@ class SyncData {
   static Future<void> downloadWordList(BodySystem bodySystem) async {
     final dio = Dio();
     final categoryUrl = '${baseUrl}${bodySystem.name}.json';
-    print('categoryUrl: $categoryUrl');
+    print('[SyncData] categoryUrl: $categoryUrl');
     final response = await dio.get(categoryUrl);
     final data = jsonDecode(response.data.toString()) as Map<String, dynamic>;
     
@@ -34,6 +34,11 @@ class SyncData {
     List<MedWord> words = (data['words'] as List).map((e) => MedWord.fromMap(e)).toList();
     for (var word in words) {
       await databaseService.insertWord(word);
+      print('[SyncData] inserted word: ${word.word}');
     }
+
+    // print all words in database
+    final allWords = await databaseService.words();
+    print('[SyncData] all words: ${allWords.map((e) => e.chineseTranslation).join(', ')}');
   }
 }

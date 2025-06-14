@@ -29,6 +29,11 @@ class Preferences extends ChangeNotifier {
     return _wordListVersion;
   }
 
+  Future<List<BodySystem>> get bodySystems async {
+    await _loading;
+    return _bodySystems.toList();
+  }
+
   Future<void> restoreDefaults() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
@@ -66,20 +71,19 @@ class Preferences extends ChangeNotifier {
     
     // local wordListOnlineVersion
     final wordListOnlineVersion = await SyncData.getOnlineWordListVersion();
-    print('wordListOnlineVersion: $wordListOnlineVersion');
+    print('[Preferences] wordListOnlineVersion: $wordListOnlineVersion');
     //if (wordListOnlineVersion != _wordListVersion) {
       _wordListVersion = wordListOnlineVersion;
       final categories = await SyncData.getOnlineCategories();
-      print('categories: $categories');
+      print('[Preferences] categories: $categories');
       
       for (final category in categories) {
-        print('category: $category');
+        print('[Preferences] category: $category');
         final bodySystem = BodySystem.values.firstWhere((e) => e.name == category,
         orElse: () => BodySystem.general);
         _bodySystems.add(bodySystem);
         SyncData.downloadWordList(bodySystem);
       }
-      print('bodySystems: $_bodySystems');
       await _saveToSharedPrefs();
     //}
     
