@@ -1,7 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart' show DeviceOrientation, SystemChrome;
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
 
 import 'styles.dart';
+import 'data/app_state.dart';
+import 'data/preferences.dart';
+import 'widgets/med_term_page.dart';
+import 'screens/home.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,42 +17,37 @@ void main() {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  runApp(const RootRestorationScope(restorationId: 'root', child: MyApp()));
+  runApp(const RootRestorationScope(restorationId: 'root', child: MedTermApp()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MedTermApp extends StatefulWidget {
+  const MedTermApp({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return CupertinoApp(
-      title: 'Flutter Demo',
-      theme: Styles.veggieThemeData,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+  State<MedTermApp> createState() => _MedTermAppState();
+}
+
+
+final _rootNavigatorKey = GlobalKey<NavigatorState>();
+final _shellNavigatorKey = GlobalKey<NavigatorState>();
+
+class _MedTermAppState extends State<MedTermApp> with RestorationMixin {
+  final _RestorableAppState _appState = _RestorableAppState();
+
+  @override
+  String get restorationId => 'wrapper';
+
+  @override
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+    registerForRestoration(_appState, 'state');
   }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+  void dispose() {
+    _appState.dispose();
+    super.dispose();
+  }
 
-class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -66,29 +69,153 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text(widget.title),
-      ),
-      child: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text('You have pushed the button this many times:'),
-              Text(
-                '$_counter',
-                style: const TextStyle(fontSize: 24),
-              ),
-              const SizedBox(height: 20),
-              CupertinoButton(
-                onPressed: _incrementCounter,
-                child: const Icon(CupertinoIcons.add),
-              ),
-            ],
-          ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(value: _appState.value),
+        ChangeNotifierProvider(create: (_) => Preferences()..load()),
+      ],
+      child: CupertinoApp.router(
+        theme: Styles.veggieThemeData,
+        debugShowCheckedModeBanner: false,
+        restorationScopeId: 'app',
+        routerConfig: GoRouter(
+          navigatorKey: _rootNavigatorKey,
+          restorationScopeId: 'router',
+          initialLocation: '/list',
+          redirect: (context, state) {
+            if (state.path == '/') {
+              return '/list';
+            }
+            return null;
+          },
+          debugLogDiagnostics: true,
+          routes: [
+            ShellRoute(
+              navigatorKey: _shellNavigatorKey,
+              pageBuilder: (context, state, child) {
+                return CupertinoPage(
+                  restorationId: 'router.shell',
+                  child: HomeScreen(
+                    restorationId: 'home',
+                    child: child,
+                    onTap: (index) {
+                      if (index == 0) {
+                        context.go('/list');
+                      } else if (index == 1) {
+                        context.go('/favorites');
+                      } else if (index == 2) {
+                        context.go('/search');
+                      } else {
+                        context.go('/settings');
+                      }
+                    },
+                  ),
+                );
+              },
+              routes: [
+                GoRoute(
+                  path: '/list',
+                  pageBuilder: (context, state) {
+                    return MedTermPage(
+                      key: state.pageKey,
+                      restorationId: 'route.list',
+                      child: Text('TODO Widget'),
+                    );
+                  },
+                  routes: [_buildDetailsRoute()],
+                ),
+                GoRoute(
+                  path: '/favorites',
+                  pageBuilder: (context, state) {
+                    return MedTermPage(
+                      key: state.pageKey,
+                      restorationId: 'route.favorites',
+                      child: const Text('TODO Widget'),
+                    );
+                  },
+                  routes: [_buildDetailsRoute()],
+                ),
+                GoRoute(
+                  path: '/search',
+                  pageBuilder: (context, state) {
+                    return MedTermPage(
+                      key: state.pageKey,
+                      restorationId: 'route.search',
+                      child: const Text('TODO Widget'),
+                    );
+                  },
+                  routes: [_buildDetailsRoute()],
+                ),
+                GoRoute(
+                  path: '/settings',
+                  pageBuilder: (context, state) {
+                    return MedTermPage(
+                      key: state.pageKey,
+                      restorationId: 'route.settings',
+                      child: const Text('TODO Widget'),
+                    );
+                  },
+                  routes: [
+                    GoRoute(
+                      parentNavigatorKey: _rootNavigatorKey,
+                      path: 'categories',
+                      pageBuilder: (context, state) {
+                        return const CupertinoPage(child: Text('TODO Page'));
+                      },
+                    ),
+                    GoRoute(
+                      parentNavigatorKey: _rootNavigatorKey,
+                      path: 'calories',
+                      pageBuilder: (context, state) {
+                        return CupertinoPage(child: Text('TODO Page'));
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
+  }
+
+  // GoRouter does not support relative routes,
+  // see https://github.com/flutter/flutter/issues/108177
+  GoRoute _buildDetailsRoute() {
+    return GoRoute(
+      parentNavigatorKey: _rootNavigatorKey,
+      path: 'details/:id',
+      pageBuilder: (context, state) {
+        final veggieId = int.parse(state.pathParameters['id']!);
+        return CupertinoPage(
+          restorationId: 'route.details',
+          child: const Text('TODO Widget'),
+        );
+      },
+    );
+  }
+}
+
+
+class _RestorableAppState extends RestorableListenable<AppState> {
+  @override
+  AppState createDefaultValue() {
+    return AppState();
+  }
+
+  @override
+  AppState fromPrimitives(Object? data) {
+    final appState = AppState();
+    final favorites = (data as List<dynamic>).cast<int>();
+    for (var id in favorites) {
+      appState.setFavorite(id, true);
+    }
+    return appState;
+  }
+
+  @override
+  Object toPrimitives() {
+    return value.favoriteVeggies.map((veggie) => veggie.id).toList();
   }
 }
