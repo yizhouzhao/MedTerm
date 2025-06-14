@@ -6,48 +6,27 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dio/dio.dart';
 import 'veggie.dart';
+
+import '../utils/sync_data.dart';
+import '../models/word.dart';
 
 /// A model class that mirrors the options in [SettingsScreen] and stores data
 /// in shared preferences.
 class Preferences extends ChangeNotifier {
   // Keys to use with shared preferences.
-  static const _caloriesKey = 'calories';
-  static const _preferredCategoriesKey = 'preferredCategories';
-
-  // Indicates whether a call to [_loadFromSharedPrefs] is in progress;
+  static const _bodySystemsKey = 'bodySystems';
+  static const _wordListVersionKey = 'wordListVersion';
+   // Indicates whether a call to [_loadFromSharedPrefs] is in progress;
   Future<void>? _loading;
 
-  int _desiredCalories = 2000;
+  String _wordListVersion = '0.0.0';
+  final Set<BodySystem> _bodySystems = <BodySystem>{};
 
-  final Set<VeggieCategory> _preferredCategories = <VeggieCategory>{};
-
-  Future<int> get desiredCalories async {
+  Future<String> get wordListVersion async {
     await _loading;
-    return _desiredCalories;
-  }
-
-  Future<Set<VeggieCategory>> get preferredCategories async {
-    await _loading;
-    return Set.from(_preferredCategories);
-  }
-
-  Future<void> addPreferredCategory(VeggieCategory category) async {
-    _preferredCategories.add(category);
-    await _saveToSharedPrefs();
-    notifyListeners();
-  }
-
-  Future<void> removePreferredCategory(VeggieCategory category) async {
-    _preferredCategories.remove(category);
-    await _saveToSharedPrefs();
-    notifyListeners();
-  }
-
-  Future<void> setDesiredCalories(int calories) async {
-    _desiredCalories = calories;
-    await _saveToSharedPrefs();
-    notifyListeners();
+    return _wordListVersion;
   }
 
   Future<void> restoreDefaults() async {
@@ -62,29 +41,48 @@ class Preferences extends ChangeNotifier {
 
   Future<void> _saveToSharedPrefs() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(_caloriesKey, _desiredCalories);
+    await prefs.setString(_wordListVersionKey, _wordListVersion);
 
     // Store preferred categories as a comma-separated string containing their
     // indices.
     await prefs.setString(
-      _preferredCategoriesKey,
-      _preferredCategories.map((c) => c.index.toString()).join(','),
+      _bodySystemsKey,
+      _bodySystems.map((c) => c.index.toString()).join(','),
     );
   }
 
   Future<void> _loadFromSharedPrefs() async {
     final prefs = await SharedPreferences.getInstance();
-    _desiredCalories = prefs.getInt(_caloriesKey) ?? 2000;
-    _preferredCategories.clear();
-    final names = prefs.getString(_preferredCategoriesKey);
+    _bodySystems.clear();
+    final systems = prefs.getString(_bodySystemsKey);
 
-    if (names != null && names.isNotEmpty) {
-      for (final name in names.split(',')) {
+    if (systems != null && systems.isNotEmpty) {
+      for (final name in systems.split(',')) {
         final index = int.tryParse(name) ?? -1;
-        _preferredCategories.add(VeggieCategory.values[index]);
+        _bodySystems.add(BodySystem.values[index]);
       }
     }
-
+    _wordListVersion = prefs.getString(_wordListVersionKey) ?? '0.0.0';
+    
+    // local wordListOnlineVersion
+    final wordListOnlineVersion = await SyncData.getOnlineWordListVersion();
+    print('wordListOnlineVersion: $wordListOnlineVersion');
+    //if (wordListOnlineVersion != _wordListVersion) {
+      _wordListVersion = wordListOnlineVersion;
+      final categories = await SyncData.getOnlineCategories();
+      print('categories: $categories');
+      
+      for (final category in categories) {
+        print('category: $category');
+        final bodySystem = BodySystem.values.firstWhere((e) => e.name == category,
+        orElse: () => BodySystem.general);
+        _bodySystems.add(bodySystem);
+        SyncData.downloadWordList(bodySystem);
+      }
+      print('bodySystems: $_bodySystems');
+      await _saveToSharedPrefs();
+    //}
+    
     notifyListeners();
   }
 }

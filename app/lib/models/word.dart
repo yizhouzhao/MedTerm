@@ -11,7 +11,7 @@ enum BodySystem {
   reproductive,
   sensory,
   immune,
-  general
+  general,
 }
 
 class MedWord {

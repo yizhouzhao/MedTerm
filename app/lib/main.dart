@@ -8,6 +8,7 @@ import 'data/preferences.dart';
 import 'screens/home.dart';
 import 'styles.dart';
 import 'widgets/med_term_page.dart';
+import 'screens/list.dart';
 
 
 void main() {
@@ -61,7 +62,7 @@ class _MedTermAppState extends State<MedTermApp> with RestorationMixin {
         ChangeNotifierProvider(create: (_) => Preferences()..load()),
       ],
       child: CupertinoApp.router(
-        theme: Styles.veggieThemeData,
+        theme: Styles.medThemeData,
         debugShowCheckedModeBanner: false,
         restorationScopeId: 'app',
         routerConfig: GoRouter(
@@ -105,7 +106,7 @@ class _MedTermAppState extends State<MedTermApp> with RestorationMixin {
                     return MedTermPage(
                       key: state.pageKey,
                       restorationId: 'route.list',
-                      child: Text('TODO Widget'),
+                      child: ListScreen(restorationId: 'list'),
                     );
                   },
                   routes: [_buildDetailsRoute()],

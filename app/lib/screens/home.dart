@@ -26,6 +26,9 @@ class HomeScreen extends StatelessWidget {
     return RestorationScope(
       restorationId: restorationId,
       child: CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          middle: Text('MedTerm'),
+        ),
         child: Column(
           children: [
             Expanded(child: child),

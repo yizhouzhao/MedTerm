@@ -7,7 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'data/veggie.dart';
 
 abstract class Styles {
-  static CupertinoThemeData veggieThemeData = const CupertinoThemeData(
+  static CupertinoThemeData medThemeData = const CupertinoThemeData(
     textTheme: CupertinoTextThemeData(
       textStyle: TextStyle(
         color: CupertinoColors.label,

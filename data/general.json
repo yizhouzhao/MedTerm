@@ -9,7 +9,7 @@
             "meaning": "Study of the heart",
             "explanation": "Cardio- means heart, -logy means study of",
             "chineseTranslation": "心脏病学",
-            "category": "cardiovascular"
+            "category": "general"
         },
         {
             "word": "Hypertension",
@@ -19,7 +19,7 @@
             "meaning": "High blood pressure",
             "explanation": "Hyper- means high, -tension means pressure",
             "chineseTranslation": "高血压",
-            "category": "cardiovascular"
+            "category": "general"
         },
         {
             "word": "Diabetes",
@@ -29,7 +29,7 @@
             "meaning": "High blood sugar",
             "explanation": "Diab- means high, -etes means sugar",
             "chineseTranslation": "糖尿病",
-            "category": "endocrine"
+            "category": "general"
         }
     ]
 }
