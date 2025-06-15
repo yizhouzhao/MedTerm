@@ -169,6 +169,12 @@ class DatabaseService {
     return Future.wait(futures);
   }
 
+  Future<List<Map<String, dynamic>>> getUserUnfamiliarWords() async {
+    final db = await _databaseService.database;
+    final List<Map<String, dynamic>> maps = await db.query('user_memory', where: 'memory_level < 0');
+    return maps;
+  }
+
   Future<void> addUserWordMemory(String word, int memoryLevel) async {
     final db = await _databaseService.database;
     await db.insert(

@@ -11,6 +11,7 @@ import 'widgets/med_term_page.dart';
 import 'screens/body_systems.dart';
 import 'screens/settings.dart';
 import 'screens/word_detail.dart';
+import 'screens/word_list.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -91,7 +92,7 @@ class _MedTermAppState extends State<MedTermApp> with RestorationMixin {
                       if (index == 0) {
                         context.go('/list');
                       } else if (index == 1) {
-                        context.go('/favorites');
+                        context.go('/notebook');
                       } else if (index == 2) {
                         context.go('/search');
                       } else {
@@ -124,13 +125,9 @@ class _MedTermAppState extends State<MedTermApp> with RestorationMixin {
                   ],
                 ),
                 GoRoute(
-                  path: '/favorites',
+                  path: '/notebook',
                   pageBuilder: (context, state) {
-                    return MedTermPage(
-                      key: state.pageKey,
-                      restorationId: 'route.favorites',
-                      child: const Text('TODO Widget'),
-                    );
+                    return NotebookWordListScreen.pageBuilder(context);
                   },
                   //routes: [_buildDetailsRoute()],
                 ),

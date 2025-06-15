@@ -15,7 +15,6 @@ class WordDetailScreen extends StatelessWidget {
     return CupertinoPage(
       restorationId: 'router.details.$word',
       child: WordDetailScreen(word: word),
-      title: 'Word Detail',
     );
   }
 
@@ -26,8 +25,7 @@ class WordDetailScreen extends StatelessWidget {
       restorationId: 'router.details.$word',
       child: CupertinoPageScaffold(
         navigationBar: const CupertinoNavigationBar(
-          middle: Text('Words'),
-          previousPageTitle: 'Home',
+          previousPageTitle: 'Word List',
         ),
         backgroundColor: Styles.scaffoldBackground(brightness),
         child: SafeArea(
@@ -36,12 +34,125 @@ class WordDetailScreen extends StatelessWidget {
             builder: (context, snapshot) {
               final isLoading =
                   snapshot.connectionState == ConnectionState.waiting;
+
+              final MedWord? medWord = snapshot.data;
               print('[WordDetailScreen] isLoading: $isLoading');
               return (isLoading)
                   ? const CupertinoActivityIndicator()
-                  : snapshot.data == null
+                  : medWord == null
                   ? const Text('Word not found')
-                  : WordLine(word: snapshot.data!.word, memoryLevel: 0);
+                  : SafeArea(
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: CupertinoColors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: CupertinoColors.systemGrey.withOpacity(0.1),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            medWord.word,
+                            style: const TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                              color: CupertinoColors.black,
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: CupertinoColors.activeOrange.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Meaning',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: CupertinoColors.activeOrange,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  medWord.meaning,
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: CupertinoColors.systemTeal.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Chinese Translation',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: CupertinoColors.systemTeal,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  medWord.chineseTranslation,
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: CupertinoColors.systemIndigo.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Word Structure',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: CupertinoColors.systemIndigo,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  "Prefix: ${medWord.prefix}- \nRoot: ${medWord.root}\nSuffix: -${medWord.suffix}",
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                                
+                              ],
+                              
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
             },
           ),
         ),
