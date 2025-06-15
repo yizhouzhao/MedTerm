@@ -8,8 +8,9 @@ import 'data/preferences.dart';
 import 'screens/home.dart';
 import 'styles.dart';
 import 'widgets/med_term_page.dart';
-import 'screens/list.dart';
-
+import 'screens/body_systems.dart';
+import 'screens/settings.dart';
+import 'screens/word_detail.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +18,9 @@ void main() {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  runApp(const RootRestorationScope(restorationId: 'root', child: MedTermApp()));
+  runApp(
+    const RootRestorationScope(restorationId: 'root', child: MedTermApp()),
+  );
 }
 
 class MedTermApp extends StatefulWidget {
@@ -26,7 +29,6 @@ class MedTermApp extends StatefulWidget {
   @override
   State<MedTermApp> createState() => _MedTermAppState();
 }
-
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -109,7 +111,17 @@ class _MedTermAppState extends State<MedTermApp> with RestorationMixin {
                       child: ListScreen(restorationId: 'list'),
                     );
                   },
-                  routes: [_buildDetailsRoute()],
+                  routes: [
+                    GoRoute(
+                      path: ':name',
+                      pageBuilder: (context, state) {
+                        return BodySystemWordListScreen.pageBuilder(
+                          context,
+                          state.pathParameters['name']!,
+                        );
+                      },
+                    ),
+                  ],
                 ),
                 GoRoute(
                   path: '/favorites',
@@ -120,7 +132,7 @@ class _MedTermAppState extends State<MedTermApp> with RestorationMixin {
                       child: const Text('TODO Widget'),
                     );
                   },
-                  routes: [_buildDetailsRoute()],
+                  //routes: [_buildDetailsRoute()],
                 ),
                 GoRoute(
                   path: '/search',
@@ -131,7 +143,7 @@ class _MedTermAppState extends State<MedTermApp> with RestorationMixin {
                       child: const Text('TODO Widget'),
                     );
                   },
-                  routes: [_buildDetailsRoute()],
+                  //routes: [_buildDetailsRoute()],
                 ),
                 GoRoute(
                   path: '/settings',
@@ -139,7 +151,7 @@ class _MedTermAppState extends State<MedTermApp> with RestorationMixin {
                     return MedTermPage(
                       key: state.pageKey,
                       restorationId: 'route.settings',
-                      child: const Text('TODO Widget'),
+                      child: SettingsScreen(restorationId: 'settings'),
                     );
                   },
                   routes: [
@@ -147,17 +159,30 @@ class _MedTermAppState extends State<MedTermApp> with RestorationMixin {
                       parentNavigatorKey: _rootNavigatorKey,
                       path: 'categories',
                       pageBuilder: (context, state) {
-                        return const CupertinoPage(child: Text('TODO Page'));
+                        return CupertinoPage(
+                          restorationId: 'route.settings.categories',
+                          child: const Text('TODO Widget'),
+                        );
                       },
                     ),
                     GoRoute(
                       parentNavigatorKey: _rootNavigatorKey,
                       path: 'calories',
                       pageBuilder: (context, state) {
-                        return CupertinoPage(child: Text('TODO Page'));
+                        return MedTermPage(
+                          key: state.pageKey,
+                          restorationId: 'route.settings.calories',
+                          child: const Text('TODO Widget'),
+                        );
                       },
                     ),
                   ],
+                ),
+                GoRoute(
+                  path: '/word/:word',
+                  pageBuilder: (context, state) {
+                    return WordDetailScreen.pageBuilder(context, state.pathParameters['word']!);
+                  },
                 ),
               ],
             ),
@@ -166,24 +191,7 @@ class _MedTermAppState extends State<MedTermApp> with RestorationMixin {
       ),
     );
   }
-
-  // GoRouter does not support relative routes,
-  // see https://github.com/flutter/flutter/issues/108177
-  GoRoute _buildDetailsRoute() {
-    return GoRoute(
-      parentNavigatorKey: _rootNavigatorKey,
-      path: 'details/:id',
-      pageBuilder: (context, state) {
-        final veggieId = int.parse(state.pathParameters['id']!);
-        return CupertinoPage(
-          restorationId: 'route.details',
-          child: const Text('TODO Widget'),
-        );
-      },
-    );
-  }
 }
-
 
 class _RestorableAppState extends RestorableListenable<AppState> {
   @override

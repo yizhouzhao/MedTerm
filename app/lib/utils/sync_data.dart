@@ -19,6 +19,7 @@ class SyncData {
     final dio = Dio();
     final response = await dio.get(wordListUrl);
     final data = jsonDecode(response.data.toString()) as Map<String, dynamic>;
+    print('[SyncData] data: $data');
     final categories = (data['categories'] as List).map((e) => e.toString()).toList();
     return categories;
   }
@@ -33,12 +34,16 @@ class SyncData {
     final databaseService = DatabaseService();
     List<MedWord> words = (data['words'] as List).map((e) => MedWord.fromMap(e)).toList();
     for (var word in words) {
-      await databaseService.insertWord(word);
-      print('[SyncData] inserted word: ${word.word}');
+      final updatedWord = word.copyWith(category: bodySystem);
+      await databaseService.insertWord(updatedWord);
+      print('[SyncData] inserted word: ${updatedWord.word} ${updatedWord.category}');
     }
 
     // print all words in database
-    final allWords = await databaseService.words();
-    print('[SyncData] all words: ${allWords.map((e) => e.chineseTranslation).join(', ')}');
+    final allWords = await databaseService.getWords(bodySystem.name);
+    print('[SyncData]${bodySystem.name} words: ${allWords.map((e) => e.chineseTranslation).join(', ')}');
+
+    final userWordsWithMemory = await databaseService.getUserWordsWithMemory(bodySystem.name);
+    print('[SyncData]${bodySystem.name} user words with memory: ${userWordsWithMemory.map((e) => e['word']).join(', ')}');
   }
 }

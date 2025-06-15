@@ -5,14 +5,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:dio/dio.dart';
 import 'package:go_router/go_router.dart';
 
-import '../data/app_state.dart';
 import '../data/preferences.dart';
-import '../data/veggie.dart';
 import '../styles.dart';
 import '../models/word.dart';
+import '../services/database.dart';
+import '../widgets/word_line.dart';
 
 class ListScreen extends StatelessWidget {
   const ListScreen({this.restorationId, super.key});
@@ -31,9 +30,7 @@ class ListScreen extends StatelessWidget {
     return CupertinoTabView(
       restorationScopeId: restorationId,
       builder: (context) {
-        final appState = Provider.of<AppState>(context);
         final prefs = Provider.of<Preferences>(context);
-        final themeData = CupertinoTheme.of(context);
         return AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle(
             statusBarBrightness: MediaQuery.platformBrightnessOf(context),
@@ -119,10 +116,7 @@ class BodySystemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return PressableCard(
       onPressed: () {
-        // GoRouter does not support relative routes,
-        // so navigate to the absolute route.
-        // see https://github.com/flutter/flutter/issues/108177
-        context.go('/list/details/${bodySystem.name}');
+        context.go('/list/${bodySystem.name}');
       },
       child: Stack(
         children: [
@@ -147,6 +141,54 @@ class BodySystemCard extends StatelessWidget {
             child: _buildDetails(context),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class BodySystemWordListScreen extends StatelessWidget {
+  const BodySystemWordListScreen({super.key, required this.bodySystemName});
+
+  final String bodySystemName;
+  static final DatabaseService databaseService = DatabaseService();
+
+  static Page<void> pageBuilder(BuildContext context, String bodySystemName) {
+    return CupertinoPage(
+      restorationId: 'router.systems.$bodySystemName',
+      child: BodySystemWordListScreen(bodySystemName: bodySystemName),
+      title: '$bodySystemName Word List',
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var brightness = CupertinoTheme.brightnessOf(context);
+    return RestorationScope(
+      restorationId: bodySystemName,
+      child: CupertinoPageScaffold(
+        navigationBar: const CupertinoNavigationBar(
+          middle: Text('Words'),
+          previousPageTitle: 'Home',
+        ),
+        backgroundColor: Styles.scaffoldBackground(brightness),
+        child: SafeArea(
+          child: FutureBuilder<List<Map<String, dynamic>>>(
+            future: databaseService.getUserWordsWithMemory(bodySystemName),
+            builder: (context, snapshot) {
+              final isLoading =
+                  snapshot.connectionState == ConnectionState.waiting;
+              print('[BodySystemWordListScreen] isLoading: $isLoading');
+              return (isLoading)
+                  ? const CupertinoActivityIndicator()
+                  : (ListView.builder(
+                    itemCount: snapshot.data?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return WordLine(word: snapshot.data?[index]['word'] ?? '', memoryLevel: snapshot.data?[index]['memory_level'] ?? 0);
+                    },
+                  ));
+            },
+          ),
+        ),
       ),
     );
   }
