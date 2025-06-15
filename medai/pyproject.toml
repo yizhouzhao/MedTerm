@@ -1,0 +1,11 @@
+[project]
+name = "medai"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "click>=8.2.1",
+    "dotenv>=0.9.9",
+    "openai>=1.86.0",
+]

@@ -1,35 +1,1425 @@
 {
-    "version": "0.0.1",
-    "words": [
-        {
-            "word": "Cardiology",
-            "prefix": "Cardio",
-            "root": "log",
-            "suffix": "y",
-            "meaning": "Study of the heart",
-            "explanation": "Cardio- means heart, -logy means study of",
-            "chineseTranslation": "心脏病学",
-            "category": "general"
-        },
-        {
-            "word": "Hypertension",
-            "prefix": "Hyper",
-            "root": "tension",
-            "suffix": "",
-            "meaning": "High blood pressure",
-            "explanation": "Hyper- means high, -tension means pressure",
-            "chineseTranslation": "高血压",
-            "category": "general"
-        },
-        {
-            "word": "Diabetes",
-            "prefix": "Diab",
-            "root": "etes",
-            "suffix": "",
-            "meaning": "High blood sugar",
-            "explanation": "Diab- means high, -etes means sugar",
-            "chineseTranslation": "糖尿病",
-            "category": "general"
-        }
-    ]
+  "version": "0.0.1",
+  "words": [
+    {
+      "word": "chemotherapy",
+      "prefix": "chemo-",
+      "root": "therap-y",
+      "suffix": "therapy",
+      "meaning": "The treatment of disease by the use of chemical substances.",
+      "explanation": "Chemotherapy is primarily used to treat cancer by using drugs that target and kill rapidly dividing cells, but can also affect other fast-growing cells in the body.",
+      "chineseTranslation": "化学疗法",
+      "category": "general"
+    },
+    {
+      "word": "cardiac",
+      "prefix": "cardi-",
+      "root": "ac",
+      "suffix": "",
+      "meaning": "relating to the heart",
+      "explanation": "The term 'cardiac' is related to anything that pertains to the heart, including conditions, procedures, and anatomy.",
+      "chineseTranslation": "心脏的",
+      "category": "general"
+    },
+    {
+      "word": "gastric",
+      "prefix": "gastr-",
+      "root": "gastr",
+      "suffix": "-ic",
+      "meaning": "pertaining to the stomach",
+      "explanation": "The term 'gastric' pertains to or is related to the stomach. It is often used in medical contexts to describe conditions, functions, or treatments involving the stomach.",
+      "chineseTranslation": "胃的",
+      "category": "general"
+    },
+    {
+      "word": "adenopathy",
+      "prefix": "adeno-",
+      "root": "path",
+      "suffix": "-y",
+      "meaning": "enlargement of lymph nodes",
+      "explanation": "Adenopathy refers to the enlargement or disease of the lymph nodes, which can occur due to infection, malignancy, or autoimmune disorders.",
+      "chineseTranslation": "腺病",
+      "category": "general"
+    },
+    {
+      "word": "dermatology",
+      "prefix": "dermato-",
+      "root": "logy",
+      "suffix": "",
+      "meaning": "The branch of medicine dealing with the skin and its diseases.",
+      "explanation": "Dermatology is a specialized field of medicine focused on the diagnosis and treatment of skin disorders, which includes conditions like acne, eczema, psoriasis, and skin cancer.",
+      "chineseTranslation": "皮肤病学",
+      "category": "general"
+    },
+    {
+      "word": "incision",
+      "prefix": "in-",
+      "root": "cis",
+      "suffix": "-ion",
+      "meaning": "a surgical cut made in skin or flesh",
+      "explanation": "An incision is a deliberate cut into the tissues of the body, often performed to facilitate surgical procedures or evaluations.",
+      "chineseTranslation": "切口",
+      "category": "general"
+    },
+    {
+      "word": "carcinoma",
+      "prefix": "carcin-",
+      "root": "oma",
+      "suffix": "",
+      "meaning": "A type of cancer that begins in the skin or in tissues that line or cover internal organs.",
+      "explanation": "Carcinomas are malignant tumors that arise from epithelial cells, which are the cells that line the surfaces of the body, including skin and organs. They can occur in various organs, such as the lungs, breast, or colon.",
+      "chineseTranslation": "癌瘤",
+      "category": "general"
+    },
+    {
+      "word": "morphology",
+      "prefix": "morpho-",
+      "root": "logy",
+      "suffix": "",
+      "meaning": "the study of the form and structure of organisms",
+      "explanation": "Morphology is a branch of biology that deals with the form and structure of living organisms, including their outward appearance as well as their internal structures.",
+      "chineseTranslation": "形态学",
+      "category": "general"
+    },
+    {
+      "word": "immunology",
+      "prefix": "immuno-",
+      "root": "logy",
+      "suffix": "",
+      "meaning": "the branch of medicine and biology concerned with immunity.",
+      "explanation": "Immunology is the study of the immune system, the complex network of cells, tissues, and organs that work together to defend the body against harmful pathogens such as bacteria and viruses.",
+      "chineseTranslation": "免疫学",
+      "category": "general"
+    },
+    {
+      "word": "hydrocele",
+      "prefix": "hydro-",
+      "root": "cele",
+      "suffix": "",
+      "meaning": "A fluid-filled sac in the scrotum.",
+      "explanation": "Hydrocele is a condition where there is an accumulation of fluid around one or both testicles, leading to swelling in the scrotum. It is generally not harmful and often resolves on its own.",
+      "chineseTranslation": "阴囊积水",
+      "category": "general"
+    },
+    {
+      "word": "gynecology",
+      "prefix": "gyne-",
+      "root": "logy",
+      "suffix": "",
+      "meaning": "the branch of medicine that deals with the functions and diseases specific to women and girls, especially those affecting the reproductive system.",
+      "explanation": "Gynecology is a medical specialty focusing on women's health, encompassing various aspects including menstruation, pregnancy, childbirth, and disorders related to the female reproductive system.",
+      "chineseTranslation": "妇科学",
+      "category": "general"
+    },
+    {
+      "word": "hematic",
+      "prefix": "hema-",
+      "root": "hemat",
+      "suffix": "-ic",
+      "meaning": "pertaining to blood",
+      "explanation": "The term 'hematic' is used to describe anything related to blood, particularly in a biological or medical context. It is often used in discussions about blood components, characteristics, or conditions.",
+      "chineseTranslation": "血液的",
+      "category": "general"
+    },
+    {
+      "word": "laryngeal",
+      "prefix": "laryng-",
+      "root": "eal",
+      "suffix": "",
+      "meaning": "Related to the larynx or voice box.",
+      "explanation": "The term laryngeal pertains to the structure and functions associated with the larynx, which is located in the throat and plays a crucial role in producing sound for speech.",
+      "chineseTranslation": "喉部的",
+      "category": "general"
+    },
+    {
+      "word": "enteric",
+      "prefix": "enter-",
+      "root": "teric",
+      "suffix": "",
+      "meaning": "pertaining to the intestine",
+      "explanation": "The term 'enteric' is used in medical contexts to describe anything related to the intestines, especially the small intestine. It is often seen in terms like 'enteritis,' which refers to inflammation of the intestine.",
+      "chineseTranslation": "肠的",
+      "category": "general"
+    },
+    {
+      "word": "nephromegaly",
+      "prefix": "nephro-",
+      "root": "megaly",
+      "suffix": "",
+      "meaning": "enlargement of the kidneys",
+      "explanation": "Nephromegaly is a medical condition characterized by the abnormal enlargement of one or both kidneys, which can be caused by various underlying health issues such as obstruction or disease.",
+      "chineseTranslation": "肾脏肿大",
+      "category": "general"
+    },
+    {
+      "word": "ophthalmic",
+      "prefix": "ophthal-",
+      "root": "almic",
+      "suffix": "",
+      "meaning": "pertaining to the eye",
+      "explanation": "The term 'ophthalmic' relates to anything associated with the anatomy, functions, or diseases of the eye.",
+      "chineseTranslation": "眼科的",
+      "category": "general"
+    },
+    {
+      "word": "rhinoplasty",
+      "prefix": "rhin-",
+      "root": "plasty",
+      "suffix": "",
+      "meaning": "surgical reshaping of the nose",
+      "explanation": "Rhinoplasty is a surgical procedure aimed at changing the shape or appearance of the nose for cosmetic purposes or to improve breathing function.",
+      "chineseTranslation": "鼻整形手术",
+      "category": "general"
+    },
+    {
+      "word": "pulmonary",
+      "prefix": "pulmon-",
+      "root": "pulmon",
+      "suffix": "-ary",
+      "meaning": "pertaining to the lungs",
+      "explanation": "Pulmonary refers to anything related to the lungs or the respiratory system.",
+      "chineseTranslation": "肺的",
+      "category": "general"
+    },
+    {
+      "word": "neural",
+      "prefix": "neur-",
+      "root": "neurol",
+      "suffix": "-al",
+      "meaning": "pertaining to nerves or the nervous system",
+      "explanation": "The term 'neural' relates to anything involving nerves, which transmit signals throughout the body, including the brain, spinal cord, and peripheral nerves.",
+      "chineseTranslation": "神经的",
+      "category": "general"
+    },
+    {
+      "word": "urology",
+      "prefix": "uro-",
+      "root": "logy",
+      "suffix": "",
+      "meaning": "the branch of medicine that focuses on the urinary tract and the male reproductive system",
+      "explanation": "Urology involves the diagnosis and treatment of conditions related to the urinary system in both males and females and the male reproductive organs. Urologists treat conditions such as urinary tract infections, bladder issues, and kidney stones.",
+      "chineseTranslation": "泌尿学",
+      "category": "general"
+    },
+    {
+      "word": "otic",
+      "prefix": "o-",
+      "root": "tic",
+      "suffix": "",
+      "meaning": "pertaining to the ear",
+      "explanation": "The term 'otic' is used in medical contexts to describe anything that is related to the ear.",
+      "chineseTranslation": "耳的",
+      "category": "general"
+    },
+    {
+      "word": "aphasia",
+      "prefix": "a-",
+      "root": "phas",
+      "suffix": "-ia",
+      "meaning": "loss of ability to understand or express speech",
+      "explanation": "Aphasia is a communication disorder that affects a person's ability to process language, which could involve difficulty in speaking, understanding, reading, or writing. It often occurs after a stroke or brain injury.",
+      "chineseTranslation": "失语症",
+      "category": "general"
+    },
+    {
+      "word": "pathology",
+      "prefix": "patho-",
+      "root": "logy",
+      "suffix": "",
+      "meaning": "the study of diseases",
+      "explanation": "Pathology is a branch of medicine that involves the study of diseases, their causes, development, and consequences. It plays a critical role in understanding how diseases affect the body.",
+      "chineseTranslation": "病理学",
+      "category": "general"
+    },
+    {
+      "word": "anoxia",
+      "prefix": "an-",
+      "root": "oxia",
+      "suffix": "",
+      "meaning": "A condition characterized by an absence of oxygen in the tissues.",
+      "explanation": "Anoxia occurs when there is inadequate oxygen supply to the body or a part of the body, which can lead to cell damage or death if not resolved promptly.",
+      "chineseTranslation": "缺氧",
+      "category": "general"
+    },
+    {
+      "word": "antepartum",
+      "prefix": "ante-",
+      "root": "partum",
+      "suffix": "",
+      "meaning": "Before childbirth",
+      "explanation": "Antepartum refers to the period before labor begins in pregnancy. It is concerned with the time before the baby is born.",
+      "chineseTranslation": "产前",
+      "category": "general"
+    },
+    {
+      "word": "antibiotic",
+      "prefix": "anti-",
+      "root": "bio",
+      "suffix": "-tic",
+      "meaning": "A substance that inhibits the growth of or destroys microorganisms.",
+      "explanation": "Antibiotics are primarily used to treat bacterial infections by killing the bacteria or inhibiting their growth; they are not effective against viral infections.",
+      "chineseTranslation": "抗生素",
+      "category": "general"
+    },
+    {
+      "word": "autograft",
+      "prefix": "auto-",
+      "root": "graft",
+      "suffix": "",
+      "meaning": "A tissue graft taken from one part of a person's body and transplanted to another part of the same person.",
+      "explanation": "Autografting is a surgical procedure where tissue is transplanted from one site to another on the same individual, typically to aid in healing or repair.",
+      "chineseTranslation": "自体移植",
+      "category": "general"
+    },
+    {
+      "word": "dyspnea",
+      "prefix": "dys-",
+      "root": "pnea",
+      "suffix": "",
+      "meaning": "Difficulty or labored breathing.",
+      "explanation": "Dyspnea is a medical term that refers to the sensation of difficult or uncomfortable breathing. It can be caused by various factors, including respiratory diseases, heart problems, anxiety, or strenuous exercise.",
+      "chineseTranslation": "呼吸困难",
+      "category": "general"
+    },
+    {
+      "word": "epigastric",
+      "prefix": "epi-",
+      "root": "gastr",
+      "suffix": "-ic",
+      "meaning": "pertaining to the upper middle region of the abdomen",
+      "explanation": "The term 'epigastric' refers to the area located just above the stomach, specifically between the right and left hypochondriac regions.",
+      "chineseTranslation": "上腹部的",
+      "category": "general"
+    },
+    {
+      "word": "bradycardia",
+      "prefix": "brady-",
+      "root": "card",
+      "suffix": "-ia",
+      "meaning": "a slower than normal heart rate",
+      "explanation": "Bradycardia refers to a condition where the heart beats fewer than 60 times per minute, which can lead to various symptoms and health risks.",
+      "chineseTranslation": "心搏过缓",
+      "category": "general"
+    },
+    {
+      "word": "endoscope",
+      "prefix": "endo-",
+      "root": "scope",
+      "suffix": "",
+      "meaning": "A medical instrument used to examine the interior of a hollow organ or cavity.",
+      "explanation": "Endoscopes are often equipped with a camera and light to illuminate the area being examined, allowing for both visualization and potentially therapeutic procedures without requiring large incisions.",
+      "chineseTranslation": "内窥镜",
+      "category": "general"
+    },
+    {
+      "word": "heterograft",
+      "prefix": "hetero-",
+      "root": "graft",
+      "suffix": "",
+      "meaning": "a tissue graft from a donor of a different species.",
+      "explanation": "Heterograft refers to a transplant of tissue or an organ that is taken from a donor of a different species than the recipient. It is often used in medical procedures where human tissue is not available or suitable.",
+      "chineseTranslation": "异种移植",
+      "category": "general"
+    },
+    {
+      "word": "eupnea",
+      "prefix": "eu-",
+      "root": "pnea",
+      "suffix": "",
+      "meaning": "Normal, unlabored breathing.",
+      "explanation": "Eupnea refers to the state of normal, healthy respiration, which is typically automatic and effortless. It is the opposite of abnormal breathing patterns, such as tachypnea (rapid breathing) or bradypnea (slow breathing).",
+      "chineseTranslation": "正常呼吸",
+      "category": "general"
+    },
+    {
+      "word": "hypertrophy",
+      "prefix": "hyper-",
+      "root": "trophy",
+      "suffix": "",
+      "meaning": "an increase in the size of an organ or tissue through the enlargement of its cells.",
+      "explanation": "Hypertrophy occurs as a natural response of the body to increased physical demands or stimuli, such as weight training, where the muscle fibers increase in size.",
+      "chineseTranslation": "肥大",
+      "category": "general"
+    },
+    {
+      "word": "homozygous",
+      "prefix": "homo-",
+      "root": "zygous",
+      "suffix": "",
+      "meaning": "Having two identical alleles for a given gene.",
+      "explanation": "In genetics, individuals are considered homozygous for a particular gene if they have inherited the same version (allele) from both parents. This can pertain to traits, genetic disorders, and more.",
+      "chineseTranslation": "纯合子",
+      "category": "general"
+    },
+    {
+      "word": "infraorbital",
+      "prefix": "infra-",
+      "root": "orbit",
+      "suffix": "-al",
+      "meaning": "pertaining to the area below the eye socket",
+      "explanation": "The term 'infraorbital' refers to anatomical structures located below the orbit (eye socket). It is often used in reference to nerves, blood vessels, or surgical procedures in that region.",
+      "chineseTranslation": "眶下的",
+      "category": "general"
+    },
+    {
+      "word": "intravenous",
+      "prefix": "intra-",
+      "root": "ven",
+      "suffix": "-ous",
+      "meaning": "pertaining to within a vein",
+      "explanation": "Intravenous refers to the administration of substances directly into a vein, commonly used for delivering medications or fluids.",
+      "chineseTranslation": "静脉内的",
+      "category": "general"
+    },
+    {
+      "word": "hypoglossal",
+      "prefix": "hypo-",
+      "root": "gloss",
+      "suffix": "-al",
+      "meaning": "Pertaining to a structure located beneath the tongue.",
+      "explanation": "The term 'hypoglossal' refers to nerves or muscles that are situated below the tongue, and it is commonly used in reference to the hypoglossal nerve, which is responsible for motor control of the tongue.",
+      "chineseTranslation": "舌下的",
+      "category": "general"
+    },
+    {
+      "word": "microcephalic",
+      "prefix": "micro-",
+      "root": "cephal",
+      "suffix": "-ic",
+      "meaning": "relating to or having an abnormally small head.",
+      "explanation": "Microcephalic refers to a condition where an individual's head is significantly smaller than the average head size for their age and sex, which can be associated with various developmental disorders.",
+      "chineseTranslation": "小头畸形的",
+      "category": "general"
+    },
+    {
+      "word": "intervertebral",
+      "prefix": "inter-",
+      "root": "vertebr-",
+      "suffix": "-al",
+      "meaning": "pertaining to the area between the vertebrae.",
+      "explanation": "The term intervertebral refers to the spaces or structures that lie between adjacent vertebrae in the spinal column. This is often used in reference to intervertebral discs, which are the cushioning pads located between the vertebrae.",
+      "chineseTranslation": "椎间的",
+      "category": "general"
+    },
+    {
+      "word": "macrocephalic",
+      "prefix": "macro-",
+      "root": "cephal",
+      "suffix": "-ic",
+      "meaning": "having an abnormally large head.",
+      "explanation": "The term 'macrocephalic' refers to individuals, especially children, whose heads are significantly larger than the average for their age and sex. This condition can be due to various factors, including genetic conditions, congenital disorders, or increased cerebrospinal fluid.",
+      "chineseTranslation": "大头",
+      "category": "general"
+    },
+    {
+      "word": "neonate",
+      "prefix": "neo-",
+      "root": "nat",
+      "suffix": "-e",
+      "meaning": "a newborn child, especially within the first 28 days after birth",
+      "explanation": "The term 'neonate' specifically refers to infants who are in the very early stages of life, focusing on their unique physiological needs and development.",
+      "chineseTranslation": "新生儿",
+      "category": "general"
+    },
+    {
+      "word": "pancarditis",
+      "prefix": "pan-",
+      "root": "card",
+      "suffix": "-itis",
+      "meaning": "inflammation of all layers of the heart",
+      "explanation": "Pancarditis is a medical condition characterized by inflammation affecting all the layers of the heart, including the epicardium, myocardium, and endocardium.",
+      "chineseTranslation": "全心包炎",
+      "category": "general"
+    },
+    {
+      "word": "percutaneous",
+      "prefix": "per-",
+      "root": "cutane",
+      "suffix": "-ous",
+      "meaning": "Through the skin.",
+      "explanation": "The term 'percutaneous' describes a method of delivering medication or performing a procedure through the skin, often using a needle or catheter.",
+      "chineseTranslation": "经皮",
+      "category": "general"
+    },
+    {
+      "word": "paranasal",
+      "prefix": "para-",
+      "root": "nas",
+      "suffix": "-al",
+      "meaning": "Relating to the areas around the nasal cavity.",
+      "explanation": "The term 'paranasal' is used to describe the sinuses or structures that are situated adjacent to the nasal cavity, typically in reference to the spaces that help with functions like breathing and mucous drainage.",
+      "chineseTranslation": "鼻旁的",
+      "category": "general"
+    },
+    {
+      "word": "postpartum",
+      "prefix": "post-",
+      "root": "partum",
+      "suffix": "",
+      "meaning": "The period following childbirth.",
+      "explanation": "Postpartum refers to the time after the delivery of a baby and is commonly used to discuss maternal recovery and health issues during this period.",
+      "chineseTranslation": "产后",
+      "category": "general"
+    },
+    {
+      "word": "pericardial",
+      "prefix": "peri-",
+      "root": "cardi",
+      "suffix": "-al",
+      "meaning": "pertaining to the pericardium",
+      "explanation": "The term 'pericardial' refers to anything relating to the pericardium, which is the double-walled sac containing the heart and the roots of the great vessels.",
+      "chineseTranslation": "心包的",
+      "category": "general"
+    },
+    {
+      "word": "prefrontal",
+      "prefix": "pre-",
+      "root": "front",
+      "suffix": "-al",
+      "meaning": "relating to the front part of the frontal lobe of the brain",
+      "explanation": "The prefrontal area is involved in complex behaviors such as planning, decision making, and social behavior.",
+      "chineseTranslation": "前额叶的",
+      "category": "general"
+    },
+    {
+      "word": "retrograde",
+      "prefix": "retro-",
+      "root": "grad",
+      "suffix": "-e",
+      "meaning": "moving backward or reverting to a previous state",
+      "explanation": "In medical terminology, retrograde often refers to the backward flow of bodily fluids or the reversal of a process, such as retrograde amnesia, where a person loses memories that were formed before a certain event.",
+      "chineseTranslation": "逆行的",
+      "category": "general"
+    },
+    {
+      "word": "subcutaneous",
+      "prefix": "sub-",
+      "root": "cutane",
+      "suffix": "-ous",
+      "meaning": "pertaining to under the skin",
+      "explanation": "Subcutaneous refers to the layer of tissue beneath the skin that contains fat, connective tissue, and blood vessels. It plays a role in thermoregulation and serves as an energy reserve.",
+      "chineseTranslation": "皮下的",
+      "category": "general"
+    },
+    {
+      "word": "pseudocyesis",
+      "prefix": "pseudo-",
+      "root": "cyesis",
+      "suffix": "",
+      "meaning": "a false pregnancy",
+      "explanation": "Pseudocyesis is a condition in which a person believes they are pregnant and may even exhibit symptoms of pregnancy, but there is no actual fetus present.",
+      "chineseTranslation": "假怀孕",
+      "category": "general"
+    },
+    {
+      "word": "transurethral",
+      "prefix": "trans-",
+      "root": "urethr",
+      "suffix": "-al",
+      "meaning": "Relating to or involving the passage through the urethra.",
+      "explanation": "The term 'transurethral' is often used in medical procedures that involve accessing the bladder or prostate through the urethra, such as transurethral resection of the prostate (TURP).",
+      "chineseTranslation": "经尿道的",
+      "category": "general"
+    },
+    {
+      "word": "supernumerary",
+      "prefix": "super-",
+      "root": "numer",
+      "suffix": "-ary",
+      "meaning": "an anatomical structure that is in excess of the usual number.",
+      "explanation": "In medical terminology, 'supernumerary' refers to an additional or extra part that is not typically present. This term is often used in reference to extra teeth, bones, or other body parts that are beyond the normal count.",
+      "chineseTranslation": "多余的",
+      "category": "general"
+    },
+    {
+      "word": "suprapubic",
+      "prefix": "supra-",
+      "root": "pubic",
+      "suffix": "",
+      "meaning": "Above the pubic bone.",
+      "explanation": "Suprapubic refers to the area above the pubic region, often used in medical contexts to describe the location of pain, surgery, or other conditions affecting that area.",
+      "chineseTranslation": "耻骨上",
+      "category": "general"
+    },
+    {
+      "word": "tachycardia",
+      "prefix": "tachy-",
+      "root": "cardi",
+      "suffix": "-ia",
+      "meaning": "An abnormally rapid heart rate.",
+      "explanation": "Tachycardia is defined as a heart rate that exceeds the normal resting rate. In adults, this is typically greater than 100 beats per minute. It can be a physiological response to exercise, stress, or it may indicate an underlying health problem.",
+      "chineseTranslation": "心动过速",
+      "category": "general"
+    },
+    {
+      "word": "ultrasound",
+      "prefix": "ultra-",
+      "root": "sound",
+      "suffix": "",
+      "meaning": "A medical imaging technique that uses high-frequency sound waves to visualize internal body structures.",
+      "explanation": "Ultrasound imaging, also known as sonography, is a non-invasive diagnostic tool that provides real-time images of organs and tissues in the body. It is commonly used for monitoring pregnancies, guiding biopsies, and assessing various conditions.",
+      "chineseTranslation": "超声波",
+      "category": "general"
+    },
+    {
+      "word": "monoplegia",
+      "prefix": "mono-",
+      "root": "pleg-",
+      "suffix": "-ia",
+      "meaning": "paralysis of a single limb or muscle group",
+      "explanation": "Monoplegia refers to paralysis that affects only one limb, which can be the arm or the leg, and it often results from conditions like stroke or nerve injury.",
+      "chineseTranslation": "单瘫",
+      "category": "general"
+    },
+    {
+      "word": "hemiplegia",
+      "prefix": "hemi-",
+      "root": "plegia",
+      "suffix": "",
+      "meaning": "Paralysis of one side of the body.",
+      "explanation": "Hemiplegia is a condition that results in the total or partial paralysis of one side of the body, most often caused by a stroke or other brain injury.",
+      "chineseTranslation": "偏瘫",
+      "category": "general"
+    },
+    {
+      "word": "polyuria",
+      "prefix": "poly-",
+      "root": "ur",
+      "suffix": "-ia",
+      "meaning": "excessive or abnormally large production of urine",
+      "explanation": "Polyuria is a condition characterized by the production of an abnormally large volume of urine, often greater than 3 liters per day in adults. It can be a symptom of various medical conditions, including diabetes mellitus and diabetes insipidus.",
+      "chineseTranslation": "多尿",
+      "category": "general"
+    },
+    {
+      "word": "nulligravida",
+      "prefix": "nulli-",
+      "root": "gravida",
+      "suffix": "",
+      "meaning": "A woman who has never been pregnant.",
+      "explanation": "The term 'nulligravida' is used in obstetrics to refer to a woman who has never carried a pregnancy to the point of viability.",
+      "chineseTranslation": "未孕妇",
+      "category": "general"
+    },
+    {
+      "word": "semiconscious",
+      "prefix": "semi-",
+      "root": "conscious",
+      "suffix": "",
+      "meaning": "Partially aware or responsive.",
+      "explanation": "The term 'semiconscious' refers to a state of being in which an individual is only partially aware of their surroundings or is unable to fully respond due to diminished consciousness.",
+      "chineseTranslation": "半意识",
+      "category": "general"
+    },
+    {
+      "word": "quadriplegia",
+      "prefix": "quadri-",
+      "root": "plegia",
+      "suffix": "",
+      "meaning": "Paralysis of all four limbs.",
+      "explanation": "Quadriplegia is a condition resulting from injury or damage to the nervous system that leads to the loss of movement and sensation in all four limbs (arms and legs). It often occurs due to spinal cord injury or diseases affecting the nervous system.",
+      "chineseTranslation": "四肢瘫痪",
+      "category": "general"
+    },
+    {
+      "word": "triceps",
+      "prefix": "tri-",
+      "root": "ceps",
+      "suffix": "",
+      "meaning": "a muscle having three points of origin",
+      "explanation": "The triceps brachii is a large muscle on the back of the upper arm that has three heads or points of origin, responsible for extending the elbow joint.",
+      "chineseTranslation": "三头肌",
+      "category": "general"
+    },
+    {
+      "word": "multipara",
+      "prefix": "multi-",
+      "root": "para",
+      "suffix": "",
+      "meaning": "A woman who has given birth two or more times.",
+      "explanation": "The term 'multipara' is used in obstetrics to describe a woman who has delivered multiple infants, which can include multiple pregnancies leading to live births, stillbirths, or a combination.",
+      "chineseTranslation": "多产妇",
+      "category": "general"
+    },
+    {
+      "word": "bilateral",
+      "prefix": "bi-",
+      "root": "later",
+      "suffix": "-al",
+      "meaning": "pertaining to two sides",
+      "explanation": "The term 'bilateral' refers to something that involves or relates to both sides of a structure, commonly used in medical contexts to describe conditions or procedures affecting both the left and right sides of the body.",
+      "chineseTranslation": "双侧的",
+      "category": "general"
+    },
+    {
+      "word": "vertebra",
+      "prefix": "verte-",
+      "root": "bra",
+      "suffix": "",
+      "meaning": "one of the small bones that make up the backbone",
+      "explanation": "Vertebrae are the individual bones that stack up to form the vertebral column (spine), protecting the spinal cord and supporting the head and body.",
+      "chineseTranslation": "脊椎",
+      "category": "general"
+    },
+    {
+      "word": "unilateral",
+      "prefix": "uni-",
+      "root": "later",
+      "suffix": "-al",
+      "meaning": "relating to one side",
+      "explanation": "The term 'unilateral' refers to something that affects or pertains to only one side or part of the body or an issue. It is often used in medical contexts to describe conditions or procedures that involve only one side of a structure.",
+      "chineseTranslation": "单侧",
+      "category": "general"
+    },
+    {
+      "word": "vertebrae",
+      "prefix": "verte-",
+      "root": "bra",
+      "suffix": "e",
+      "meaning": "the small bones that make up the spine.",
+      "explanation": "Vertebrae are individual bones that stack to form the vertebral column or spine. They protect the spinal cord and provide structural support.",
+      "chineseTranslation": "椎骨",
+      "category": "general"
+    },
+    {
+      "word": "thoraces",
+      "prefix": "",
+      "root": "thorac",
+      "suffix": "es",
+      "meaning": "The plural form of thorax, referring to the chest region of the body.",
+      "explanation": "In human anatomy, the thorax is the part of the body situated between the neck and the abdomen. It is enclosed by the ribcage and contains vital organs such as the heart and lungs.",
+      "chineseTranslation": "胸廓",
+      "category": "general"
+    },
+    {
+      "word": "appendices",
+      "prefix": "ap-",
+      "root": "pend",
+      "suffix": "-ices",
+      "meaning": "Supplementary material at the end of a book or document.",
+      "explanation": "Appendices are used to provide additional information, such as tables, figures, or data, that support the main text but are not included within the main body to maintain clarity and conciseness.",
+      "chineseTranslation": "附录",
+      "category": "general"
+    },
+    {
+      "word": "metastasis",
+      "prefix": "meta-",
+      "root": "stasis",
+      "suffix": "",
+      "meaning": "The spread of disease from one organ or part to another non-adjacent organ or part.",
+      "explanation": "Metastasis typically refers to the process by which cancer cells invade adjacent tissues and spread to distant organs via the bloodstream or lymphatic system. It shows that the cancer has progressed beyond its original site.",
+      "chineseTranslation": "转移",
+      "category": "general"
+    },
+    {
+      "word": "appendix",
+      "prefix": "ap-",
+      "root": "pend",
+      "suffix": "-ix",
+      "meaning": "a supplementary part at the end of a book or document, or a part of the body in anatomy.",
+      "explanation": "In anatomy, the appendix is a small, tube-like structure attached to the large intestine. In books or documents, an appendix provides additional information that is not included in the main text.",
+      "chineseTranslation": "附录",
+      "category": "general"
+    },
+    {
+      "word": "thorax",
+      "prefix": "",
+      "root": "thorax",
+      "suffix": "",
+      "meaning": "The part of the body between the neck and the abdomen; it contains the ribs, breastbone, and spine.",
+      "explanation": "The thorax is commonly referred to as the chest area and houses vital organs, including the heart and lungs, protected by the rib cage.",
+      "chineseTranslation": "胸腔",
+      "category": "general"
+    },
+    {
+      "word": "sarcoma",
+      "prefix": "sarco-",
+      "root": "oma",
+      "suffix": "",
+      "meaning": "A type of cancer that arises from connective tissues.",
+      "explanation": "Sarcomas are malignancies that originate in mesenchymal tissues, which include bone, cartilage, fat, muscle, and vascular tissues. They are different from carcinomas, which originate in epithelial tissues.",
+      "chineseTranslation": "肉瘤",
+      "category": "general"
+    },
+    {
+      "word": "metastases",
+      "prefix": "meta-",
+      "root": "stasis",
+      "suffix": "es",
+      "meaning": "The spread of cancer cells from the original tumor to distant parts of the body.",
+      "explanation": "Metastases occur when cancer cells break away from the primary tumor and travel through the bloodstream or lymphatic system to form secondary tumors in other organs or tissues.",
+      "chineseTranslation": "转移瘤",
+      "category": "general"
+    },
+    {
+      "word": "sarcomata",
+      "prefix": "sarco-",
+      "root": "mat",
+      "suffix": "-a",
+      "meaning": "A type of malignant tumor that arises from connective tissues.",
+      "explanation": "Sarcomata are tumors that originate from mesenchymal tissues, which include bone, muscle, fat, and cartilage. They are often aggressive and can metastasize to other parts of the body.",
+      "chineseTranslation": "肉瘤",
+      "category": "general"
+    },
+    {
+      "word": "ganglia",
+      "prefix": "gangli-",
+      "root": "ganglion",
+      "suffix": "-ia",
+      "meaning": "A structure containing a number of nerve cell bodies, typically located outside the central nervous system.",
+      "explanation": "Ganglia act as relay points in the nervous system where information is processed and transmitted. They play crucial roles in the autonomic nervous system and are involved in sensory and motor functions.",
+      "chineseTranslation": "神经节",
+      "category": "general"
+    },
+    {
+      "word": "ganglion",
+      "prefix": "gangli-",
+      "root": "on",
+      "suffix": "",
+      "meaning": "A mass of nerve tissue containing cell bodies.",
+      "explanation": "Ganglia are structures found in the nervous system, typically serving as relay stations where signals are transmitted between different parts of the nervous system.",
+      "chineseTranslation": "神经节",
+      "category": "general"
+    },
+    {
+      "word": "phalanx",
+      "prefix": "pha-",
+      "root": "lanx",
+      "suffix": "",
+      "meaning": "a bone in the fingers or toes.",
+      "explanation": "The phalanx refers specifically to the bones that make up the digits (fingers and toes) of the hands and feet. Each finger has three phalanges (proximal, middle, and distal), while the thumb has two (proximal and distal).",
+      "chineseTranslation": "趾骨",
+      "category": "general"
+    },
+    {
+      "word": "phalanges",
+      "prefix": "",
+      "root": "phalang-",
+      "suffix": "es",
+      "meaning": "The bones of the fingers and toes.",
+      "explanation": "Phalanges are the small bones that make up the digits (fingers and toes) in the hands and feet. Each finger and toe has three phalanges, except for the thumb and big toe, which have two.",
+      "chineseTranslation": "指骨",
+      "category": "general"
+    },
+    {
+      "word": "nuclei",
+      "prefix": "",
+      "root": "nucle-",
+      "suffix": "i",
+      "meaning": "The plural form of nucleus, referring to multiple central or essential parts of cells.",
+      "explanation": "In biology, nuclei are the membrane-bound organelles in eukaryotic cells that contain the genetic material. Each nucleus contains DNA and controls cellular activities such as growth, metabolism, and reproduction.",
+      "chineseTranslation": "细胞核",
+      "category": "general"
+    },
+    {
+      "word": "nucleus",
+      "prefix": "nu-",
+      "root": "cleus",
+      "suffix": "",
+      "meaning": "The central part of a cell or atom, that contains the genetic material.",
+      "explanation": "In cellular biology, the nucleus is a membrane-bound organelle found in eukaryotic cells that contains most of the genetic material. In atomic theory, the nucleus is the dense region consisting of protons and neutrons at the center of an atom, which is surrounded by electrons.",
+      "chineseTranslation": "细胞核",
+      "category": "general"
+    },
+    {
+      "word": "ova",
+      "prefix": "",
+      "root": "ov",
+      "suffix": "a",
+      "meaning": "female reproductive cells or eggs.",
+      "explanation": "Ova are the gametes produced by female organisms and the primary component in sexual reproduction, serving as the counterpart to sperm in fertilization.",
+      "chineseTranslation": "卵子",
+      "category": "general"
+    },
+    {
+      "word": "gastralgia",
+      "prefix": "gastr-",
+      "root": "algia",
+      "suffix": "",
+      "meaning": "pain in the stomach",
+      "explanation": "Gastralgia refers to discomfort or pain located in the stomach area, which can be caused by various gastrointestinal issues or conditions.",
+      "chineseTranslation": "胃痛",
+      "category": "general"
+    },
+    {
+      "word": "ovum",
+      "prefix": "",
+      "root": "ov",
+      "suffix": "um",
+      "meaning": "A female reproductive cell or gamete.",
+      "explanation": "An ovum, also known as an egg cell, is a reproductive cell produced by the female in organisms that reproduce sexually. It is involved in the process of fertilization and development of a new organism.",
+      "chineseTranslation": "卵子",
+      "category": "general"
+    },
+    {
+      "word": "biopsy",
+      "prefix": "bio-",
+      "root": "opsy",
+      "suffix": "",
+      "meaning": "The removal of tissue from a living body for diagnostic examination.",
+      "explanation": "A biopsy is a medical procedure that involves taking a small sample of tissue for testing. This is often done to diagnose diseases, including cancer, by examining the cells in the removed tissue under a microscope.",
+      "chineseTranslation": "活组织检查",
+      "category": "general"
+    },
+    {
+      "word": "biopsies",
+      "prefix": "bio-",
+      "root": "opsis",
+      "suffix": "-ies",
+      "meaning": "The removal and examination of tissue from a living organism for diagnostic purposes.",
+      "explanation": "Biopsies are typically performed to identify diseases like cancer by examining the tissue under a microscope. It helps in understanding the nature of a disease and deciding on the course of treatment.",
+      "chineseTranslation": "活检",
+      "category": "general"
+    },
+    {
+      "word": "cystocele",
+      "prefix": "cysto-",
+      "root": "cele",
+      "suffix": "",
+      "meaning": "a protrusion of the urinary bladder through the vaginal wall",
+      "explanation": "A cystocele occurs when the supportive tissues between a woman's bladder and vagina weaken, allowing the bladder to bulge into the vagina. This can lead to discomfort and other urinary issues.",
+      "chineseTranslation": "膀胱脱垂",
+      "category": "general"
+    },
+    {
+      "word": "excise",
+      "prefix": "ex-",
+      "root": "cis",
+      "suffix": "-e",
+      "meaning": "to remove by cutting out",
+      "explanation": "Excise refers to the surgical removal of tissue or organs from the body. It can also refer to the removal of part of a tumor or other abnormal growth.",
+      "chineseTranslation": "切除",
+      "category": "general"
+    },
+    {
+      "word": "cardiodynia",
+      "prefix": "cardio-",
+      "root": "dynia",
+      "suffix": "",
+      "meaning": "heart pain",
+      "explanation": "Cardiodynia refers to pain located in the heart or chest region, often related to cardiac conditions.",
+      "chineseTranslation": "心痛",
+      "category": "general"
+    },
+    {
+      "word": "mutagen",
+      "prefix": "mu-",
+      "root": "tag",
+      "suffix": "-en",
+      "meaning": "A substance that causes genetic mutation.",
+      "explanation": "Mutagens are agents, such as chemicals or radiation, that can induce changes in the DNA sequence of organisms, leading to mutations that may result in cancer or other genetic disorders.",
+      "chineseTranslation": "诱变剂",
+      "category": "general"
+    },
+    {
+      "word": "erythrocyte",
+      "prefix": "erythro-",
+      "root": "cyte",
+      "suffix": "",
+      "meaning": "A type of red blood cell that carries oxygen in the blood.",
+      "explanation": "Erythrocytes are the most abundant cells in the blood and are responsible for transporting oxygen from the lungs to the body's tissues and returning carbon dioxide to the lungs.",
+      "chineseTranslation": "红细胞",
+      "category": "general"
+    },
+    {
+      "word": "osteogenesis",
+      "prefix": "osteo-",
+      "root": "genesis",
+      "suffix": "",
+      "meaning": "the formation and development of bone tissue",
+      "explanation": "Osteogenesis refers to the biological process through which new bone is formed in the body. This includes the creation of bone cells and the mineralization of the bone matrix.",
+      "chineseTranslation": "骨生成",
+      "category": "general"
+    },
+    {
+      "word": "hypothyroidism",
+      "prefix": "hypo-",
+      "root": "thyroid",
+      "suffix": "-ism",
+      "meaning": "A condition in which the thyroid gland does not produce enough thyroid hormones.",
+      "explanation": "Hypothyroidism leads to a slower metabolism and can cause various symptoms such as fatigue, weight gain, and sensitivity to cold.",
+      "chineseTranslation": "甲状腺功能减退症",
+      "category": "general"
+    },
+    {
+      "word": "hemiplegia",
+      "prefix": "hemi-",
+      "root": "plegia",
+      "suffix": "",
+      "meaning": "Paralysis of one side of the body",
+      "explanation": "Hemiplegia is a condition characterized by the paralysis of one side of the body, often resulting from a stroke or traumatic brain injury that affects the motor control areas in the brain.",
+      "chineseTranslation": "偏瘫",
+      "category": "general"
+    },
+    {
+      "word": "cellulitis",
+      "prefix": "cellul-",
+      "root": "itis",
+      "suffix": "",
+      "meaning": "an infection of the skin and tissues underneath the skin.",
+      "explanation": "Cellulitis is a common bacterial skin infection that causes red, swollen areas on the skin, often accompanied by pain and warmth. It can occur anywhere on the body and is often caused by bacteria entering through a break in the skin.",
+      "chineseTranslation": "蜂窝组织炎",
+      "category": "general"
+    },
+    {
+      "word": "lithiasis",
+      "prefix": "lith-",
+      "root": "iasis",
+      "suffix": "",
+      "meaning": "the formation of stones in the body.",
+      "explanation": "Lithiasis refers to a medical condition characterized by the presence of calculi or stones in the body, particularly within the kidneys, bladder, or other parts of the urinary tract. It can lead to pain and other complications.",
+      "chineseTranslation": "结石症",
+      "category": "general"
+    },
+    {
+      "word": "carcinogenic",
+      "prefix": "carcino-",
+      "root": "gen-",
+      "suffix": "-ic",
+      "meaning": "capable of causing cancer",
+      "explanation": "Carcinogenic substances are those that can lead to the formation of cancer in living tissue by causing mutations or other changes in the cellular structure.",
+      "chineseTranslation": "致癌的",
+      "category": "general"
+    },
+    {
+      "word": "osteolysis",
+      "prefix": "osteo-",
+      "root": "lysis",
+      "suffix": "",
+      "meaning": "Destruction or dissolution of bone tissue.",
+      "explanation": "Osteolysis refers to the process of bone tissue breakdown, which can occur due to various factors, including disease, inflammation, or the resumption of normal bone remodeling after injury. It can lead to conditions such as osteoporosis or bone metastasis.",
+      "chineseTranslation": "骨溶解",
+      "category": "general"
+    },
+    {
+      "word": "chondromalacia",
+      "prefix": "chondro-",
+      "root": "malacia",
+      "suffix": "",
+      "meaning": "Cartilage softening, typically in the knee area.",
+      "explanation": "Chondromalacia refers to the softening and breakdown of cartilage, often affecting the knee joint and leading to pain and difficulty in movement.",
+      "chineseTranslation": "软骨软化症",
+      "category": "general"
+    },
+    {
+      "word": "cyanosis",
+      "prefix": "cyan-",
+      "root": "osis",
+      "suffix": "",
+      "meaning": "A bluish discoloration of the skin and mucous membranes due to inadequate oxygenation of the blood.",
+      "explanation": "Cyanosis occurs when the hemoglobin in the blood is poorly oxygenated, leading to a bluish tint, often seen in the lips, fingers, and toes.",
+      "chineseTranslation": "青紫症",
+      "category": "general"
+    },
+    {
+      "word": "bronchiectasis",
+      "prefix": "bronchi-",
+      "root": "ectasis",
+      "suffix": "",
+      "meaning": "A condition characterized by the abnormal dilation of the bronchi.",
+      "explanation": "Bronchiectasis occurs when the bronchial tubes become damaged, leading to their irreparable widening and a buildup of mucus that can lead to infection and other respiratory issues.",
+      "chineseTranslation": "支气管扩张症",
+      "category": "general"
+    },
+    {
+      "word": "dysplasia",
+      "prefix": "dys-",
+      "root": "plasia",
+      "suffix": "",
+      "meaning": "abnormal growth or development of tissues or organs",
+      "explanation": "Dysplasia refers to an abnormality in the size, shape, or organization of cells within a tissue, often indicating a precancerous condition.",
+      "chineseTranslation": "发育不良",
+      "category": "general"
+    },
+    {
+      "word": "cardiomegaly",
+      "prefix": "cardio-",
+      "root": "megaly",
+      "suffix": "",
+      "meaning": "abnormal enlargement of the heart",
+      "explanation": "Cardiomegaly indicates that the heart is larger than normal, which can be due to various underlying conditions such as high blood pressure, heart valve disease, or cardiomyopathy. It can be detected through imaging techniques like X-rays or echocardiograms.",
+      "chineseTranslation": "心脏肥大",
+      "category": "general"
+    },
+    {
+      "word": "myopathy",
+      "prefix": "myo-",
+      "root": "path",
+      "suffix": "-y",
+      "meaning": "a disease of muscle tissue",
+      "explanation": "Myopathy refers to any disease that affects the muscle fibers, which can lead to muscular weakness and dysfunction.",
+      "chineseTranslation": "肌病",
+      "category": "general"
+    },
+    {
+      "word": "hemorrhage",
+      "prefix": "hemo-",
+      "root": "-rrhage",
+      "suffix": "",
+      "meaning": "Excessive bleeding",
+      "explanation": "Hemorrhage refers to the excessive loss of blood from the circulatory system, either internally or externally. It can be caused by injuries, medical conditions, or complications from surgical procedures.",
+      "chineseTranslation": "出血",
+      "category": "general"
+    },
+    {
+      "word": "proctoptosis",
+      "prefix": "procto-",
+      "root": "ptosis",
+      "suffix": "",
+      "meaning": "prolapse of the rectum",
+      "explanation": "Proctoptosis refers to the condition where the rectum is displaced or excessively dropped down into the anal canal or outside the body. This is often caused by weakness in the supporting structures.",
+      "chineseTranslation": "直肠下垂",
+      "category": "general"
+    },
+    {
+      "word": "neoplasm",
+      "prefix": "neo-",
+      "root": "plasm",
+      "suffix": "",
+      "meaning": "a new and abnormal growth of tissue in some part of the body",
+      "explanation": "Neoplasm refers to a mass formed by abnormal cell growth. These can be benign (non-cancerous) or malignant (cancerous). The term is often used in the context of tumors.",
+      "chineseTranslation": "肿瘤",
+      "category": "general"
+    },
+    {
+      "word": "rhinorrhea",
+      "prefix": "rhino-",
+      "root": "rhea",
+      "suffix": "",
+      "meaning": "discharge of mucus from the nose",
+      "explanation": "Rhinorrhea refers to a condition characterized by an excessive flow of mucus from the nasal cavity, often associated with allergies, colds, or sinus infections.",
+      "chineseTranslation": "流涕",
+      "category": "general"
+    },
+    {
+      "word": "arteriosclerosis",
+      "prefix": "arterio-",
+      "root": "sclerosis",
+      "suffix": "",
+      "meaning": "hardening of the arteries",
+      "explanation": "Arteriosclerosis is a condition characterized by the thickening and hardening of the walls of the arteries, which can lead to reduced blood flow and increase the risk of cardiovascular diseases.",
+      "chineseTranslation": "动脉硬化",
+      "category": "general"
+    },
+    {
+      "word": "hysterorrhexis",
+      "prefix": "hystero-",
+      "root": "rrhexis",
+      "suffix": "",
+      "meaning": "Rupture of the uterus.",
+      "explanation": "Hysterorrhexis refers to the tearing or rupture of the uterine wall, which can be a serious medical condition requiring immediate attention.",
+      "chineseTranslation": "子宫破裂",
+      "category": "general"
+    },
+    {
+      "word": "angiostenosis",
+      "prefix": "angio-",
+      "root": "stenosis",
+      "suffix": "",
+      "meaning": "Narrowing of a blood vessel",
+      "explanation": "Angiostenosis refers to the constriction or narrowing of blood vessels, which can lead to reduced blood flow to organs and tissues.",
+      "chineseTranslation": "血管狭窄",
+      "category": "general"
+    },
+    {
+      "word": "chemotherapy",
+      "prefix": "chemo-",
+      "root": "therap",
+      "suffix": "-y",
+      "meaning": "a type of cancer treatment that uses drugs to destroy cancer cells",
+      "explanation": "Chemotherapy involves using powerful chemicals to kill rapidly dividing cells, primarily cancer cells, in the body.",
+      "chineseTranslation": "化疗",
+      "category": "general"
+    },
+    {
+      "word": "cardiac",
+      "prefix": "cardi-",
+      "root": "ac",
+      "suffix": "",
+      "meaning": "relating to the heart",
+      "explanation": "The term 'cardiac' pertains directly to the heart, including its structure, function, and diseases.",
+      "chineseTranslation": "心脏的",
+      "category": "general"
+    },
+    {
+      "word": "ovarian",
+      "prefix": "o-",
+      "root": "vari",
+      "suffix": "-an",
+      "meaning": "related to the ovaries",
+      "explanation": "The term 'ovarian' pertains to the ovaries, which are the female reproductive organs responsible for producing eggs and hormones.",
+      "chineseTranslation": "卵巢的",
+      "category": "general"
+    },
+    {
+      "word": "hypertrophy",
+      "prefix": "hyper-",
+      "root": "trophy",
+      "suffix": "",
+      "meaning": "Abnormal increase in the size of an organ or tissue through the enlargement of its cells.",
+      "explanation": "Hypertrophy is commonly seen in muscles in response to increased workload, but can also occur in other tissues or organs such as the heart, often due to conditions such as high blood pressure.",
+      "chineseTranslation": "肥大",
+      "category": "general"
+    },
+    {
+      "word": "ventricular",
+      "prefix": "ventricul-",
+      "root": "ventricul",
+      "suffix": "-ar",
+      "meaning": "pertaining to a ventricle",
+      "explanation": "The term 'ventricular' refers to anything related to the ventricles, which are hollow parts of the heart or brain that help in the circulation of blood or cerebrospinal fluid.",
+      "chineseTranslation": "心室的",
+      "category": "general"
+    },
+    {
+      "word": "pulmonary",
+      "prefix": "pulmo-",
+      "root": "nary",
+      "suffix": "",
+      "meaning": "Related to the lungs",
+      "explanation": "The term 'pulmonary' is used to describe anything associated with the lungs, such as diseases, conditions, or treatments.",
+      "chineseTranslation": "肺的",
+      "category": "general"
+    },
+    {
+      "word": "duodenal",
+      "prefix": "duod-",
+      "root": "enum",
+      "suffix": "-al",
+      "meaning": "pertaining to the duodenum, the first part of the small intestine.",
+      "explanation": "The term 'duodenal' refers specifically to anything related to the duodenum. The duodenum is a crucial segment of the digestive system, located between the stomach and the jejunum. It plays a significant role in the digestion of food by mixing ingested chyme with digestive enzymes and bile.",
+      "chineseTranslation": "十二指肠的",
+      "category": "general"
+    },
+    {
+      "word": "esophageal",
+      "prefix": "eso-",
+      "root": "phag-",
+      "suffix": "-eal",
+      "meaning": "pertaining to the esophagus",
+      "explanation": "The term esophageal refers to anything related to the esophagus, which is the tube that carries food from the throat to the stomach.",
+      "chineseTranslation": "食道的",
+      "category": "general"
+    },
+    {
+      "word": "gastric",
+      "prefix": "gastr-",
+      "root": "gastr",
+      "suffix": "-ic",
+      "meaning": "pertaining to the stomach",
+      "explanation": "The term gastric is used to describe anything related to the stomach, including conditions, diseases, and processes occurring in this organ.",
+      "chineseTranslation": "胃的",
+      "category": "general"
+    },
+    {
+      "word": "neurological",
+      "prefix": "neuro-",
+      "root": "log",
+      "suffix": "-ical",
+      "meaning": "pertaining to the nervous system or disorders of the nervous system",
+      "explanation": "The term 'neurological' relates to the field of neurology, which is concerned with the diagnosis and treatment of diseases involving the nervous system, including the brain, spinal cord, and nerves.",
+      "chineseTranslation": "神经的",
+      "category": "general"
+    },
+    {
+      "word": "penile",
+      "prefix": "peni-",
+      "root": "penis",
+      "suffix": "-ile",
+      "meaning": "Relating to the penis.",
+      "explanation": "The term 'penile' is used to describe anything associated with or pertaining to the penis, which is the male reproductive organ.",
+      "chineseTranslation": "阴茎的",
+      "category": "general"
+    },
+    {
+      "word": "superior",
+      "prefix": "super-",
+      "root": "ior",
+      "suffix": "",
+      "meaning": "Above or higher in rank, status, or quality.",
+      "explanation": "The term 'superior' is often used in medical contexts to describe structures that are located above another structure in anatomical orientation.",
+      "chineseTranslation": "上方的",
+      "category": "general"
+    },
+    {
+      "word": "intravenous",
+      "prefix": "intra-",
+      "root": "vena",
+      "suffix": "-ous",
+      "meaning": "pertaining to within a vein",
+      "explanation": "Intravenous refers to the administration of substances directly into a vein, often used for delivering medications, fluids, or nutrients swiftly into the bloodstream.",
+      "chineseTranslation": "静脉内的",
+      "category": "general"
+    },
+    {
+      "word": "auditory",
+      "prefix": "audi-",
+      "root": "tory",
+      "suffix": "-ory",
+      "meaning": "related to hearing",
+      "explanation": "The term auditory refers to anything associated with the sense of hearing, including structures, functions, and processes related to the perception of sound.",
+      "chineseTranslation": "听觉的",
+      "category": "general"
+    },
+    {
+      "word": "adipose",
+      "prefix": "adipo-",
+      "root": "pose",
+      "suffix": "",
+      "meaning": "fatty tissue",
+      "explanation": "Adipose refers to the body’s fatty tissue, which serves as insulation and energy storage. It is also involved in various metabolic processes.",
+      "chineseTranslation": "脂肪的",
+      "category": "general"
+    },
+    {
+      "word": "acoustic",
+      "prefix": "a-",
+      "root": "coust",
+      "suffix": "-ic",
+      "meaning": "relating to sound or the sense of hearing",
+      "explanation": "The term acoustic relates to the properties or qualities of sound, often used in contexts like acoustic performance in music or acoustics in physics.",
+      "chineseTranslation": "声学的",
+      "category": "general"
+    },
+    {
+      "word": "colostomy",
+      "prefix": "colo-",
+      "root": "stomy",
+      "suffix": "",
+      "meaning": "A surgical procedure that creates an opening from the colon to the outside of the body.",
+      "explanation": "In a colostomy, a part of the colon is diverted to an artificial opening in the abdominal wall, allowing waste to exit the body into a colostomy bag. This is often necessary after surgery for conditions like colon cancer or severe inflammatory bowel disease.",
+      "chineseTranslation": "结肠造口术",
+      "category": "general"
+    },
+    {
+      "word": "thoracotomy",
+      "prefix": "thora-",
+      "root": "cotom",
+      "suffix": "-y",
+      "meaning": "Surgical incision into the chest wall.",
+      "explanation": "Thoracotomy is a surgical procedure involving a large incision made in the chest to gain access to the organs inside the thoracic cavity, typically to treat conditions affecting the lungs, heart, or other structures in that area.",
+      "chineseTranslation": "胸腔切开术",
+      "category": "general"
+    },
+    {
+      "word": "nephropexy",
+      "prefix": "nephro-",
+      "root": "pexy",
+      "suffix": "",
+      "meaning": "surgical fixation of a kidney",
+      "explanation": "Nephropexy is a surgical procedure to secure or fix a kidney to the abdominal wall or surrounding structures, often performed in cases of nephroptosis (floating kidney).",
+      "chineseTranslation": "肾固定术",
+      "category": "general"
+    },
+    {
+      "word": "arthrocentesis",
+      "prefix": "arthro-",
+      "root": "centesis",
+      "suffix": "",
+      "meaning": "The procedure of puncturing a joint cavity to withdraw fluid.",
+      "explanation": "Arthrocentesis is a medical procedure used to diagnose or treat joint disorders by removing synovial fluid from a joint using a needle. It can also be performed to inject medication into the joint.",
+      "chineseTranslation": "关节穿刺",
+      "category": "general"
+    },
+    {
+      "word": "dermatoplasty",
+      "prefix": "dermato-",
+      "root": "plast",
+      "suffix": "-y",
+      "meaning": "surgical repair of the skin",
+      "explanation": "Dermatoplasty involves surgical procedures to repair or reconstruct skin tissues, often used in cosmetic or reconstructive surgery to improve the appearance or function of damaged skin.",
+      "chineseTranslation": "皮肤修复术",
+      "category": "general"
+    },
+    {
+      "word": "myorrhaphy",
+      "prefix": "myo-",
+      "root": "rrhaphy",
+      "suffix": "",
+      "meaning": "Suture of a muscle.",
+      "explanation": "Myorrhaphy is a surgical procedure that involves suturing or stitching together muscle tissue usually following a tear or injury.",
+      "chineseTranslation": "肌肉缝合",
+      "category": "general"
+    },
+    {
+      "word": "gastrectomy",
+      "prefix": "gastro-",
+      "root": "ectom",
+      "suffix": "-y",
+      "meaning": "surgical removal of part or all of the stomach",
+      "explanation": "Gastrectomy is a surgical procedure that involves the partial or total removal of the stomach. This procedure is often performed to treat stomach cancer, severe ulcers, or other stomach-related conditions.",
+      "chineseTranslation": "胃切除术",
+      "category": "general"
+    },
+    {
+      "word": "electrocardiogram",
+      "prefix": "electro-",
+      "root": "cardio",
+      "suffix": "-gram",
+      "meaning": "A test that records the electrical activity of the heart.",
+      "explanation": "An electrocardiogram (ECG or EKG) measures the electrical signals that trigger each heartbeat. It helps in diagnosing heart conditions by displaying the heart's rhythm and electrical activity.",
+      "chineseTranslation": "心电图",
+      "category": "general"
+    },
+    {
+      "word": "electrocardiography",
+      "prefix": "electro-",
+      "root": "cardio",
+      "suffix": "-graphy",
+      "meaning": "The process of recording the electrical activity of the heart over a period of time.",
+      "explanation": "Electrocardiography (ECG or EKG) is a medical test that detects electrical activity in your heart. It produces an electrocardiogram, a graphical representation of the heart's electrical signals, which can help diagnose heart conditions.",
+      "chineseTranslation": "心电图",
+      "category": "general"
+    },
+    {
+      "word": "audiometer",
+      "prefix": "audio-",
+      "root": "metre",
+      "suffix": "-er",
+      "meaning": "an instrument for measuring hearing acuity",
+      "explanation": "An audiometer is used to evaluate the hearing capabilities of an individual, allowing healthcare professionals to assess the degree of hearing loss or impairment.",
+      "chineseTranslation": "听力计",
+      "category": "general"
+    },
+    {
+      "word": "audiometry",
+      "prefix": "audio-",
+      "root": "metr",
+      "suffix": "-y",
+      "meaning": "The measurement of hearing ability.",
+      "explanation": "Audiometry is a clinical test used to measure a person's ability to hear various sounds, tones, and pitches. It is commonly used for diagnosing hearing loss and assessing the auditory function.",
+      "chineseTranslation": "听力测量",
+      "category": "general"
+    },
+    {
+      "word": "gastroscope",
+      "prefix": "gastro-",
+      "root": "scope",
+      "suffix": "",
+      "meaning": "An instrument for examining the stomach.",
+      "explanation": "A gastroscope is a type of endoscope specifically designed for exploring the interior lining of the stomach, allowing doctors to diagnose and treat conditions related to the gastrointestinal tract.",
+      "chineseTranslation": "胃镜",
+      "category": "general"
+    },
+    {
+      "word": "electrocardiograph",
+      "prefix": "electro-",
+      "root": "cardio-",
+      "suffix": "-graph",
+      "meaning": "An instrument used to record the electrical activity of the heart.",
+      "explanation": "The electrocardiograph measures the electrical impulses generated by the heart as it beats, producing a graph that represents these impulses over time. This recording is known as an electrocardiogram (ECG or EKG) and helps in diagnosing heart conditions.",
+      "chineseTranslation": "心电图仪",
+      "category": "general"
+    },
+    {
+      "word": "gastroscopy",
+      "prefix": "gastro-",
+      "root": "scopy",
+      "suffix": "-y",
+      "meaning": "A procedure to examine the inside of the stomach.",
+      "explanation": "Gastroscopy is a medical procedure that uses a thin, flexible tube called a gastroscope to visualize the lining of the stomach. It is commonly used to investigate symptoms like abdominal pain, nausea, or unexplained weight loss.",
+      "chineseTranslation": "胃镜检查",
+      "category": "general"
+    }
+  ]
 }
