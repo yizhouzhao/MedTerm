@@ -12,6 +12,7 @@ import 'screens/body_systems.dart';
 import 'screens/settings.dart';
 import 'screens/word_detail.dart';
 import 'screens/word_list.dart';
+import 'screens/search.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -116,7 +117,7 @@ class _MedTermAppState extends State<MedTermApp> with RestorationMixin {
                     GoRoute(
                       path: ':name',
                       pageBuilder: (context, state) {
-                        return BodySystemWordListScreen.pageBuilder(
+                        return WordListScreen.pageBuilder(
                           context,
                           state.pathParameters['name']!,
                         );
@@ -134,10 +135,10 @@ class _MedTermAppState extends State<MedTermApp> with RestorationMixin {
                 GoRoute(
                   path: '/search',
                   pageBuilder: (context, state) {
-                    return MedTermPage(
+                    return MedTermPage(   
                       key: state.pageKey,
                       restorationId: 'route.search',
-                      child: const Text('TODO Widget'),
+                      child: SearchScreen(restorationId: 'search'),
                     );
                   },
                   //routes: [_buildDetailsRoute()],

@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../services/database.dart';
 import '../styles.dart';
 import '../widgets/word_line.dart';
 
-class BodySystemWordListScreen extends StatelessWidget {
-  const BodySystemWordListScreen({super.key, required this.bodySystemName});
+class WordListScreen extends StatefulWidget {
+  const WordListScreen({super.key, required this.bodySystemName});
 
   final String bodySystemName;
   static final DatabaseService databaseService = DatabaseService();
@@ -13,16 +14,25 @@ class BodySystemWordListScreen extends StatelessWidget {
   static Page<void> pageBuilder(BuildContext context, String bodySystemName) {
     return CupertinoPage(
       restorationId: 'router.systems.$bodySystemName',
-      child: BodySystemWordListScreen(bodySystemName: bodySystemName),
+      child: WordListScreen(bodySystemName: bodySystemName),
       title: '$bodySystemName Word List',
     );
   }
 
   @override
+  State<WordListScreen> createState() => _WordListScreenState();
+}
+
+class _WordListScreenState extends State<WordListScreen> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     var brightness = CupertinoTheme.brightnessOf(context);
     return RestorationScope(
-      restorationId: bodySystemName,
+      restorationId: widget.bodySystemName,
       child: CupertinoPageScaffold(
         navigationBar: const CupertinoNavigationBar(
           middle: Text('Words'),
@@ -31,19 +41,20 @@ class BodySystemWordListScreen extends StatelessWidget {
         backgroundColor: Styles.scaffoldBackground(brightness),
         child: SafeArea(
           child: FutureBuilder<List<Map<String, dynamic>>>(
-            future: databaseService.getUserWordsWithMemory(bodySystemName),
+            future: WordListScreen.databaseService.getUserWordsWithMemory(widget.bodySystemName),
             builder: (context, snapshot) {
-              final isLoading =
-                  snapshot.connectionState == ConnectionState.waiting;
-              print('[BodySystemWordListScreen] isLoading: $isLoading');
-              return (isLoading)
-                  ? const CupertinoActivityIndicator()
-                  : (ListView.builder(
+              if (snapshot.hasData) {
+                return (ListView.builder(
                     itemCount: snapshot.data?.length ?? 0,
                     itemBuilder: (context, index) {
-                      return WordLine(word: snapshot.data?[index]['word'] ?? '', memoryLevel: snapshot.data?[index]['memory_level'] ?? 0);
+                      return WordLine(
+                        word: snapshot.data?[index]['word'] ?? '', 
+                        memoryLevel: snapshot.data?[index]['memory_level'] ?? 0
+                      );
                     },
                   ));
+              }
+              return const CupertinoActivityIndicator();
             },
           ),
         ),
