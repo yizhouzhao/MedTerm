@@ -3,52 +3,39 @@
 // found in the LICENSE file.
 
 import 'package:flutter/foundation.dart';
-import 'local_veggie_provider.dart';
-import 'veggie.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import '../models/word.dart';
 
 class AppState extends ChangeNotifier {
-  final List<Veggie> _veggies;
+  List<MedWord> _medWords = [];
 
-  AppState() : _veggies = LocalVeggieProvider.veggies;
+  AppState() {}
 
-  List<Veggie> get allVeggies => List<Veggie>.from(_veggies);
-
-  List<Veggie> get availableVeggies {
-    var currentSeason = _getSeasonForDate(DateTime.now());
-    return _veggies.where((v) => v.seasons.contains(currentSeason)).toList();
-  }
-
-  List<Veggie> get favoriteVeggies =>
-      _veggies.where((v) => v.isFavorite).toList();
-
-  List<Veggie> get unavailableVeggies {
-    var currentSeason = _getSeasonForDate(DateTime.now());
-    return _veggies.where((v) => !v.seasons.contains(currentSeason)).toList();
-  }
-
-  Veggie getVeggie(int? id) => _veggies.singleWhere((v) => v.id == id);
-
-  List<Veggie> searchVeggies(String? terms) =>
-      _veggies
-          .where((v) => v.name.toLowerCase().contains(terms!.toLowerCase()))
-          .toList();
-
-  void setFavorite(int? id, bool isFavorite) {
-    var veggie = getVeggie(id);
-    veggie.isFavorite = isFavorite;
+  void setMedWords(List<MedWord> medWords) {
+    print('[setMedWords]: ${medWords.length}');
+    _medWords = medWords;
     notifyListeners();
   }
 
-  /// Used in tests to set the season independent of the current date.
-  static Season? debugCurrentSeason;
-
-  static Season? _getSeasonForDate(DateTime date) {
-    if (debugCurrentSeason != null) {
-      return debugCurrentSeason;
-    }
-    return Season.winter;
+  List<MedWord> getMedWords() {
+    return _medWords;
   }
 
+  int getMedWordsLength() {
+    print('[getMedWordsLength]: ${_medWords.length}');
+    return _medWords.length;
+  }
 
+  int getCurrentMedWordIndex(String word) {
+    return _medWords.indexWhere((e) => e.word == word);
+  }
+
+  int getNextMedWordIndex(String word) {
+    // loop around if the index is the last one
+    int index = _medWords.indexWhere((e) => e.word == word);
+    if (index == _medWords.length - 1) {
+      return 0;
+    }
+    return index + 1;
+  }
 }

@@ -136,12 +136,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
           const CupertinoSliverNavigationBar(largeTitle: Text('Settings')),
           SliverList(
             delegate: SliverChildListDelegate([
-              CupertinoListSection.insetGrouped(
-                children: [
-                  _buildCaloriesTile(context, prefs),
-                  _buildCategoriesTile(context, prefs),
-                ],
-              ),
+              // CupertinoListSection.insetGrouped(
+              //   children: [
+              //     _buildCaloriesTile(context, prefs),
+              //     _buildCategoriesTile(context, prefs),
+              //   ],
+              // ),
               CupertinoListSection.insetGrouped(
                 children: [_buildRestoreDefaultsTile(context, prefs)],
               ),

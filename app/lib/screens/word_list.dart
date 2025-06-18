@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../data/app_state.dart';
 import '../services/database.dart';
 import '../styles.dart';
 import '../widgets/word_line.dart';
+import '../models/word.dart';
 
 class WordListScreen extends StatefulWidget {
   const WordListScreen({super.key, this.category});
@@ -31,6 +33,7 @@ class _WordListScreenState extends State<WordListScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    final appState = Provider.of<AppState>(context, listen: false);
     var brightness = CupertinoTheme.brightnessOf(context);
     return RestorationScope(
       restorationId: 'router.systems.${widget.category ?? 'unfamiliar'}',
@@ -47,6 +50,16 @@ class _WordListScreenState extends State<WordListScreen>
             ),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
+                Future.wait(
+                  snapshot.data!
+                      .map(
+                        (e) =>
+                            WordListScreen.databaseService.getWord(e['word']),
+                      )
+                      .toList(),
+                ).then((words) {
+                  appState.setMedWords(words.whereType<MedWord>().toList());
+                });
                 return (ListView.builder(
                   itemCount: snapshot.data?.length ?? 0,
                   itemBuilder: (context, index) {

@@ -12,7 +12,14 @@ enum BodySystem {
   sensory,
   immune,
   general,
-  
+}
+
+class MedWordLinkList {
+  final MedWord word;
+  final MedWord? nextWord;
+  final MedWord? previousWord;
+
+  const MedWordLinkList({required this.word, this.nextWord, this.previousWord});
 }
 
 class MedWord {
@@ -98,28 +105,28 @@ class MedWord {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is MedWord &&
-      other.word == word &&
-      other.prefix == prefix &&
-      other.root == root &&
-      other.suffix == suffix &&
-      other.meaning == meaning &&
-      other.explanation == explanation &&
-      other.chineseTranslation == chineseTranslation &&
-      other.category == category;
+        other.word == word &&
+        other.prefix == prefix &&
+        other.root == root &&
+        other.suffix == suffix &&
+        other.meaning == meaning &&
+        other.explanation == explanation &&
+        other.chineseTranslation == chineseTranslation &&
+        other.category == category;
   }
 
   @override
   int get hashCode {
     return word.hashCode ^
-      prefix.hashCode ^
-      root.hashCode ^
-      suffix.hashCode ^
-      meaning.hashCode ^
-      explanation.hashCode ^
-      chineseTranslation.hashCode ^
-      category.hashCode;
+        prefix.hashCode ^
+        root.hashCode ^
+        suffix.hashCode ^
+        meaning.hashCode ^
+        explanation.hashCode ^
+        chineseTranslation.hashCode ^
+        category.hashCode;
   }
 }
 

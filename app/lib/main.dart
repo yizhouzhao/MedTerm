@@ -35,23 +35,7 @@ class MedTermApp extends StatefulWidget {
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
-class _MedTermAppState extends State<MedTermApp> with RestorationMixin {
-  final _RestorableAppState _appState = _RestorableAppState();
-
-  @override
-  String get restorationId => 'wrapper';
-
-  @override
-  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
-    registerForRestoration(_appState, 'state');
-  }
-
-  @override
-  void dispose() {
-    _appState.dispose();
-    super.dispose();
-  }
-
+class _MedTermAppState extends State<MedTermApp> {
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -62,7 +46,7 @@ class _MedTermAppState extends State<MedTermApp> with RestorationMixin {
     // than having to individually change instances of widgets.
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: _appState.value),
+        ChangeNotifierProvider(create: (_) => AppState()),
         ChangeNotifierProvider(create: (_) => Preferences()..load()),
       ],
       child: CupertinoApp.router(
@@ -191,27 +175,5 @@ class _MedTermAppState extends State<MedTermApp> with RestorationMixin {
         ),
       ),
     );
-  }
-}
-
-class _RestorableAppState extends RestorableListenable<AppState> {
-  @override
-  AppState createDefaultValue() {
-    return AppState();
-  }
-
-  @override
-  AppState fromPrimitives(Object? data) {
-    final appState = AppState();
-    final favorites = (data as List<dynamic>).cast<int>();
-    for (var id in favorites) {
-      appState.setFavorite(id, true);
-    }
-    return appState;
-  }
-
-  @override
-  Object toPrimitives() {
-    return value.favoriteVeggies.map((veggie) => veggie.id).toList();
   }
 }
