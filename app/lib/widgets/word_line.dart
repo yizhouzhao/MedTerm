@@ -16,7 +16,6 @@ class NotificationManager {
     _timer?.cancel();
 
     final overlay = Overlay.of(context);
-    if (overlay == null) return;
 
     final overlayEntry = OverlayEntry(
       builder:

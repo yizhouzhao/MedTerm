@@ -206,4 +206,17 @@ class DatabaseService {
     }, conflictAlgorithm: ConflictAlgorithm.replace);
     print('[DatabaseService] Added user word memory: $word, $memoryLevel');
   }
+
+  Future<void> resetDatabase() async {
+    final db = await _databaseService.database;
+
+    // Drop existing tables
+    await db.execute('DROP TABLE IF EXISTS words');
+    await db.execute('DROP TABLE IF EXISTS user_memory');
+
+    // Recreate tables
+    await _onCreate(db, 1);
+
+    print('[DatabaseService] Database reset completed');
+  }
 }

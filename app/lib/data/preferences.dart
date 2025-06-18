@@ -6,8 +6,6 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dio/dio.dart';
-import 'veggie.dart';
 
 import '../utils/sync_data.dart';
 import '../models/word.dart';
@@ -37,6 +35,7 @@ class Preferences extends ChangeNotifier {
   Future<void> restoreDefaults() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
+    SyncData.resetDatabase();
     load();
   }
 
@@ -72,22 +71,27 @@ class Preferences extends ChangeNotifier {
     // local wordListOnlineVersion
     final wordListOnlineVersion = await SyncData.getOnlineWordListVersion();
     print('[Preferences] wordListOnlineVersion: $wordListOnlineVersion');
-    //if (wordListOnlineVersion != _wordListVersion) {
-    _wordListVersion = wordListOnlineVersion;
-    final categories = await SyncData.getOnlineCategories();
-    print('[Preferences] categories: $categories');
 
-    for (final category in categories) {
-      print('[Preferences] category: $category');
-      final bodySystem = BodySystem.values.firstWhere(
-        (e) => e.name == category,
-        orElse: () => BodySystem.general,
-      );
-      _bodySystems.add(bodySystem);
-      SyncData.downloadWordList(bodySystem);
+    //FIXME: this is a hack to force the word list to be downloaded
+    //TODO: remove this after the word list is downloaded
+    //TODO: add a loading indicator
+    //FIXME: this is a hack to force the word list to be downloaded
+    if (wordListOnlineVersion != _wordListVersion) {
+      _wordListVersion = wordListOnlineVersion;
+      final categories = await SyncData.getOnlineCategories();
+      print('[Preferences] categories: $categories');
+
+      for (final category in categories) {
+        print('[Preferences] category: $category');
+        final bodySystem = BodySystem.values.firstWhere(
+          (e) => e.name == category,
+          orElse: () => BodySystem.general,
+        );
+        _bodySystems.add(bodySystem);
+        SyncData.downloadWordList(bodySystem);
+      }
+      await _saveToSharedPrefs();
     }
-    await _saveToSharedPrefs();
-    //}
 
     notifyListeners();
   }

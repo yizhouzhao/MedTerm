@@ -9,7 +9,7 @@ import '../models/word.dart';
 class AppState extends ChangeNotifier {
   List<MedWord> _medWords = [];
 
-  AppState() {}
+  AppState();
 
   void setMedWords(List<MedWord> medWords) {
     print('[setMedWords]: ${medWords.length}');

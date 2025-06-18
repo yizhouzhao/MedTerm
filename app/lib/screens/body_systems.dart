@@ -10,8 +10,6 @@ import 'package:go_router/go_router.dart';
 import '../data/preferences.dart';
 import '../styles.dart';
 import '../models/word.dart';
-import '../services/database.dart';
-import '../widgets/word_line.dart';
 
 class ListScreen extends StatelessWidget {
   const ListScreen({this.restorationId, super.key});

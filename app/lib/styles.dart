@@ -3,8 +3,6 @@
 // found in the LICENSE file.
 
 import 'package:flutter/cupertino.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'data/veggie.dart';
 
 abstract class Styles {
   static CupertinoThemeData medThemeData = const CupertinoThemeData(
@@ -118,36 +116,6 @@ abstract class Styles {
   static const Color searchCursorColor = Color.fromRGBO(0, 122, 255, 1);
 
   static const Color searchIconColor = Color.fromRGBO(128, 128, 128, 1);
-
-  static const seasonColors = <Season, Color>{
-    Season.winter: Color(0xff336dcc),
-    Season.spring: Color(0xff2fa02b),
-    Season.summer: Color(0xff287213),
-    Season.autumn: Color(0xff724913),
-  };
-
-  // While handy, some of the Font Awesome icons sometimes bleed over their
-  // allotted bounds. This padding is used to adjust for that.
-  static const seasonIconPadding = {
-    Season.winter: EdgeInsets.only(right: 0),
-    Season.spring: EdgeInsets.only(right: 4),
-    Season.summer: EdgeInsets.only(right: 6),
-    Season.autumn: EdgeInsets.only(right: 0),
-  };
-
-  static const seasonIconData = {
-    Season.winter: FontAwesomeIcons.snowflake,
-    Season.spring: FontAwesomeIcons.leaf,
-    Season.summer: FontAwesomeIcons.umbrellaBeach,
-    Season.autumn: FontAwesomeIcons.canadianMapleLeaf,
-  };
-
-  static const seasonBorder = Border(
-    top: BorderSide(color: Color(0xff606060)),
-    left: BorderSide(color: Color(0xff606060)),
-    bottom: BorderSide(color: Color(0xff606060)),
-    right: BorderSide(color: Color(0xff606060)),
-  );
 
   static const uncheckedIcon = IconData(
     0xf372,
