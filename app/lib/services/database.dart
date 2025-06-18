@@ -160,28 +160,50 @@ class DatabaseService {
     }
   }
 
-  Future<List<Map<String, dynamic>>> getUserWordsWithMemory(String category) async {
-    final words = await getWords(category);
-    final futures = words.map((word) async => {
-      'word': word.word,
-      'memory_level':  await getUserWordMemory(word.word)
-    });
-    return Future.wait(futures);
+  Future<List<Map<String, dynamic>>> getUserWordsWithMemory(
+    String? category,
+  ) async {
+    /*
+    if category is not empty, return words with memory level
+    if category is empty, return unfamiliar words
+    */
+    List<Map<String, dynamic>> words;
+    if (category != null) {
+      final words = await getWords(category);
+      final futures = words.map(
+        (word) async => {
+          'word': word.word,
+          'memory_level': await getUserWordMemory(word.word),
+        },
+      );
+      //sort the words by memory level in descending order
+      final sortedWords = await Future.wait(futures);
+      sortedWords.sort(
+        (a, b) =>
+            (a['memory_level'] as int).compareTo(b['memory_level'] as int),
+      );
+      return sortedWords;
+    } else {
+      final words = await getUserUnfamiliarWords();
+      return words;
+    }
   }
 
   Future<List<Map<String, dynamic>>> getUserUnfamiliarWords() async {
     final db = await _databaseService.database;
-    final List<Map<String, dynamic>> maps = await db.query('user_memory', where: 'memory_level < 0');
+    final List<Map<String, dynamic>> maps = await db.query(
+      'user_memory',
+      where: 'memory_level < 0',
+    );
     return maps;
   }
 
   Future<void> addUserWordMemory(String word, int memoryLevel) async {
     final db = await _databaseService.database;
-    await db.insert(
-      'user_memory',
-      {'word': word, 'memory_level': memoryLevel},
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+    await db.insert('user_memory', {
+      'word': word,
+      'memory_level': memoryLevel,
+    }, conflictAlgorithm: ConflictAlgorithm.replace);
     print('[DatabaseService] Added user word memory: $word, $memoryLevel');
   }
 }

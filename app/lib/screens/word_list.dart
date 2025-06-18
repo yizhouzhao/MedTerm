@@ -6,16 +6,16 @@ import '../styles.dart';
 import '../widgets/word_line.dart';
 
 class WordListScreen extends StatefulWidget {
-  const WordListScreen({super.key, required this.bodySystemName});
+  const WordListScreen({super.key, this.category});
 
-  final String bodySystemName;
+  final String? category;
   static final DatabaseService databaseService = DatabaseService();
 
-  static Page<void> pageBuilder(BuildContext context, String bodySystemName) {
+  static Page<void> pageBuilder(BuildContext context, String? category) {
     return CupertinoPage(
-      restorationId: 'router.systems.$bodySystemName',
-      child: WordListScreen(bodySystemName: bodySystemName),
-      title: '$bodySystemName Word List',
+      restorationId: 'router.systems.${category ?? 'unfamiliar'}',
+      child: WordListScreen(category: category),
+      title: 'Word List',
     );
   }
 
@@ -23,7 +23,8 @@ class WordListScreen extends StatefulWidget {
   State<WordListScreen> createState() => _WordListScreenState();
 }
 
-class _WordListScreenState extends State<WordListScreen> with AutomaticKeepAliveClientMixin {
+class _WordListScreenState extends State<WordListScreen>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -32,7 +33,7 @@ class _WordListScreenState extends State<WordListScreen> with AutomaticKeepAlive
     super.build(context);
     var brightness = CupertinoTheme.brightnessOf(context);
     return RestorationScope(
-      restorationId: widget.bodySystemName,
+      restorationId: 'router.systems.${widget.category ?? 'unfamiliar'}',
       child: CupertinoPageScaffold(
         navigationBar: const CupertinoNavigationBar(
           middle: Text('Words'),
@@ -41,67 +42,22 @@ class _WordListScreenState extends State<WordListScreen> with AutomaticKeepAlive
         backgroundColor: Styles.scaffoldBackground(brightness),
         child: SafeArea(
           child: FutureBuilder<List<Map<String, dynamic>>>(
-            future: WordListScreen.databaseService.getUserWordsWithMemory(widget.bodySystemName),
+            future: WordListScreen.databaseService.getUserWordsWithMemory(
+              widget.category,
+            ),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return (ListView.builder(
-                    itemCount: snapshot.data?.length ?? 0,
-                    itemBuilder: (context, index) {
-                      return WordLine(
-                        word: snapshot.data?[index]['word'] ?? '', 
-                        memoryLevel: snapshot.data?[index]['memory_level'] ?? 0
-                      );
-                    },
-                  ));
+                  itemCount: snapshot.data?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    return WordLine(
+                      word: snapshot.data?[index]['word'] ?? '',
+                      memoryLevel: snapshot.data?[index]['memory_level'] ?? 0,
+                    );
+                  },
+                ));
               }
               return const CupertinoActivityIndicator();
-            },
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class NotebookWordListScreen extends StatelessWidget {
-  const NotebookWordListScreen({super.key});
-
-  static final DatabaseService databaseService = DatabaseService();
-
-  static Page<void> pageBuilder(BuildContext context) {
-    return CupertinoPage(
-      restorationId: 'router.notebook',
-      child: NotebookWordListScreen(),
-      title: 'Notebook',
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var brightness = CupertinoTheme.brightnessOf(context);
-    return RestorationScope(
-      restorationId: 'router.notebook',
-      child: CupertinoPageScaffold(
-        // navigationBar: const CupertinoNavigationBar(
-        //   middle: Text('Notebook'),
-        //   previousPageTitle: 'Home',
-        // ),
-        backgroundColor: Styles.scaffoldBackground(brightness),
-        child: SafeArea(
-          child: FutureBuilder<List<Map<String, dynamic>>>(
-            future: databaseService.getUserUnfamiliarWords(),
-            builder: (context, snapshot) {
-              final isLoading =
-                  snapshot.connectionState == ConnectionState.waiting;
-              print('[NotebookWordListScreen] isLoading: $isLoading');
-              return (isLoading)
-                  ? const CupertinoActivityIndicator()
-                  : (ListView.builder(
-                    itemCount: snapshot.data?.length ?? 0,
-                    itemBuilder: (context, index) {
-                      return WordLine(word: snapshot.data?[index]['word'] ?? '', memoryLevel: snapshot.data?[index]['memory_level'] ?? 0);
-                    },
-                  ));
             },
           ),
         ),

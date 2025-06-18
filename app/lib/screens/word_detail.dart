@@ -1,15 +1,22 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
+import '../models/word.dart';
 import '../services/database.dart';
 import '../styles.dart';
-import '../widgets/word_line.dart';
-import '../models/word.dart';
 
 class WordDetailScreen extends StatelessWidget {
   const WordDetailScreen({super.key, required this.word});
 
   final String word;
   static final DatabaseService databaseService = DatabaseService();
+  static final FlutterTts _flutterTts = FlutterTts();
+
+  Future<void> _speak(String text) async {
+    if (text.isNotEmpty) {
+      await _flutterTts.speak(text);
+    }
+  }
 
   static Page<void> pageBuilder(BuildContext context, String word) {
     return CupertinoPage(
@@ -58,20 +65,38 @@ class WordDetailScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            medWord.word,
-                            style: const TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                              color: CupertinoColors.black,
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  medWord.word,
+                                  style: const TextStyle(
+                                    fontSize: 32,
+                                    fontWeight: FontWeight.bold,
+                                    color: CupertinoColors.black,
+                                  ),
+                                ),
+                              ),
+                              CupertinoButton(
+                                padding: EdgeInsets.zero,
+                                child: const Icon(
+                                  CupertinoIcons.speaker_2_fill,
+                                  color: CupertinoColors.activeBlue,
+                                  size: 28,
+                                ),
+                                onPressed: () => _speak(medWord.word),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 24),
                           Container(
                             width: double.infinity,
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: CupertinoColors.activeOrange.withOpacity(0.1),
+                              color: CupertinoColors.activeOrange.withOpacity(
+                                0.1,
+                              ),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Column(
@@ -98,7 +123,9 @@ class WordDetailScreen extends StatelessWidget {
                             width: double.infinity,
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: CupertinoColors.systemTeal.withOpacity(0.1),
+                              color: CupertinoColors.systemTeal.withOpacity(
+                                0.1,
+                              ),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Column(
@@ -125,7 +152,9 @@ class WordDetailScreen extends StatelessWidget {
                             width: double.infinity,
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: CupertinoColors.systemIndigo.withOpacity(0.1),
+                              color: CupertinoColors.systemIndigo.withOpacity(
+                                0.1,
+                              ),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Column(
@@ -144,9 +173,7 @@ class WordDetailScreen extends StatelessWidget {
                                   "Prefix: ${medWord.prefix}- \nRoot: ${medWord.root}\nSuffix: -${medWord.suffix}",
                                   style: const TextStyle(fontSize: 16),
                                 ),
-                                
                               ],
-                              
                             ),
                           ),
                         ],

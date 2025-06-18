@@ -128,14 +128,14 @@ class _MedTermAppState extends State<MedTermApp> with RestorationMixin {
                 GoRoute(
                   path: '/notebook',
                   pageBuilder: (context, state) {
-                    return NotebookWordListScreen.pageBuilder(context);
+                    return WordListScreen.pageBuilder(context, null);
                   },
                   //routes: [_buildDetailsRoute()],
                 ),
                 GoRoute(
                   path: '/search',
                   pageBuilder: (context, state) {
-                    return MedTermPage(   
+                    return MedTermPage(
                       key: state.pageKey,
                       restorationId: 'route.search',
                       child: SearchScreen(restorationId: 'search'),
@@ -179,7 +179,10 @@ class _MedTermAppState extends State<MedTermApp> with RestorationMixin {
                 GoRoute(
                   path: '/word/:word',
                   pageBuilder: (context, state) {
-                    return WordDetailScreen.pageBuilder(context, state.pathParameters['word']!);
+                    return WordDetailScreen.pageBuilder(
+                      context,
+                      state.pathParameters['word']!,
+                    );
                   },
                 ),
               ],

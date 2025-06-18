@@ -18,7 +18,7 @@ class Preferences extends ChangeNotifier {
   // Keys to use with shared preferences.
   static const _bodySystemsKey = 'bodySystems';
   static const _wordListVersionKey = 'wordListVersion';
-   // Indicates whether a call to [_loadFromSharedPrefs] is in progress;
+  // Indicates whether a call to [_loadFromSharedPrefs] is in progress;
   Future<void>? _loading;
 
   String _wordListVersion = '0.0.0';
@@ -68,25 +68,27 @@ class Preferences extends ChangeNotifier {
       }
     }
     _wordListVersion = prefs.getString(_wordListVersionKey) ?? '0.0.0';
-    
+
     // local wordListOnlineVersion
     final wordListOnlineVersion = await SyncData.getOnlineWordListVersion();
     print('[Preferences] wordListOnlineVersion: $wordListOnlineVersion');
     //if (wordListOnlineVersion != _wordListVersion) {
-      _wordListVersion = wordListOnlineVersion;
-      final categories = await SyncData.getOnlineCategories();
-      print('[Preferences] categories: $categories');
-      
-      for (final category in categories) {
-        print('[Preferences] category: $category');
-        final bodySystem = BodySystem.values.firstWhere((e) => e.name == category,
-        orElse: () => BodySystem.general);
-        _bodySystems.add(bodySystem);
-        SyncData.downloadWordList(bodySystem);
-      }
-      await _saveToSharedPrefs();
+    _wordListVersion = wordListOnlineVersion;
+    final categories = await SyncData.getOnlineCategories();
+    print('[Preferences] categories: $categories');
+
+    for (final category in categories) {
+      print('[Preferences] category: $category');
+      final bodySystem = BodySystem.values.firstWhere(
+        (e) => e.name == category,
+        orElse: () => BodySystem.general,
+      );
+      _bodySystems.add(bodySystem);
+      SyncData.downloadWordList(bodySystem);
+    }
+    await _saveToSharedPrefs();
     //}
-    
+
     notifyListeners();
   }
 }
