@@ -8,7 +8,7 @@ import 'data/preferences.dart';
 import 'screens/home.dart';
 import 'styles.dart';
 import 'widgets/med_term_page.dart';
-import 'screens/body_systems.dart';
+import 'screens/lesson.dart';
 import 'screens/settings.dart';
 import 'screens/word_detail.dart';
 import 'screens/word_list.dart';
@@ -99,11 +99,11 @@ class _MedTermAppState extends State<MedTermApp> {
                   },
                   routes: [
                     GoRoute(
-                      path: ':name',
+                      path: ':lesson',
                       pageBuilder: (context, state) {
                         return WordListScreen.pageBuilder(
                           context,
-                          state.pathParameters['name']!,
+                          int.parse(state.pathParameters['lesson']!),
                         );
                       },
                     ),

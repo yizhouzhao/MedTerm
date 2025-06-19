@@ -16,44 +16,45 @@ class SyncData {
     return data['version'] as String;
   }
 
-  static Future<List<String>> getOnlineCategories() async {
+  static Future<List<int>> getOnlineLessons() async {
     final dio = Dio();
     final response = await dio.get(wordListUrl);
     final data = jsonDecode(response.data.toString()) as Map<String, dynamic>;
-    print('[SyncData] data: $data');
-    final categories =
-        (data['categories'] as List).map((e) => e.toString()).toList();
-    return categories;
+    print('[SyncData] data 2: $data');
+    print('[SyncData] data 3: ${data['lessons']}');
+    final lessons = (data['lessons'] as List).map((e) => e as int).toList();
+    print('[SyncData] lessons 2: $lessons');
+    return lessons;
   }
 
-  static Future<void> downloadWordList(BodySystem bodySystem) async {
+  static Future<void> downloadWordList(int lesson) async {
     final dio = Dio();
-    final categoryUrl = '$baseUrl${bodySystem.name}.json';
-    print('[SyncData] categoryUrl: $categoryUrl');
-    final response = await dio.get(categoryUrl);
+    final lessonUrl = '$baseUrl$lesson.json';
+    print('[SyncData] lessonUrl: $lessonUrl');
+    final response = await dio.get(lessonUrl);
     final data = jsonDecode(response.data.toString()) as Map<String, dynamic>;
 
     List<MedWord> words =
         (data['words'] as List).map((e) => MedWord.fromMap(e)).toList();
     for (var word in words) {
-      final updatedWord = word.copyWith(category: bodySystem);
+      final updatedWord = word.copyWith(lesson: lesson);
       await databaseService.insertWord(updatedWord);
       print(
-        '[SyncData] inserted word: ${updatedWord.word} ${updatedWord.category}',
+        '[SyncData] inserted word: ${updatedWord.word} ${updatedWord.lesson}',
       );
     }
 
     // print all words in database
-    final allWords = await databaseService.getWords(bodySystem.name);
+    final allWords = await databaseService.getWords(lesson);
     print(
-      '[SyncData]${bodySystem.name} words: ${allWords.map((e) => e.chineseTranslation).join(', ')}',
+      '[SyncData]$lesson words: ${allWords.map((e) => e.chineseTranslation).join(', ')}',
     );
 
     final userWordsWithMemory = await databaseService.getUserWordsWithMemory(
-      bodySystem.name,
+      lesson,
     );
     print(
-      '[SyncData]${bodySystem.name} user words with memory: ${userWordsWithMemory.map((e) => e['word']).join(', ')}',
+      '[SyncData]$lesson user words with memory: ${userWordsWithMemory.map((e) => e['word']).join(', ')}',
     );
   }
 

@@ -9,17 +9,16 @@ import 'package:go_router/go_router.dart';
 
 import '../data/preferences.dart';
 import '../styles.dart';
-import '../models/word.dart';
 
 class ListScreen extends StatelessWidget {
   const ListScreen({this.restorationId, super.key});
 
   final String? restorationId;
 
-  Widget _generateBodySystemCard(BodySystem bodySystem) {
+  Widget _generateLessonCard(int lesson) {
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: BodySystemCard(bodySystem),
+      child: LessonCard(lesson),
     );
   }
 
@@ -35,15 +34,15 @@ class ListScreen extends StatelessWidget {
           ),
           child: SafeArea(
             bottom: false,
-            child: FutureBuilder<List<BodySystem>>(
-              future: prefs.bodySystems,
+            child: FutureBuilder<List<int>>(
+              future: prefs.lessons,
               builder: (context, snapshot) {
-                final data = snapshot.data ?? <BodySystem>[];
+                final data = snapshot.data ?? <int>[];
                 return ListView.builder(
                   restorationId: 'list',
                   itemCount: data.length,
                   itemBuilder: (context, index) {
-                    return _generateBodySystemCard(data[index]);
+                    return _generateLessonCard(data[index]);
                   },
                 );
               },
@@ -83,11 +82,11 @@ class PressableCard extends StatelessWidget {
   }
 }
 
-class BodySystemCard extends StatelessWidget {
-  const BodySystemCard(this.bodySystem, {super.key});
+class LessonCard extends StatelessWidget {
+  const LessonCard(this.lesson, {super.key});
 
   /// Veggie to be displayed by the card.
-  final BodySystem bodySystem;
+  final int lesson;
 
   Color _generateColorFromName(String name) {
     // Create a hash from the name to generate consistent colors
@@ -117,10 +116,7 @@ class BodySystemCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              bodySystem.name[0].toUpperCase() + bodySystem.name.substring(1),
-              style: Styles.cardTitleText(themeData),
-            ),
+            Text("Lesson $lesson", style: Styles.cardTitleText(themeData)),
             const SizedBox(height: 8),
             // Text(
             //   "A short description of the body system",
@@ -136,16 +132,16 @@ class BodySystemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return PressableCard(
       onPressed: () {
-        context.go('/list/${bodySystem.name}');
+        context.go('/list/$lesson');
       },
       child: Stack(
         children: [
           Semantics(
-            label: 'A card background featuring ${bodySystem.name}',
+            label: 'A card background featuring lesson $lesson',
             child: Container(
               height: 120,
               decoration: BoxDecoration(
-                color: _generateColorFromName(bodySystem.name),
+                color: _generateColorFromName("lesson $lesson"),
                 // image: DecorationImage(
                 //   fit: BoxFit.cover,
                 //   colorFilter: Styles.desaturatedColorFilter,

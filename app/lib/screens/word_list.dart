@@ -8,15 +8,15 @@ import '../widgets/word_line.dart';
 import '../models/word.dart';
 
 class WordListScreen extends StatefulWidget {
-  const WordListScreen({super.key, this.category});
+  const WordListScreen({super.key, this.lesson});
 
-  final String? category;
+  final int? lesson;
   static final DatabaseService databaseService = DatabaseService();
 
-  static Page<void> pageBuilder(BuildContext context, String? category) {
+  static Page<void> pageBuilder(BuildContext context, int? lesson) {
     return CupertinoPage(
-      restorationId: 'router.systems.${category ?? 'unfamiliar'}',
-      child: WordListScreen(category: category),
+      restorationId: 'router.systems.${lesson ?? '0'}',
+      child: WordListScreen(lesson: lesson),
       title: 'Word List',
     );
   }
@@ -36,7 +36,7 @@ class _WordListScreenState extends State<WordListScreen>
     final appState = Provider.of<AppState>(context, listen: false);
     var brightness = CupertinoTheme.brightnessOf(context);
     return RestorationScope(
-      restorationId: 'router.systems.${widget.category ?? 'unfamiliar'}',
+      restorationId: 'router.systems.${widget.lesson ?? '0'}',
       child: CupertinoPageScaffold(
         navigationBar: const CupertinoNavigationBar(
           middle: Text('Words'),
@@ -46,7 +46,7 @@ class _WordListScreenState extends State<WordListScreen>
         child: SafeArea(
           child: FutureBuilder<List<Map<String, dynamic>>>(
             future: WordListScreen.databaseService.getUserWordsWithMemory(
-              widget.category,
+              widget.lesson,
             ),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
