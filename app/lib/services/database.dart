@@ -44,7 +44,8 @@ class DatabaseService {
         meaning TEXT NOT NULL,
         explanation TEXT NOT NULL,
         chineseTranslation TEXT NOT NULL,
-        category TEXT NOT NULL
+        traditionalChineseTranslation TEXT NOT NULL,
+        lesson INTEGER NOT NULL
       )''');
     // Run the CREATE TABLE statement for User memory
     await db.execute('''CREATE TABLE user_memory(
@@ -90,17 +91,17 @@ class DatabaseService {
     return MedWord.fromMap(maps[0]);
   }
 
-  Future<List<MedWord>> getWords(String? category) async {
+  Future<List<MedWord>> getWords(int? lesson) async {
     final db = await _databaseService.database;
     try {
       final maps = await db.query(
         'words',
-        where: category != null ? 'category = ?' : null,
-        whereArgs: category != null ? [category] : null,
+        where: lesson != null ? 'lesson = ?' : null,
+        whereArgs: lesson != null ? [lesson] : null,
       );
       return maps.map((map) => MedWord.fromMap(map)).toList();
     } catch (e) {
-      print('Error fetching words for category $category: $e');
+      print('Error fetching words for lesson $lesson: $e');
       return []; // Return empty list on error
     }
   }
@@ -160,16 +161,13 @@ class DatabaseService {
     }
   }
 
-  Future<List<Map<String, dynamic>>> getUserWordsWithMemory(
-    String? category,
-  ) async {
+  Future<List<Map<String, dynamic>>> getUserWordsWithMemory(int? lesson) async {
     /*
-    if category is not empty, return words with memory level
-    if category is empty, return unfamiliar words
+      if lesson is not empty, return words with memory level
+      if lesson is empty, return unfamiliar words
     */
-    List<Map<String, dynamic>> words;
-    if (category != null) {
-      final words = await getWords(category);
+    if (lesson != null) {
+      final words = await getWords(lesson);
       final futures = words.map(
         (word) async => {
           'word': word.word,

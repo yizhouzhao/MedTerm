@@ -26,6 +26,7 @@ class _WordSoundState extends State<WordSound> {
   }
 
   Future<void> _initTts() async {
+    await _flutterTts.setSharedInstance(true);
     await _flutterTts.setLanguage("en-US");
     await _flutterTts.setSpeechRate(0.5);
     await _flutterTts.setVolume(1.0);

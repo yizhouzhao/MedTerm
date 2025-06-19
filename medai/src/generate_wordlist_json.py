@@ -4,6 +4,9 @@ from dotenv import load_dotenv
 import json
 import re
 import click
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import threading
 
 # Load environment variables from .env file
 load_dotenv()
@@ -14,6 +17,15 @@ client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 # Verify API key is set
 if not os.getenv('OPENAI_API_KEY'):
     raise ValueError("OPENAI_API_KEY environment variable is not set")
+
+# Thread-local storage for rate limiting
+thread_local = threading.local()
+
+def get_client():
+    """Get thread-local OpenAI client"""
+    if not hasattr(thread_local, 'client'):
+        thread_local.client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+    return thread_local.client
 
 def extract_json_from_markdown(content):
     """
@@ -49,50 +61,76 @@ def parse_json_response(response_content):
         print(f"Unexpected error: {e}")
         return None
 
-
 def generate_word_json(word):
-    # chat with openai to generate a wordlist json
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": "You are teaching medical terms. For each medical word, please tell me its meaning, Chinese Translation, Traditional Chinese Translation, explanation, and word prefix, root, and suffix. Please make sure that the word is a medical term. And if you think the word doesn't have a prefix, root, or suffix, please leave it blank."},
-            {"role": "assistant", "content": 
-            """ 
-            You must format your output as a JSON value that adheres to a given "JSON Schema" instance.
+    """Generate JSON data for a single word using thread-local client"""
+    try:
+        # Get thread-local client
+        thread_client = get_client()
+        
+        # chat with openai to generate a wordlist json
+        response = thread_client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": "You are teaching medical terms. For each medical word, please tell me its meaning, Chinese Translation, Traditional Chinese Translation, explanation, and word prefix, root, and suffix. Please make sure that the word is a medical term. And if you think the word doesn't have a prefix, root, or suffix, please leave it blank."},
+                {"role": "assistant", "content": 
+                """ 
+                You must format your output as a JSON value that adheres to a given "JSON Schema" instance.
 
-            "JSON Schema" is a declarative language that allows you to annotate and validate JSON documents.
+                "JSON Schema" is a declarative language that allows you to annotate and validate JSON documents.
 
-            For example, the example "JSON Schema" instance {{"properties": {{"foo": {{"description": "a list of test words", "type": "array", "items": {{"type": "string"}}}}}}, "required": ["foo"]}}}}
-            would match an object with one required property, "foo". The "type" property specifies "foo" must be an "array", and the "description" property semantically describes it as "a list of test words". The items within "foo" must be strings.
-            Thus, the object {{"foo": ["bar", "baz"]}} is a well-formatted instance of this example "JSON Schema". The object {{"properties": {{"foo": ["bar", "baz"]}}}} is not well-formatted.
+                For example, the example "JSON Schema" instance {{"properties": {{"foo": {{"description": "a list of test words", "type": "array", "items": {{"type": "string"}}}}}}, "required": ["foo"]}}}}
+                would match an object with one required property, "foo". The "type" property specifies "foo" must be an "array", and the "description" property semantically describes it as "a list of test words". The items within "foo" must be strings.
+                Thus, the object {{"foo": ["bar", "baz"]}} is a well-formatted instance of this example "JSON Schema". The object {{"properties": {{"foo": ["bar", "baz"]}}}} is not well-formatted.
 
-            Your output will be parsed and type-checked according to the provided schema instance, so make sure all fields in your output match the schema exactly and there are no trailing commas!
+                Your output will be parsed and type-checked according to the provided schema instance, so make sure all fields in your output match the schema exactly and there are no trailing commas!
 
-            Here is the JSON Schema instance your output must adhere to. Include the enclosing markdown codeblock:
-            ```json
-            {"type":"object","properties":{"output":{"type":"object","properties":{"word":{"type":"string"},"prefix":{"type":"string"},"root":{"type":"string"},"suffix":{"type":"string"},"meaning":{"type":"string"},"explanation":{"type":"string"},"chineseTranslation":{"type":"string"},"traditionalChineseTranslation":{"type":"string"}},"additionalProperties":false}},"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}
-            ```
-            """},
-            {"role": "user", "content": word}
-        ]
-    )
+                Here is the JSON Schema instance your output must adhere to. Include the enclosing markdown codeblock:
+                ```json
+                {"type":"object","properties":{"output":{"type":"object","properties":{"word":{"type":"string"},"prefix":{"type":"string"},"root":{"type":"string"},"suffix":{"type":"string"},"meaning":{"type":"string"},"explanation":{"type":"string"},"chineseTranslation":{"type":"string"},"traditionalChineseTranslation":{"type":"string"}},"additionalProperties":false}},"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}
+                ```
+                """},
+                {"role": "user", "content": word}
+            ]
+        )
+        
+        response_content = response.choices[0].message.content
+        print("Raw API Response:")
+        print(response_content)
+        print("\n" + "="*50 + "\n")
+        
+        # Parse the response to json with error handling
+        json_response = parse_json_response(response_content)
+        
+        if json_response and "output" in json_response:
+            print("Parsed JSON Output:")
+            print(json_response["output"])
+            return json_response["output"]
+        else:
+            print("Failed to parse JSON response or 'output' key not found")
+            return None
+            
+    except Exception as e:
+        print(f"Error processing word '{word}': {e}")
+        return None
+
+def process_word_with_retry(word, max_retries=3):
+    """Process a word with retry logic for better reliability"""
+    for attempt in range(max_retries):
+        try:
+            result = generate_word_json(word)
+            if result:
+                return result
+            else:
+                print(f"Attempt {attempt + 1} failed for word: {word}")
+                if attempt < max_retries - 1:
+                    time.sleep(2 ** attempt)  # Exponential backoff
+        except Exception as e:
+            print(f"Attempt {attempt + 1} failed for word '{word}': {e}")
+            if attempt < max_retries - 1:
+                time.sleep(2 ** attempt)  # Exponential backoff
     
-    response_content = response.choices[0].message.content
-    print("Raw API Response:")
-    print(response_content)
-    print("\n" + "="*50 + "\n")
-    
-    # Parse the response to json with error handling
-    json_response = parse_json_response(response_content)
-    
-    if json_response and "output" in json_response:
-        print("Parsed JSON Output:")
-        print(json_response["output"])
-    else:
-        print("Failed to parse JSON response or 'output' key not found")
-
-    return json_response["output"]
-
+    print(f"All attempts failed for word: {word}")
+    return None
 
 @click.command()
 @click.option('--input_file', type=str, help='The input file to generate a wordlist for')
@@ -113,11 +151,49 @@ def main(input_file, output_file, input_format, lesson):
     else:
         raise ValueError("Invalid input format")
 
+    print(f"Found {len(words)} words to process")
+    
+    # words = words[:3] # TODO: remove this
+    # Process words in parallel
+    max_workers = 5  # Adjust based on your API rate limits
     med_words = []
-    for word in words[:3]: # TODO: remove this
-        med_word = generate_word_json(word)
-        med_word["lesson"] = lesson
-        med_words.append(med_word)
+    failed_words = []
+    
+    print(f"Processing {len(words)} words with {max_workers} parallel workers...")
+    
+    # Create a list to store results in order
+    results = [None] * len(words)
+    
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        # Submit all tasks with their indices
+        future_to_index = {executor.submit(process_word_with_retry, word): i for i, word in enumerate(words)}
+        
+        # Process completed tasks
+        for future in as_completed(future_to_index):
+            index = future_to_index[future]
+            word = words[index]
+            try:
+                med_word = future.result()
+                if med_word:
+                    med_word["lesson"] = lesson
+                    results[index] = med_word
+                    print(f"✓ Processed ({index+1}/{len(words)}): {word}")
+                else:
+                    failed_words.append(word)
+                    print(f"✗ Failed ({index+1}/{len(words)}): {word}")
+            except Exception as e:
+                failed_words.append(word)
+                print(f"✗ Exception ({index+1}/{len(words)}): {word} - {e}")
+    
+    # Filter out None results and create final med_words list
+    med_words = [result for result in results if result is not None]
+    
+    print(f"\nProcessing complete!")
+    print(f"Successfully processed: {len(med_words)} words")
+    print(f"Failed: {len(failed_words)} words")
+    
+    if failed_words:
+        print(f"Failed words: {failed_words}")
 
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump({

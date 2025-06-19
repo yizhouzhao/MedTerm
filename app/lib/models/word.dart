@@ -14,14 +14,6 @@ enum BodySystem {
   general,
 }
 
-class MedWordLinkList {
-  final MedWord word;
-  final MedWord? nextWord;
-  final MedWord? previousWord;
-
-  const MedWordLinkList({required this.word, this.nextWord, this.previousWord});
-}
-
 class MedWord {
   final String word;
   final String prefix;
@@ -30,7 +22,8 @@ class MedWord {
   final String meaning;
   final String explanation;
   final String chineseTranslation;
-  final BodySystem category;
+  final String traditionalChineseTranslation;
+  final int lesson;
 
   const MedWord({
     required this.word,
@@ -40,7 +33,8 @@ class MedWord {
     required this.meaning,
     required this.explanation,
     required this.chineseTranslation,
-    required this.category,
+    required this.traditionalChineseTranslation,
+    required this.lesson,
   });
 
   // Create a copy of the MedWord with some fields updated
@@ -52,7 +46,8 @@ class MedWord {
     String? meaning,
     String? explanation,
     String? chineseTranslation,
-    BodySystem? category,
+    String? traditionalChineseTranslation,
+    int? lesson,
   }) {
     return MedWord(
       word: word ?? this.word,
@@ -62,7 +57,9 @@ class MedWord {
       meaning: meaning ?? this.meaning,
       explanation: explanation ?? this.explanation,
       chineseTranslation: chineseTranslation ?? this.chineseTranslation,
-      category: category ?? this.category,
+      traditionalChineseTranslation:
+          traditionalChineseTranslation ?? this.traditionalChineseTranslation,
+      lesson: lesson ?? this.lesson,
     );
   }
 
@@ -76,7 +73,8 @@ class MedWord {
       'meaning': meaning,
       'explanation': explanation,
       'chineseTranslation': chineseTranslation,
-      'category': category.name,
+      'traditionalChineseTranslation': traditionalChineseTranslation,
+      'lesson': lesson,
     };
   }
 
@@ -90,16 +88,15 @@ class MedWord {
       meaning: map['meaning'] as String,
       explanation: map['explanation'] as String,
       chineseTranslation: map['chineseTranslation'] as String,
-      category: BodySystem.values.firstWhere(
-        (e) => e.name == map['category'],
-        orElse: () => BodySystem.general,
-      ),
+      traditionalChineseTranslation:
+          map['traditionalChineseTranslation'] as String,
+      lesson: map['lesson'] as int,
     );
   }
 
   @override
   String toString() {
-    return 'MedWord(word: $word, prefix: $prefix, root: $root, suffix: $suffix, meaning: $meaning, explanation: $explanation, chineseTranslation: $chineseTranslation, category: $category)';
+    return 'MedWord(word: $word, prefix: $prefix, root: $root, suffix: $suffix, meaning: $meaning, explanation: $explanation, chineseTranslation: $chineseTranslation, traditionalChineseTranslation: $traditionalChineseTranslation, lesson: $lesson)';
   }
 
   @override
@@ -114,7 +111,8 @@ class MedWord {
         other.meaning == meaning &&
         other.explanation == explanation &&
         other.chineseTranslation == chineseTranslation &&
-        other.category == category;
+        other.traditionalChineseTranslation == traditionalChineseTranslation &&
+        other.lesson == lesson;
   }
 
   @override
@@ -126,7 +124,8 @@ class MedWord {
         meaning.hashCode ^
         explanation.hashCode ^
         chineseTranslation.hashCode ^
-        category.hashCode;
+        traditionalChineseTranslation.hashCode ^
+        lesson.hashCode;
   }
 }
 

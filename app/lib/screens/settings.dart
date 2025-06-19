@@ -123,6 +123,47 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  CupertinoListTile _buildSyncDataTile(
+    BuildContext context,
+    Preferences prefs,
+  ) {
+    return CupertinoListTile.notched(
+      leading: const SettingsIcon(
+        backgroundColor: CupertinoColors.systemBlue,
+        icon: CupertinoIcons.cloud_download,
+      ),
+      title: const Text('Sync Data'),
+      onTap: () {
+        showCupertinoDialog<void>(
+          context: context,
+          builder:
+              (context) => CupertinoAlertDialog(
+                title: const Text('Download Latest Lessons'),
+                content: const Text(
+                  'Download the latest lessons from the project website.',
+                ),
+                actions: [
+                  CupertinoDialogAction(
+                    isDefaultAction: true,
+                    child: const Text('Download'),
+                    onPressed: () async {
+                      // await prefs.syncData();
+                      if (!context.mounted) return;
+                      context.pop();
+                    },
+                  ),
+                  CupertinoDialogAction(
+                    isDefaultAction: true,
+                    child: const Text('No'),
+                    onPressed: () => context.pop(),
+                  ),
+                ],
+              ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final prefs = Provider.of<Preferences>(context);
@@ -143,7 +184,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               //   ],
               // ),
               CupertinoListSection.insetGrouped(
-                children: [_buildRestoreDefaultsTile(context, prefs)],
+                children: [
+                  _buildRestoreDefaultsTile(context, prefs),
+                  _buildSyncDataTile(context, prefs),
+                ],
               ),
             ]),
           ),
