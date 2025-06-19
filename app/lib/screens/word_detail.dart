@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 
@@ -7,19 +6,13 @@ import '../models/word.dart';
 import '../services/database.dart';
 import '../styles.dart';
 import '../data/app_state.dart';
+import '../widgets/word_sound.dart';
 
 class WordDetailScreen extends StatelessWidget {
   const WordDetailScreen({super.key, required this.word});
 
   final String word;
   static final DatabaseService databaseService = DatabaseService();
-  static final FlutterTts _flutterTts = FlutterTts();
-
-  Future<void> _speak(String text) async {
-    if (text.isNotEmpty) {
-      await _flutterTts.speak(text);
-    }
-  }
 
   static Page<void> pageBuilder(BuildContext context, String word) {
     return CupertinoPage(
@@ -53,63 +46,29 @@ class WordDetailScreen extends StatelessWidget {
                   : medWord == null
                   ? const Text('Word not found')
                   : SafeArea(
-                    child: GestureDetector(
-                      onHorizontalDragEnd: (details) {
-                        if (details.primaryVelocity! > 0) {
-                          // Swipe from left to right
-                          int nextIndex = appState.getNextMedWordIndex(
-                            medWord.word,
-                          );
-                          context.pushReplacement(
-                            '/word/${appState.getMedWords()[nextIndex].word}',
-                          );
-                        }
-                      },
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.all(16),
-                              decoration: BoxDecoration(
-                                color: CupertinoColors.white,
-                                borderRadius: BorderRadius.circular(12),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: CupertinoColors.systemGrey
-                                        .withOpacity(0.1),
-                                    blurRadius: 4,
-                                    offset: const Offset(0, 2),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: CupertinoColors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: CupertinoColors.systemGrey.withOpacity(
+                                    0.1,
                                   ),
-                                ],
-                              ),
+                                  blurRadius: 4,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: SingleChildScrollView(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          medWord.word,
-                                          style: const TextStyle(
-                                            fontSize: 32,
-                                            fontWeight: FontWeight.bold,
-                                            color: CupertinoColors.black,
-                                          ),
-                                        ),
-                                      ),
-                                      CupertinoButton(
-                                        padding: EdgeInsets.zero,
-                                        child: const Icon(
-                                          CupertinoIcons.speaker_2_fill,
-                                          color: CupertinoColors.activeBlue,
-                                          size: 28,
-                                        ),
-                                        onPressed: () => _speak(medWord.word),
-                                      ),
-                                    ],
-                                  ),
+                                  WordSound(word: medWord.word),
                                   const SizedBox(height: 24),
                                   Container(
                                     width: double.infinity,
@@ -191,7 +150,7 @@ class WordDetailScreen extends StatelessWidget {
                                         ),
                                         const SizedBox(height: 8),
                                         Text(
-                                          "Prefix: ${medWord.prefix}- \nRoot: ${medWord.root}\nSuffix: -${medWord.suffix}",
+                                          "Prefix: ${medWord.prefix} \nRoot: ${medWord.root}\nSuffix: ${medWord.suffix}",
                                           style: const TextStyle(fontSize: 16),
                                         ),
                                       ],
@@ -201,31 +160,31 @@ class WordDetailScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          FlashcardControls(
-                            word: medWord.word,
-                            onRemember: () async {
-                              await databaseService.addUserWordMemory(
-                                medWord.word,
-                                1,
-                              );
-                            },
-                            onDontRemember: () async {
-                              await databaseService.addUserWordMemory(
-                                medWord.word,
-                                -1,
-                              );
-                            },
-                            onNext: () {
-                              int nextIndex = appState.getNextMedWordIndex(
-                                medWord.word,
-                              );
-                              context.pushReplacement(
-                                '/word/${appState.getMedWords()[nextIndex].word}',
-                              );
-                            },
-                          ),
-                        ],
-                      ),
+                        ),
+                        FlashcardControls(
+                          word: medWord.word,
+                          onRemember: () async {
+                            await databaseService.addUserWordMemory(
+                              medWord.word,
+                              1,
+                            );
+                          },
+                          onDontRemember: () async {
+                            await databaseService.addUserWordMemory(
+                              medWord.word,
+                              -1,
+                            );
+                          },
+                          onNext: () {
+                            int nextIndex = appState.getNextMedWordIndex(
+                              medWord.word,
+                            );
+                            context.pushReplacement(
+                              '/word/${appState.getMedWords()[nextIndex].word}',
+                            );
+                          },
+                        ),
+                      ],
                     ),
                   );
             },
@@ -253,12 +212,15 @@ class FlashcardControls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           CupertinoButton(
-            onPressed: onDontRemember,
+            onPressed: () {
+              onDontRemember();
+              onNext();
+            },
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -282,7 +244,10 @@ class FlashcardControls extends StatelessWidget {
           // add the separator as a gray rectangle
           Container(width: 1, height: 24, color: CupertinoColors.systemGrey),
           CupertinoButton(
-            onPressed: onRemember,
+            onPressed: () {
+              onRemember();
+              onNext();
+            },
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Column(
               mainAxisSize: MainAxisSize.min,

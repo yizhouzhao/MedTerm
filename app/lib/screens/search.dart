@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:translator/translator.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import '../widgets/word_sound.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key, required this.restorationId});
@@ -16,29 +17,9 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
   final GoogleTranslator _translator = GoogleTranslator();
-  final FlutterTts _flutterTts = FlutterTts();
   String _translatedText = '';
   String _meaningText = '';
   bool _isLoading = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _initTts();
-  }
-
-  Future<void> _initTts() async {
-    await _flutterTts.setLanguage("en-US");
-    await _flutterTts.setSpeechRate(0.5);
-    await _flutterTts.setVolume(1.0);
-    await _flutterTts.setPitch(1.0);
-  }
-
-  Future<void> _speak(String text) async {
-    if (text.isNotEmpty) {
-      await _flutterTts.speak(text);
-    }
-  }
 
   Future<String> _getDefinition(String word) async {
     try {
@@ -93,7 +74,6 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void dispose() {
     _searchController.dispose();
-    _flutterTts.stop();
     super.dispose();
   }
 
@@ -135,6 +115,23 @@ class _SearchScreenState extends State<SearchScreen> {
                       width: double.infinity,
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
+                        color: CupertinoColors.activeOrange.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: CupertinoColors.systemGrey.withOpacity(0.1),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: WordSound(word: _searchController.text),
+                    ),
+                    const SizedBox(height: 24),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
                         color: CupertinoColors.activeGreen.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
@@ -160,14 +157,14 @@ class _SearchScreenState extends State<SearchScreen> {
                                   color: CupertinoColors.activeGreen,
                                 ),
                               ),
-                              CupertinoButton(
-                                padding: EdgeInsets.zero,
-                                child: const Icon(
-                                  CupertinoIcons.speaker_2_fill,
-                                  color: CupertinoColors.activeGreen,
-                                ),
-                                onPressed: () => _speak(_searchController.text),
-                              ),
+                              // CupertinoButton(
+                              //   padding: EdgeInsets.zero,
+                              //   child: const Icon(
+                              //       CupertinoIcons.speaker_2_fill,
+                              //       color: CupertinoColors.activeGreen,
+                              //     ),
+                              //     onPressed: () => _speak(_searchController.text),
+                              //   ),
                             ],
                           ),
                           const SizedBox(height: 8),

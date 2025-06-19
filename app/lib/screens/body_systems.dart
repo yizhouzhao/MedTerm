@@ -89,6 +89,25 @@ class BodySystemCard extends StatelessWidget {
   /// Veggie to be displayed by the card.
   final BodySystem bodySystem;
 
+  Color _generateColorFromName(String name) {
+    // Create a hash from the name to generate consistent colors
+    int hash = name.hashCode;
+
+    // Use the hash to generate RGB values
+    int r = (hash & 0xFF0000) >> 16;
+    int g = (hash & 0x00FF00) >> 8;
+    int b = hash & 0x0000FF;
+
+    // Ensure minimum brightness for readability
+    if (r + g + b < 300) {
+      r = (r + 100).clamp(0, 255);
+      g = (g + 100).clamp(0, 255);
+      b = (b + 100).clamp(0, 255);
+    }
+
+    return Color.fromARGB(200, r, g, b);
+  }
+
   Widget _buildDetails(BuildContext context) {
     final themeData = CupertinoTheme.of(context);
     return Container(
@@ -98,12 +117,15 @@ class BodySystemCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(bodySystem.name, style: Styles.cardTitleText(themeData)),
-            const SizedBox(height: 8),
             Text(
-              "A short description of the body system",
-              style: Styles.cardDescriptionText(themeData),
+              bodySystem.name[0].toUpperCase() + bodySystem.name.substring(1),
+              style: Styles.cardTitleText(themeData),
             ),
+            const SizedBox(height: 8),
+            // Text(
+            //   "A short description of the body system",
+            //   style: Styles.cardDescriptionText(themeData),
+            // ),
           ],
         ),
       ),
@@ -121,9 +143,9 @@ class BodySystemCard extends StatelessWidget {
           Semantics(
             label: 'A card background featuring ${bodySystem.name}',
             child: Container(
-              height: 150,
+              height: 120,
               decoration: BoxDecoration(
-                color: CupertinoColors.systemBlue,
+                color: _generateColorFromName(bodySystem.name),
                 // image: DecorationImage(
                 //   fit: BoxFit.cover,
                 //   colorFilter: Styles.desaturatedColorFilter,
@@ -143,5 +165,3 @@ class BodySystemCard extends StatelessWidget {
     );
   }
 }
-
-
