@@ -1,19 +1,3 @@
-enum BodySystem {
-  digestive,
-  respiratory,
-  cardiovascular,
-  nervous,
-  musculoskeletal,
-  integumentary,
-  endocrine,
-  lymphatic,
-  urinary,
-  reproductive,
-  sensory,
-  immune,
-  general,
-}
-
 class MedWord {
   final String word;
   final String prefix;
@@ -137,5 +121,6 @@ class MedWord {
 //   meaning: 'Study of the heart',
 //   explanation: 'Cardio- means heart, -logy means study of',
 //   chineseTranslation: '心脏病学',
-//   category: BodySystem.cardiovascular,
+//   traditionalChineseTranslation: '心臟病學',
+//   lesson: 1,
 // );

@@ -15,11 +15,18 @@ class Preferences extends ChangeNotifier {
   // Keys to use with shared preferences.
   static const _lessonsKey = 'lessons';
   static const _wordListVersionKey = 'wordListVersion';
+  static const _descriptionsKey = 'descriptions';
   // Indicates whether a call to [_loadFromSharedPrefs] is in progress;
   Future<void>? _loading;
 
   String _wordListVersion = '0.0.0';
   final Set<int> _lessons = <int>{};
+  final Set<String> _descriptions = <String>{};
+
+  Future<List<String>> get descriptions async {
+    await _loading;
+    return _descriptions.toList();
+  }
 
   Future<String> get wordListVersion async {
     await _loading;
@@ -84,6 +91,8 @@ class Preferences extends ChangeNotifier {
     for (final lesson in lessons) {
       print('[Preferences] lesson: $lesson');
       _lessons.add(lesson);
+      final description = await SyncData.getOnlineDescription(lesson);
+      _descriptions.add(description);
       SyncData.downloadWordList(lesson);
     }
     await _saveToSharedPrefs();

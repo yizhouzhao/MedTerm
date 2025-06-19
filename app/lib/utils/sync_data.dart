@@ -20,11 +20,21 @@ class SyncData {
     final dio = Dio();
     final response = await dio.get(wordListUrl);
     final data = jsonDecode(response.data.toString()) as Map<String, dynamic>;
-    print('[SyncData] data 2: $data');
-    print('[SyncData] data 3: ${data['lessons']}');
     final lessons = (data['lessons'] as List).map((e) => e as int).toList();
-    print('[SyncData] lessons 2: $lessons');
     return lessons;
+  }
+
+  static Future<String> getOnlineDescription(int lesson) async {
+    try {
+      final dio = Dio();
+      final response = await dio.get(wordListUrl);
+      final data = jsonDecode(response.data.toString()) as Map<String, dynamic>;
+      final description = data['descriptions'][lesson - 1] as String;
+      return description;
+    } catch (e) {
+      print('[SyncData] error: $e');
+      return 'No description';
+    }
   }
 
   static Future<void> downloadWordList(int lesson) async {
@@ -37,11 +47,9 @@ class SyncData {
     List<MedWord> words =
         (data['words'] as List).map((e) => MedWord.fromMap(e)).toList();
     for (var word in words) {
-      final updatedWord = word.copyWith(lesson: lesson);
-      await databaseService.insertWord(updatedWord);
-      print(
-        '[SyncData] inserted word: ${updatedWord.word} ${updatedWord.lesson}',
-      );
+      //print('[SyncData] word: $word');
+      await databaseService.insertWord(word);
+      //print('[SyncData] inserted word: ${word.word} ${word.lesson}');
     }
 
     // print all words in database

@@ -118,10 +118,26 @@ class LessonCard extends StatelessWidget {
           children: [
             Text("Lesson $lesson", style: Styles.cardTitleText(themeData)),
             const SizedBox(height: 8),
-            // Text(
-            //   "A short description of the body system",
-            //   style: Styles.cardDescriptionText(themeData),
-            // ),
+            Consumer<Preferences>(
+              builder: (context, prefs, child) {
+                return FutureBuilder<List<String>>(
+                  future: prefs.descriptions,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData &&
+                        snapshot.data!.length > lesson - 1) {
+                      return Text(
+                        snapshot.data![lesson - 1],
+                        style: Styles.cardDescriptionText(themeData),
+                      );
+                    }
+                    return Text(
+                      'Loading...',
+                      style: Styles.cardDescriptionText(themeData),
+                    );
+                  },
+                );
+              },
+            ),
           ],
         ),
       ),

@@ -17,7 +17,6 @@ class WordListScreen extends StatefulWidget {
     return CupertinoPage(
       restorationId: 'router.systems.${lesson ?? '0'}',
       child: WordListScreen(lesson: lesson),
-      title: 'Word List',
     );
   }
 
@@ -38,8 +37,12 @@ class _WordListScreenState extends State<WordListScreen>
     return RestorationScope(
       restorationId: 'router.systems.${widget.lesson ?? '0'}',
       child: CupertinoPageScaffold(
-        navigationBar: const CupertinoNavigationBar(
-          middle: Text('Words'),
+        navigationBar: CupertinoNavigationBar(
+          middle: Text(
+            widget.lesson != null && widget.lesson! > 0
+                ? 'Lesson ${widget.lesson}'
+                : 'Notebook',
+          ),
           previousPageTitle: 'Home',
         ),
         backgroundColor: Styles.scaffoldBackground(brightness),
