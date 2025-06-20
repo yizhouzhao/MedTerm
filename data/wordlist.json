@@ -1,9 +1,11 @@
 {
     "version": "0.0.1",
     "lessons": [
-        1
+        1,
+        2
     ],
     "descriptions": [
-        "Preview of West Medical Terminology"
+        "Preview of West Medical Terminology",
+        "Study of Body Parts"
     ]
 }

@@ -71,7 +71,7 @@ def generate_word_json(word):
         response = thread_client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
-                {"role": "system", "content": "You are teaching medical terms. For each medical word, please tell me its meaning, Chinese Translation, Traditional Chinese Translation, explanation, and word prefix, root, and suffix. Please make sure that the word is a medical term. And if you think the word doesn't have a prefix, root, or suffix, please leave it blank."},
+                {"role": "system", "content": "You are teaching medical terms. For each medical word, please tell me its meaning, Chinese Translation, Traditional Chinese Translation, explanation, and word prefix, root, and suffix. Please make sure that you give the translation for its medical meaning. And if you think the word doesn't have a prefix, root, or suffix, please leave it blank. Besides, you may need to change spelling and capitalization if necessary."},
                 {"role": "assistant", "content": 
                 """ 
                 You must format your output as a JSON value that adheres to a given "JSON Schema" instance.
@@ -135,13 +135,14 @@ def process_word_with_retry(word, max_retries=3):
 @click.command()
 @click.option('--input_file', type=str, help='The input file to generate a wordlist for')
 @click.option('--output_file', type=str, help='The output file to save the wordlist to')
-@click.option('--input_format', type=str, help='The input format of the wordlist')
 @click.option('--lesson', type=int, help='The lesson number to generate a wordlist for')
-def main(input_file, output_file, input_format, lesson):
-    import os
+@click.option('--version', type=str, help='The version of the wordlist', default='0.0.1')
+@click.option('--debug', is_flag=True, help='Enable debug mode', default=False)
+def main(input_file, output_file, lesson, version, debug):
     print("[generate_wordlist_json] Current working directory:", os.getcwd())
     input_file = os.path.join(os.getcwd(), input_file)
     print("[generate_wordlist_json] Input file:", input_file)
+    input_format = input_file.split('.')[-1]
     if input_format == "json":
         with open(input_file, 'r') as f:
             words = json.load(f)
@@ -153,7 +154,10 @@ def main(input_file, output_file, input_format, lesson):
 
     print(f"Found {len(words)} words to process")
     
-    # words = words[:3] # TODO: remove this
+    # Debug mode: only process the first 5 words
+    if debug: 
+        words = words[:5]
+
     # Process words in parallel
     max_workers = 5  # Adjust based on your API rate limits
     med_words = []
@@ -166,7 +170,7 @@ def main(input_file, output_file, input_format, lesson):
     
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         # Submit all tasks with their indices
-        future_to_index = {executor.submit(process_word_with_retry, word): i for i, word in enumerate(words)}
+        future_to_index = {executor.submit(process_word_with_retry, word.strip().lower()): i for i, word in enumerate(words)}
         
         # Process completed tasks
         for future in as_completed(future_to_index):
@@ -197,11 +201,12 @@ def main(input_file, output_file, input_format, lesson):
 
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump({
-            "version": "0.0.1",
+            "version": version,
             "words": med_words
         }, f, indent=4, ensure_ascii=False)
 
 if __name__ == "__main__":
     # run the script with the following arguments:
-    # python src/generate_wordlist_json.py --input_file ../data/lessons/1.json --output_file ../data/1.json --input_format json --lesson 1
+    # python src/generate_wordlist_json.py --input_file ../data/lessons/1.json --output_file ../data/1.json --lesson 1 --version 0.0.1 --debug
+    # python src/generate_wordlist_json.py --input_file ../data/lessons/2.txt --output_file ../data/2.json --lesson 2 --version 0.0.1 --debug
     main()

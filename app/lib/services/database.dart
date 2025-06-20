@@ -1,6 +1,7 @@
 import '../models/word.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'dart:io';
 
 class DatabaseService {
   // Singleton pattern
@@ -206,15 +207,28 @@ class DatabaseService {
   }
 
   Future<void> resetDatabase() async {
-    final db = await _databaseService.database;
+    // Close the database connection first
+    if (_database != null) {
+      await _database!.close();
+      _database = null;
+    }
 
-    // Drop existing tables
-    await db.execute('DROP TABLE IF EXISTS words');
-    await db.execute('DROP TABLE IF EXISTS user_memory');
+    final databasePath = await getDatabasesPath();
+    final path = join(databasePath, 'med_term_database.db');
 
-    // Recreate tables
-    await _onCreate(db, 1);
+    // Delete the database file from filesystem
+    try {
+      final file = File(path);
+      if (await file.exists()) {
+        await file.delete();
+        print('[DatabaseService] Database file deleted: $path');
+      }
+    } catch (e) {
+      print('[DatabaseService] Error deleting database file: $e');
+    }
 
     print('[DatabaseService] Database reset completed');
+    // Re-initialize the database
+    _database = await _initDatabase();
   }
 }
