@@ -7,6 +7,7 @@ import '../services/database.dart';
 import '../styles.dart';
 import '../data/app_state.dart';
 import '../widgets/word_sound.dart';
+import '../data/preferences.dart';
 
 class WordDetailScreen extends StatelessWidget {
   const WordDetailScreen({super.key, required this.word});
@@ -25,6 +26,7 @@ class WordDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var brightness = CupertinoTheme.brightnessOf(context);
     final appState = Provider.of<AppState>(context, listen: false);
+    final prefs = Provider.of<Preferences>(context, listen: false);
     return RestorationScope(
       restorationId: 'router.details.$word',
       child: CupertinoPageScaffold(
@@ -99,35 +101,43 @@ class WordDetailScreen extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(height: 16),
-                                  Container(
-                                    width: double.infinity,
-                                    padding: const EdgeInsets.all(16),
-                                    decoration: BoxDecoration(
-                                      color: CupertinoColors.systemTeal
-                                          .withOpacity(0.1),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Text(
-                                          'Chinese Translation',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: CupertinoColors.systemTeal,
+                                  if (prefs.showTranslation ?? false)
+                                    Container(
+                                      width: double.infinity,
+                                      padding: const EdgeInsets.all(16),
+                                      decoration: BoxDecoration(
+                                        color: CupertinoColors.systemTeal
+                                            .withOpacity(0.1),
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text(
+                                            'Chinese Translation',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: CupertinoColors.systemTeal,
+                                            ),
                                           ),
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Text(
-                                          medWord.chineseTranslation,
-                                          style: const TextStyle(fontSize: 16),
-                                        ),
-                                      ],
+                                          const SizedBox(height: 8),
+                                          Text(
+                                            prefs.translationType ==
+                                                    'traditional'
+                                                ? medWord
+                                                    .traditionalChineseTranslation
+                                                : medWord.chineseTranslation,
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 16),
+                                  if (prefs.showTranslation ?? false)
+                                    const SizedBox(height: 16),
                                   Container(
                                     width: double.infinity,
                                     padding: const EdgeInsets.all(16),

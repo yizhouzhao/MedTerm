@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:provider/provider.dart';
+
+import '../data/preferences.dart';
 
 class WordSound extends StatefulWidget {
   const WordSound({super.key, required this.word});
@@ -20,6 +23,12 @@ class _WordSoundState extends State<WordSound> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _checkAutoRead();
+  }
+
+  @override
   void dispose() {
     _flutterTts.stop();
     super.dispose();
@@ -31,6 +40,15 @@ class _WordSoundState extends State<WordSound> {
     await _flutterTts.setSpeechRate(0.5);
     await _flutterTts.setVolume(1.0);
     await _flutterTts.setPitch(1.0);
+  }
+
+  Future<void> _checkAutoRead() async {
+    final prefs = Provider.of<Preferences>(context, listen: false);
+    if (prefs.autoRead == true) {
+      // Add a small delay to ensure TTS is initialized
+      await Future.delayed(const Duration(milliseconds: 500));
+      await _speak(widget.word);
+    }
   }
 
   Future<void> _speak(String text) async {

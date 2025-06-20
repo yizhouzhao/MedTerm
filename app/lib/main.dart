@@ -136,29 +136,6 @@ class _MedTermAppState extends State<MedTermApp> {
                       child: SettingsScreen(restorationId: 'settings'),
                     );
                   },
-                  routes: [
-                    GoRoute(
-                      parentNavigatorKey: _rootNavigatorKey,
-                      path: 'categories',
-                      pageBuilder: (context, state) {
-                        return CupertinoPage(
-                          restorationId: 'route.settings.categories',
-                          child: const Text('TODO Widget'),
-                        );
-                      },
-                    ),
-                    GoRoute(
-                      parentNavigatorKey: _rootNavigatorKey,
-                      path: 'calories',
-                      pageBuilder: (context, state) {
-                        return MedTermPage(
-                          key: state.pageKey,
-                          restorationId: 'route.settings.calories',
-                          child: const Text('TODO Widget'),
-                        );
-                      },
-                    ),
-                  ],
                 ),
                 GoRoute(
                   path: '/word/:word',

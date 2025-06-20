@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:translator/translator.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:provider/provider.dart';
 
 import '../widgets/word_sound.dart';
+import '../data/preferences.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key, required this.restorationId});
@@ -51,10 +53,18 @@ class _SearchScreenState extends State<SearchScreen> {
     });
 
     try {
+      // Get user preferences for translation type
+      final prefs = Provider.of<Preferences>(context, listen: false);
+      final translationType = prefs.translationType;
+
+      // Choose target language based on user preference
+      final targetLanguage =
+          translationType == 'traditional' ? 'zh-tw' : 'zh-cn';
+
       final translation = await _translator.translate(
         text,
         from: 'en',
-        to: 'zh-cn',
+        to: targetLanguage,
       );
       final meaning = await _getDefinition(text);
       setState(() {

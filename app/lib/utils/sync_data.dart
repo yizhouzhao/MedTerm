@@ -29,7 +29,9 @@ class SyncData {
       final dio = Dio();
       final response = await dio.get(wordListUrl);
       final data = jsonDecode(response.data.toString()) as Map<String, dynamic>;
+      print('[SyncData] getOnlineDescription data: $data');
       final description = data['descriptions'][lesson - 1] as String;
+      print('[SyncData] getOnlineDescription description: $description');
       return description;
     } catch (e) {
       print('[SyncData] error: $e');

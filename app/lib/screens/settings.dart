@@ -51,37 +51,6 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  CupertinoListTile _buildCaloriesTile(
-    BuildContext context,
-    Preferences prefs,
-  ) {
-    return CupertinoListTile.notched(
-      leading: const SettingsIcon(
-        backgroundColor: CupertinoColors.systemBlue,
-        icon: Styles.calorieIcon,
-      ),
-      title: const Text('Calorie Target'),
-      additionalInfo: Text("1000"),
-      trailing: const CupertinoListTileChevron(),
-      onTap: () => context.go('/settings/calories'),
-    );
-  }
-
-  CupertinoListTile _buildCategoriesTile(
-    BuildContext context,
-    Preferences prefs,
-  ) {
-    return CupertinoListTile.notched(
-      leading: const SettingsIcon(
-        backgroundColor: CupertinoColors.systemOrange,
-        icon: Styles.preferenceIcon,
-      ),
-      title: const Text('Preferred Categories'),
-      trailing: const CupertinoListTileChevron(),
-      onTap: () => context.go('/settings/categories'),
-    );
-  }
-
   CupertinoListTile _buildRestoreDefaultsTile(
     BuildContext context,
     Preferences prefs,
@@ -92,6 +61,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         icon: Styles.resetIcon,
       ),
       title: const Text('Reset Database'),
+      subtitle: const Text('Clear all the data in the MedTerm database'),
       onTap: () {
         showCupertinoDialog<void>(
           context: context,
@@ -109,6 +79,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       await prefs.restoreDefaults();
                       if (!context.mounted) return;
                       context.pop();
+                      // Show success notification
+                      showCupertinoDialog<void>(
+                        context: context,
+                        builder:
+                            (context) => CupertinoAlertDialog(
+                              title: const Text('Database Reset'),
+                              content: const Text(
+                                'The database has been successfully reset.',
+                              ),
+                              actions: [
+                                CupertinoDialogAction(
+                                  isDefaultAction: true,
+                                  child: const Text('OK'),
+                                  onPressed: () => context.pop(),
+                                ),
+                              ],
+                            ),
+                      );
                     },
                   ),
                   CupertinoDialogAction(
@@ -133,6 +121,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         icon: CupertinoIcons.cloud_download,
       ),
       title: const Text('Sync Data'),
+      subtitle: const Text('Download the latest lessons'),
       onTap: () {
         showCupertinoDialog<void>(
           context: context,
@@ -146,10 +135,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   CupertinoDialogAction(
                     isDefaultAction: true,
                     child: const Text('Download'),
-                    onPressed: () async {
-                      // await prefs.syncData();
+                    onPressed: () {
+                      prefs.load();
                       if (!context.mounted) return;
                       context.pop();
+                      showCupertinoDialog<void>(
+                        context: context,
+                        builder:
+                            (context) => CupertinoAlertDialog(
+                              title: const Text('Sync Data'),
+                              content: const Text(
+                                'The database has been successfully downloaded.',
+                              ),
+                              actions: [
+                                CupertinoDialogAction(
+                                  isDefaultAction: true,
+                                  child: const Text('OK'),
+                                  onPressed: () => context.pop(),
+                                ),
+                              ],
+                            ),
+                      );
                     },
                   ),
                   CupertinoDialogAction(
@@ -158,6 +164,93 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     onPressed: () => context.pop(),
                   ),
                 ],
+              ),
+        );
+      },
+    );
+  }
+
+  CupertinoListTile _buildAutoReadTile(
+    BuildContext context,
+    Preferences prefs,
+  ) {
+    return CupertinoListTile.notched(
+      leading: const SettingsIcon(
+        backgroundColor: CupertinoColors.systemGreen,
+        icon: CupertinoIcons.speaker_2,
+      ),
+      title: const Text('Auto-Read'),
+      subtitle: const Text('Automatically read words aloud'),
+      trailing: CupertinoSwitch(
+        value: prefs.autoRead ?? false,
+        onChanged: (value) {
+          prefs.setAutoRead(value);
+        },
+      ),
+    );
+  }
+
+  CupertinoListTile _buildShowTranslationTile(
+    BuildContext context,
+    Preferences prefs,
+  ) {
+    return CupertinoListTile.notched(
+      leading: const SettingsIcon(
+        backgroundColor: CupertinoColors.systemOrange,
+        icon: CupertinoIcons.text_bubble,
+      ),
+      title: const Text('Show Translation'),
+      subtitle: const Text('Display Chinese translations'),
+      trailing: CupertinoSwitch(
+        value: prefs.showTranslation ?? false,
+        onChanged: (value) {
+          prefs.setShowTranslation(value);
+        },
+      ),
+    );
+  }
+
+  CupertinoListTile _buildTranslationTypeTile(
+    BuildContext context,
+    Preferences prefs,
+  ) {
+    return CupertinoListTile.notched(
+      leading: const SettingsIcon(
+        backgroundColor: CupertinoColors.systemPurple,
+        icon: CupertinoIcons.textformat_abc,
+      ),
+      title: const Text('Translation Type'),
+      subtitle: Text(
+        prefs.translationType == 'traditional'
+            ? 'Traditional Chinese'
+            : 'Simplified Chinese',
+      ),
+      onTap: () {
+        showCupertinoModalPopup<void>(
+          context: context,
+          builder:
+              (context) => CupertinoActionSheet(
+                title: const Text('Select Translation Type'),
+                actions: [
+                  CupertinoActionSheetAction(
+                    onPressed: () {
+                      prefs.setTranslationType('simplified');
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Simplified Chinese'),
+                  ),
+                  CupertinoActionSheetAction(
+                    onPressed: () {
+                      prefs.setTranslationType('traditional');
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Traditional Chinese'),
+                  ),
+                ],
+                cancelButton: CupertinoActionSheetAction(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Cancel'),
+                ),
               ),
         );
       },
@@ -185,8 +278,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               // ),
               CupertinoListSection.insetGrouped(
                 children: [
-                  _buildRestoreDefaultsTile(context, prefs),
+                  _buildAutoReadTile(context, prefs),
+                  _buildShowTranslationTile(context, prefs),
+                  _buildTranslationTypeTile(context, prefs),
+                ],
+              ),
+              CupertinoListSection.insetGrouped(
+                children: [
                   _buildSyncDataTile(context, prefs),
+                  _buildRestoreDefaultsTile(context, prefs),
                 ],
               ),
             ]),
