@@ -42,7 +42,7 @@ class WordDetailScreen extends StatelessWidget {
                   snapshot.connectionState == ConnectionState.waiting;
 
               final MedWord? medWord = snapshot.data;
-              print('[WordDetailScreen] isLoading: $isLoading');
+              // print('[WordDetailScreen] isLoading: $isLoading');
               return (isLoading)
                   ? const CupertinoActivityIndicator()
                   : medWord == null

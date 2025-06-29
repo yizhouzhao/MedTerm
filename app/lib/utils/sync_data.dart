@@ -29,9 +29,9 @@ class SyncData {
       final dio = Dio();
       final response = await dio.get(wordListUrl);
       final data = jsonDecode(response.data.toString()) as Map<String, dynamic>;
-      print('[SyncData] getOnlineDescription data: $data');
+      // print('[SyncData] getOnlineDescription data: $data');
       final description = data['descriptions'][lesson - 1] as String;
-      print('[SyncData] getOnlineDescription description: $description');
+      // print('[SyncData] getOnlineDescription description: $description');
       return description;
     } catch (e) {
       print('[SyncData] error: $e');
@@ -42,7 +42,7 @@ class SyncData {
   static Future<void> downloadWordList(int lesson) async {
     final dio = Dio();
     final lessonUrl = '$baseUrl$lesson.json';
-    print('[SyncData] lessonUrl: $lessonUrl');
+    // print('[SyncData] lessonUrl: $lessonUrl');
     final response = await dio.get(lessonUrl);
     final data = jsonDecode(response.data.toString()) as Map<String, dynamic>;
 
@@ -54,18 +54,18 @@ class SyncData {
       //print('[SyncData] inserted word: ${word.word} ${word.lesson}');
     }
 
-    // print all words in database
-    final allWords = await databaseService.getWords(lesson);
-    print(
-      '[SyncData]$lesson words: ${allWords.map((e) => e.chineseTranslation).join(', ')}',
-    );
+    // // print all words in database
+    // final allWords = await databaseService.getWords(lesson);
+    // // print(
+    // //   '[SyncData]$lesson words: ${allWords.map((e) => e.chineseTranslation).join(', ')}',
+    // // );
 
-    final userWordsWithMemory = await databaseService.getUserWordsWithMemory(
-      lesson,
-    );
-    print(
-      '[SyncData]$lesson user words with memory: ${userWordsWithMemory.map((e) => e['word']).join(', ')}',
-    );
+    // final userWordsWithMemory = await databaseService.getUserWordsWithMemory(
+    //   lesson,
+    // );
+    // print(
+    //   '[SyncData]$lesson user words with memory: ${userWordsWithMemory.map((e) => e['word']).join(', ')}',
+    // );
   }
 
   static Future<void> resetDatabase() async {

@@ -69,7 +69,7 @@ class Preferences extends ChangeNotifier {
   }
 
   Future<void> restoreDefaults() async {
-    print('[Preferences] restoreDefaults...');
+    // print('[Preferences] restoreDefaults...');
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
     _lessons.clear();
@@ -79,13 +79,13 @@ class Preferences extends ChangeNotifier {
     _showTranslation = true;
     _translationType = 'simplified';
     await _saveToSharedPrefs();
-    //SyncData.resetDatabase();
-    load();
+    await SyncData.resetDatabase();
+    load(forceDownload: true);
   }
 
-  void load() {
-    print('[Preferences] load');
-    _loading = _loadFromSharedPrefs();
+  void load({bool forceDownload = false}) {
+    // print('[Preferences] load');
+    _loading = _loadFromSharedPrefs(forceDownload: forceDownload);
   }
 
   Future<void> _saveToSharedPrefs() async {
@@ -107,14 +107,14 @@ class Preferences extends ChangeNotifier {
     await prefs.setString(_translationTypeKey, _translationType);
   }
 
-  Future<void> _loadFromSharedPrefs() async {
+  Future<void> _loadFromSharedPrefs({bool forceDownload = false}) async {
     final prefs = await SharedPreferences.getInstance();
     _lessons.clear();
     _descriptions.clear();
     final lessons = prefs.getString(_lessonsKey);
     final descriptions = prefs.getString(_descriptionsKey);
-    print('[Preferences] local lessons: $lessons');
-    print('[Preferences] local descriptions: $descriptions');
+    // print('[Preferences] local lessons: $lessons');
+    // print('[Preferences] local descriptions: $descriptions');
 
     if (lessons != null && lessons.isNotEmpty) {
       for (final name in lessons.split(',')) {
@@ -134,29 +134,24 @@ class Preferences extends ChangeNotifier {
 
     // local wordListOnlineVersion
     final wordListOnlineVersion = await SyncData.getOnlineWordListVersion();
-    print('[Preferences] wordListOnlineVersion: $wordListOnlineVersion');
+    // print('[Preferences] wordListOnlineVersion: $wordListOnlineVersion');
 
-    //FIXME: this is a hack to force the word list to be downloaded
-    //TODO: remove this after the word list is downloaded
-    //TODO: add a loading indicator
-    //FIXME: this is a hack to force the word list to be downloaded
-    //if (wordListOnlineVersion != _wordListVersion) {
-    _wordListVersion = wordListOnlineVersion;
-    final onlineLessons = await SyncData.getOnlineLessons();
-    print('[Preferences] lessons: $onlineLessons');
+    if (wordListOnlineVersion != _wordListVersion || forceDownload) {
+      _wordListVersion = wordListOnlineVersion;
+      final onlineLessons = await SyncData.getOnlineLessons();
+      // print('[Preferences] lessons: $onlineLessons');
 
-    for (final lesson in onlineLessons) {
-      print('[Preferences] lesson: $lesson');
-      _lessons.add(lesson);
-      final description = await SyncData.getOnlineDescription(lesson);
-      _descriptions.add(description);
-      SyncData.downloadWordList(lesson);
+      for (final lesson in onlineLessons) {
+        _lessons.add(lesson);
+        final description = await SyncData.getOnlineDescription(lesson);
+        _descriptions.add(description);
+        SyncData.downloadWordList(lesson);
+      }
+      await _saveToSharedPrefs();
     }
-    await _saveToSharedPrefs();
-    //}
 
-    print('[Preferences] _lessons: $_lessons');
-    print('[Preferences] _descriptions: $_descriptions');
+    // print('[Preferences] _lessons: $_lessons');
+    // print('[Preferences] _descriptions: $_descriptions');
 
     notifyListeners();
   }

@@ -12,7 +12,7 @@ class AppState extends ChangeNotifier {
   AppState();
 
   void setMedWords(List<MedWord> medWords) {
-    print('[setMedWords]: ${medWords.length}');
+    //print('[setMedWords]: ${medWords.length}');
     _medWords = medWords;
     notifyListeners();
   }
@@ -22,7 +22,7 @@ class AppState extends ChangeNotifier {
   }
 
   int getMedWordsLength() {
-    print('[getMedWordsLength]: ${_medWords.length}');
+    // print('[getMedWordsLength]: ${_medWords.length}');
     return _medWords.length;
   }
 

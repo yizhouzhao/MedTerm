@@ -27,12 +27,48 @@ class DatabaseService {
 
     // Set the version. This executes the onCreate function and provides a
     // path to perform database upgrades and downgrades.
-    return await openDatabase(
-      path,
-      onCreate: _onCreate,
-      version: 1,
-      onConfigure: (db) async => await db.execute('PRAGMA foreign_keys = ON'),
-    );
+    try {
+      return await openDatabase(
+        path,
+        onCreate: _onCreate,
+        version: 1,
+        onConfigure: (db) async {
+          try {
+            await db.execute('PRAGMA foreign_keys = ON');
+          } catch (e) {
+            print('[DatabaseService] Error setting foreign keys: $e');
+          }
+        },
+      );
+    } catch (e) {
+      print('[DatabaseService] Error opening database: $e');
+      // If database is corrupted, try to delete and recreate
+      try {
+        final file = File(path);
+        if (await file.exists()) {
+          await file.delete();
+          print('[DatabaseService] Deleted corrupted database file');
+        }
+        // Retry opening database
+        return await openDatabase(
+          path,
+          onCreate: _onCreate,
+          version: 1,
+          onConfigure: (db) async {
+            try {
+              await db.execute('PRAGMA foreign_keys = ON');
+            } catch (e) {
+              print(
+                '[DatabaseService] Error setting foreign keys on retry: $e',
+              );
+            }
+          },
+        );
+      } catch (retryError) {
+        print('[DatabaseService] Error on database retry: $retryError');
+        rethrow;
+      }
+    }
   }
 
   Future<void> _onCreate(Database db, int version) async {
@@ -209,7 +245,12 @@ class DatabaseService {
   Future<void> resetDatabase() async {
     // Close the database connection first
     if (_database != null) {
-      await _database!.close();
+      try {
+        await _database!.close();
+        print('[DatabaseService] Database connection closed');
+      } catch (e) {
+        print('[DatabaseService] Error closing database: $e');
+      }
       _database = null;
     }
 
@@ -219,6 +260,7 @@ class DatabaseService {
     // Delete the database file from filesystem
     try {
       final file = File(path);
+      print('[DatabaseService] File Exists: ${await file.exists()}');
       if (await file.exists()) {
         await file.delete();
         print('[DatabaseService] Database file deleted: $path');
@@ -227,8 +269,9 @@ class DatabaseService {
       print('[DatabaseService] Error deleting database file: $e');
     }
 
+    // Add a small delay to ensure file system operations complete
+    await Future.delayed(const Duration(milliseconds: 100));
+
     print('[DatabaseService] Database reset completed');
-    // Re-initialize the database
-    _database = await _initDatabase();
   }
 }

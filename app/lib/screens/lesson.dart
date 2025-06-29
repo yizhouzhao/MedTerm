@@ -127,7 +127,9 @@ class LessonCard extends StatelessWidget {
                         snapshot.data!.length > lesson - 1) {
                       return Text(
                         snapshot.data![lesson - 1],
-                        style: Styles.cardDescriptionText(themeData),
+                        style: Styles.cardDescriptionText(
+                          themeData,
+                        ).copyWith(fontSize: 12),
                       );
                     }
                     return Text(

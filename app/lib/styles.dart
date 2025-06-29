@@ -37,7 +37,7 @@ abstract class Styles {
   static TextStyle cardTitleText(CupertinoThemeData themeData) =>
       themeData.textTheme.textStyle.copyWith(
         color: const Color.fromRGBO(0, 0, 0, 0.9),
-        fontSize: 32,
+        fontSize: 28,
         fontWeight: FontWeight.bold,
       );
 

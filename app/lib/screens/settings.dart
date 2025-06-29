@@ -5,6 +5,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../data/preferences.dart';
 import '../styles.dart';
 
@@ -69,14 +70,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
               (context) => CupertinoAlertDialog(
                 title: const Text('Are you sure?'),
                 content: const Text(
-                  'Are you sure you want to reset the current MedTerm database?',
+                  'Are you sure you want to reset the current MedTerm database? This action cannot be undone.',
                 ),
                 actions: [
                   CupertinoDialogAction(
                     isDestructiveAction: true,
                     child: const Text('Yes'),
                     onPressed: () async {
-                      await prefs.restoreDefaults();
+                      late bool success;
+                      try {
+                        await prefs.restoreDefaults();
+                        success = true;
+                      } catch (e) {
+                        // print('[SettingsScreen] Error restoring defaults: $e');
+                        success = false;
+                      }
                       if (!context.mounted) return;
                       context.pop();
                       // Show success notification
@@ -85,8 +93,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         builder:
                             (context) => CupertinoAlertDialog(
                               title: const Text('Database Reset'),
-                              content: const Text(
-                                'The database has been successfully reset.',
+                              content: Text(
+                                success
+                                    ? 'The database has been successfully reset.'
+                                    : 'Failed to reset the database.',
                               ),
                               actions: [
                                 CupertinoDialogAction(
@@ -136,7 +146,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     isDefaultAction: true,
                     child: const Text('Download'),
                     onPressed: () {
-                      prefs.load();
+                      late bool success;
+                      try {
+                        prefs.load(forceDownload: true);
+                        success = true;
+                      } catch (e) {
+                        // print('[SettingsScreen] Error downloading lessons: $e');
+                        success = false;
+                      }
                       if (!context.mounted) return;
                       context.pop();
                       showCupertinoDialog<void>(
@@ -144,8 +161,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         builder:
                             (context) => CupertinoAlertDialog(
                               title: const Text('Sync Data'),
-                              content: const Text(
-                                'The database has been successfully downloaded.',
+                              content: Text(
+                                success
+                                    ? 'The database has been successfully downloaded.'
+                                    : 'Failed to download the latest lessons.',
                               ),
                               actions: [
                                 CupertinoDialogAction(
@@ -219,7 +238,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         backgroundColor: CupertinoColors.systemPurple,
         icon: CupertinoIcons.textformat_abc,
       ),
-      title: const Text('Translation Type'),
+      title: const Text('Set Translation Type'),
       subtitle: Text(
         prefs.translationType == 'traditional'
             ? 'Traditional Chinese'
@@ -257,6 +276,61 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  CupertinoListTile _buildProjectPageTile(BuildContext context) {
+    return CupertinoListTile.notched(
+      leading: const SettingsIcon(
+        backgroundColor: CupertinoColors.systemIndigo,
+        icon: CupertinoIcons.globe,
+      ),
+      title: const Text('Visit Project Page'),
+      subtitle: const Text('Visit MedTerm project website'),
+      onTap: () async {
+        final Uri url = Uri.parse(
+          'https://yizhouzhao.github.io/portfolio/medterm/',
+        );
+        try {
+          if (await canLaunchUrl(url)) {
+            await launchUrl(url, mode: LaunchMode.externalApplication);
+          } else {
+            if (!context.mounted) return;
+            showCupertinoDialog<void>(
+              context: context,
+              builder:
+                  (context) => CupertinoAlertDialog(
+                    title: const Text('Error'),
+                    content: const Text('Could not open the project page.'),
+                    actions: [
+                      CupertinoDialogAction(
+                        isDefaultAction: true,
+                        child: const Text('OK'),
+                        onPressed: () => context.pop(),
+                      ),
+                    ],
+                  ),
+            );
+          }
+        } catch (e) {
+          if (!context.mounted) return;
+          showCupertinoDialog<void>(
+            context: context,
+            builder:
+                (context) => CupertinoAlertDialog(
+                  title: const Text('Error'),
+                  content: const Text('Failed to open the project page.'),
+                  actions: [
+                    CupertinoDialogAction(
+                      isDefaultAction: true,
+                      child: const Text('OK'),
+                      onPressed: () => context.pop(),
+                    ),
+                  ],
+                ),
+          );
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final prefs = Provider.of<Preferences>(context);
@@ -288,6 +362,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _buildSyncDataTile(context, prefs),
                   _buildRestoreDefaultsTile(context, prefs),
                 ],
+              ),
+
+              CupertinoListSection.insetGrouped(
+                children: [_buildProjectPageTile(context)],
               ),
             ]),
           ),

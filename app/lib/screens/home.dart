@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final index = _getSelectedIndex(GoRouterState.of(context).uri.toString());
-    print('index: $index');
+    // print('index: $index');
     return RestorationScope(
       restorationId: restorationId,
       child: CupertinoPageScaffold(

@@ -1,0 +1,322 @@
+Melanocyte
+Basal cell
+Squamous cell
+Melanoma
+Basel cell
+Squamous cell carcinoma
+Melanoma
+Epidermis
+Dermis
+Papillary layer
+Recticular layer
+Fibroblast
+Microphage
+Collagen
+Fibroblast
+Adipocyte
+Insulation
+Keratin
+Cuticle
+Lunula
+Paronychia
+Onychomalacia
+Onychomycosis
+onychophagia
+Ungual
+Hair follicle
+Hair shaft
+Arrector Pili Muscle
+Goosebumps
+Sebaceous gland
+Medulla
+Sweat duct
+sweat pore
+Perspiration
+Urea
+Apocrine glands
+Nodule
+Papule
+Pustule
+Abscess
+Acne
+Comedo
+Acne rosacea
+Cystic acne
+Subcutaneous
+Epidermal
+Intradermal
+Dermatitis
+Dermatologist
+Anhidrosis
+Hyperhidrosis
+Lipectomy
+Necrosis
+Pyogenic
+Rhytidectomy
+Rhytidoplasty
+Seborrhea
+Trichomycosis
+erythroderma
+ichthyoderma
+leukoderma
+pyoderma
+scleroderma
+xeroderma
+Cyanosis
+Diaphoresis
+Pallor
+Erythema
+Hyperemia
+Cyst
+Hyperpigmentation
+Keloid
+Keratosis
+Lesion
+Purulent
+Ecchymosis
+Petechiae
+Purpura
+Photosensitivity
+Pruritus
+Ulcer
+Decubitus ulcer
+Urticaria
+Vesicle
+Wheal
+Rubella
+Macule
+Gangrene
+Eczema
+Psoriasis
+Malignant melanoma
+Verruca
+warts
+Fissure
+Laceration
+Lice
+Scabies
+Pediculosis
+Tinea
+Tinea capitis
+Tinea pedis
+Sebaceous cyst
+Varicella
+Vitiligo
+Albinism
+Biopsy
+Debridement
+Liposuction
+Rhytidectomy
+Cryosurgery
+Abrasion
+Contusion
+Petechiae
+Purpura
+Ecchymosis
+Ulcer
+Eczema
+Impetigo
+Kaposi’s sarcoma
+antibiotics
+antifungals
+antiparasitics
+antipruritics
+antiseptics
+anti-virals
+corticosteroid cream
+lidocaine
+Xylocaine
+procaine
+Novocain
+bacitracin
+neomycin
+polymyxinB
+Neosporin
+miconazole
+Monistat
+clotrimazole
+Lotrimin
+lindane
+Kwell
+permethrin
+Nix
+diphenhydramine
+Benadryl
+camphor
+pramoxine
+Caladryl
+isopropyl alcohol
+hydrogen peroxide
+valacyclovir
+Valtrex
+famcyclovir
+Famvir
+acyclovir
+Zovirax
+hydrocortisone
+Cortaid
+triamcinolone
+Kenalog
+herpes simplex virus
+systemic lupus erythematosus
+ligament
+Osteoblasts
+Proximal epiphysis
+Articular cartilage
+Epiphyseal line
+Spongy bone
+Compact bone
+Medullary cavity
+Diaphysis
+Distal epiphysis
+Arteries
+Periosteum
+Cortical bone
+Articular cartilage
+Cancellous bone
+Red Bone Marrow
+Yellow Bone Marrow
+Condyle
+Epicondyle
+Trochanter
+pectoral girdle
+clavicle
+scapula
+hipbone
+ilium
+ischium
+pubis
+Humerus
+Ribs
+Radius
+Ulna
+Spine
+Femur
+Fibula
+Tibia
+Skull
+Maxilla
+Mandible
+Clavicle
+Scapula
+Sternum
+Coccyx
+Sacrum
+Phalanges
+Metacarpals
+Carpals
+Tarsals
+Metatarsals
+Temporal bone
+Occipital bone
+Sphenoid bone
+Zygomatic bone
+Lacrimal bone
+Synovial joint
+Cartilaginous joint
+Fibrous joint
+found in nasal septum
+eustachian tube
+intervertebral disks
+kyphosis
+Lordosis
+Scoliosis
+Fracture
+Dislocation
+Rheumatoid arthritis
+Radiograph
+Arthroscopy
+Arthroplasty
+Nonsteroidal Anti-inflammatory Drugs
+Striated muscle
+Fascia
+Tendon
+Periosteum
+Myoneural
+myocardium
+Rectus abdominis
+Sternocleidoma stoid
+Gluteus maximus
+Flexor carpi
+Extensor carpi
+External oblique
+Biceps brachii
+Triceps brachii
+Pronation
+Supination
+Dorsiflexion
+Plantarflexion
+Agonist
+Antagonist
+Tendinous
+Tendinitis
+Tendotomy
+Tendoplasty
+Tenorraphy
+Tenoplasty
+Tenodynia
+Polymyositis
+Myorrhexis
+Myorrhaphy
+Myoplasty
+Myopathy
+Electromyogram
+myalgia
+kinesiology
+fasciotomy
+fasciitis
+fascial
+Musculotendinous
+Leiomyosarcoma
+Myosarcoma
+Tenodesis
+Ganglion cyst
+Spasm
+Atrophy
+Adhesion
+Pectoralis Major
+Sternocleidomastoid
+Deltoid
+Trapezius
+Rectus Abdominus
+Palmaris Longus
+Flexor Carpi Radialis
+Serratus Anterior
+Brachioradialis
+Flexor Digitorum Superficialis
+External Oblique
+Lubrical
+Gluteus Medius
+Tensor Faciae Latae
+Vastus Lateralis
+Rectus Femoris
+Vastus Medialis
+Pectineus
+Sartorius
+Adductor Longus
+Peroneus Longus
+Gracilis
+Tibialis Anterior
+Extensor Digitorum Brevis
+Gastrocnemius
+Soleus
+Extensor Hallucis Brevis
+Trapezius
+Thoraco-lumbar Fascia
+Deltoid
+Rhomboid
+Teres Major
+Triceps
+Latissimus Dorsi
+Extensor Carpi Radialis
+Extensor Digitorum
+Extensor Carpi Ulnaris
+Extensor Digiti Minimi
+Gluteus Maximus
+Vastus Lateralis
+Gracilis
+Semimembranosus
+Semitendinosis
+Biceps Femoris
+Gastrocnemius
+
