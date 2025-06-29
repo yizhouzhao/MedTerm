@@ -71,7 +71,7 @@ def generate_word_json(word):
         response = thread_client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
-                {"role": "system", "content": "You are teaching medical terms. For each medical word, please tell me its meaning, Chinese Translation, Traditional Chinese Translation, explanation, and word prefix, root, and suffix. Please make sure that you give the translation for its medical meaning. And if you think the word doesn't have a prefix, root, or suffix, please leave it blank. Besides, you may need to change spelling and capitalization if necessary."},
+                {"role": "system", "content": "You are teaching medical terms. For each medical word, please tell me its meaning, Chinese Translation, Traditional Chinese Translation, explanation, and word prefix, root, and suffix. Please make sure that you give the translation for its medical meaning. And if you think the term doesn't have a prefix, root, or suffix, or the term is composed by two or more words, please leave it blank. Besides, you may need to change spelling and capitalization if necessary."},
                 {"role": "assistant", "content": 
                 """ 
                 You must format your output as a JSON value that adheres to a given "JSON Schema" instance.
@@ -154,6 +154,9 @@ def main(input_file, output_file, lesson, version, debug):
 
     print(f"Found {len(words)} words to process")
     
+    # remove duplicate words
+    words = list(set(words))
+
     # Debug mode: only process the first 5 words
     if debug: 
         words = words[:5]
@@ -209,4 +212,5 @@ if __name__ == "__main__":
     # run the script with the following arguments:
     # python src/generate_wordlist_json.py --input_file ../data/lessons/1.json --output_file ../data/1.json --lesson 1 --version 0.0.1 --debug
     # python src/generate_wordlist_json.py --input_file ../data/lessons/2.txt --output_file ../data/2.json --lesson 2 --version 0.0.1 --debug
+    # python src/generate_wordlist_json.py --input_file ../data/lessons/3.txt --output_file ../data/3.json --lesson 3 --version 0.0.1 --debug
     main()
