@@ -3,11 +3,15 @@
     "lessons": [
         1,
         2,
-        3
+        3, 
+        4,
+        5
     ],
     "descriptions": [
         "Preview of West Medical Terminology",
         "Study of Body Parts",
-        "Integumentary, Skeletal, and Muscular Systems"
+        "Integumentary, Skeletal, and Muscular Systems",
+        "Cardiovascular and Lymphatic Systems",
+        "Respiratory and Digestive Systems" 
     ]
 }

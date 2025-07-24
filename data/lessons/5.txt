@@ -1,0 +1,112 @@
+Inhale
+Exhale
+Alveoli
+nasal cavity
+pharynx
+larynx
+trachea
+bronchial tubes
+Cilia
+Nares
+Palate
+Paranasal Sinuses
+Nasal conchae
+Olfactory region
+Nasopharynx
+Oropharynx
+Laryngopharynx
+Pharyngeal tonsils
+Palatine tonsils
+Lingual tonsils
+Auditory Tube
+Thyroid Cartilage
+Vocal Cords
+Glottis
+Epiglottis
+bronchi
+Secondary bronchi
+Tertiary bronchi
+bronchioles
+pleura
+lobes
+hilum
+intercostal muscles
+Vital Sign
+asphyxia
+dyspnea on exertion
+ventilator
+bronchiectasis
+chronic obstructive pulmonary disease
+pneumothorax
+emphysema
+tuberculosis
+pleural effusion
+pleurisy
+endotracheal intubation
+epistaxis
+hemoptysis
+phlegm
+sputum
+diphtheria
+pertussis
+percussion
+bronchoscopy
+tuberculin skin test
+antihistamine
+antitussive
+bronchodilator
+expectorant
+salivary gland
+taste bud
+uvula
+gag of reflex
+Mucous Membrane
+Dentin
+enamel
+Pulp Cavity
+Cementum
+Periodontal Ligament
+Cutting Teeth
+Incisors
+Cuspids
+Grinding Teeth
+Bicuspids
+Molars
+Fundus
+Hydrochloric Acid
+Chyme
+Sphincters
+Cardiac Sphincter
+Pyloric Sphincter
+Duodenum
+Jejunum
+Ileum
+Cecum
+Vermiform Appendix
+Ascending Colon
+Transverse Colon
+Descending Colon
+Sigmoid Colon
+Rectum
+Anus
+bile
+emulsification
+glucagon
+bowel incontinence
+constipation
+jaundice
+pyrosis
+canker sore
+cold sore
+gastroesophageal reflux disease
+hemorrhoids
+ileus
+hernia
+cirrhosis
+hepatitis B virus
+cholecystitis
+cholelithiasis
+laxative
+Herbivores
+carnivores
+omnivores
