@@ -21,6 +21,7 @@ class SyncData {
     final response = await dio.get(wordListUrl);
     final data = jsonDecode(response.data.toString()) as Map<String, dynamic>;
     final lessons = (data['lessons'] as List).map((e) => e as int).toList();
+    // print('[SyncData] lessons: $lessons');
     return lessons;
   }
 

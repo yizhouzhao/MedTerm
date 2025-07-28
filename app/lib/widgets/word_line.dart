@@ -200,22 +200,19 @@ class _WordLineState extends State<WordLine> {
           ],
         ),
         child: CupertinoListTile.notched(
-          title: CupertinoButton(
-            padding: EdgeInsets.zero,
-            onPressed: () {
-              context.push('/word/${widget.word}');
-            },
-            child: Text(
-              widget.word,
-              style: TextStyle(
-                color:
-                    _memoryLevel > 0
-                        ? CupertinoColors.systemGrey
-                        : CupertinoColors.label,
-              ),
+          title: Text(
+            widget.word,
+            style: TextStyle(
+              color:
+                  _memoryLevel > 0
+                      ? CupertinoColors.systemGrey
+                      : CupertinoColors.label,
             ),
           ),
           trailing: buildTailButton(),
+          onTap: () {
+            context.push('/word/${widget.word}');
+          },
         ),
       ),
     );

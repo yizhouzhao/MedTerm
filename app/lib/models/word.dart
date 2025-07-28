@@ -64,18 +64,34 @@ class MedWord {
 
   // Create MedWord from a Map
   factory MedWord.fromMap(Map<String, dynamic> map) {
-    return MedWord(
-      word: map['word'] as String,
-      prefix: map['prefix'] as String,
-      root: map['root'] as String,
-      suffix: map['suffix'] as String,
-      meaning: map['meaning'] as String,
-      explanation: map['explanation'] as String,
-      chineseTranslation: map['chineseTranslation'] as String,
-      traditionalChineseTranslation:
-          map['traditionalChineseTranslation'] as String,
-      lesson: map['lesson'] as int,
-    );
+    try {
+      return MedWord(
+        word: map['word'] as String,
+        prefix: map['prefix'] as String,
+        root: map['root'] as String,
+        suffix: map['suffix'] as String,
+        meaning: map['meaning'] as String,
+        explanation: map['explanation'] as String,
+        chineseTranslation: map['chineseTranslation'] as String,
+        traditionalChineseTranslation:
+            map['traditionalChineseTranslation'] as String,
+        lesson: map['lesson'] as int,
+      );
+    } catch (e) {
+      print('[MedWord] fromMap map: $map');
+      print('[MedWord] fromMap error: $e');
+      return MedWord(
+        word: '',
+        prefix: '',
+        root: '',
+        suffix: '',
+        meaning: '',
+        explanation: '',
+        chineseTranslation: '',
+        traditionalChineseTranslation: '',
+        lesson: 0,
+      );
+    }
   }
 
   @override

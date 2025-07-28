@@ -214,4 +214,5 @@ if __name__ == "__main__":
     # python src/generate_wordlist_json.py --input_file ../data/lessons/2.txt --output_file ../data/2.json --lesson 2 --version 0.0.1 --debug
     # python src/generate_wordlist_json.py --input_file ../data/lessons/3.txt --output_file ../data/3.json --lesson 3 --version 0.0.1 --debug
     # python src/generate_wordlist_json.py --input_file ../data/lessons/4.txt --output_file ../data/4.json --lesson 4 --version 0.0.1 --debug
+    # python src/generate_wordlist_json.py --input_file ../data/lessons/5.txt --output_file ../data/5.json --lesson 5 --version 0.0.1 --debug
     main()

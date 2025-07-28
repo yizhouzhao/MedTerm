@@ -108,6 +108,9 @@ class Preferences extends ChangeNotifier {
   }
 
   Future<void> _loadFromSharedPrefs({bool forceDownload = false}) async {
+    // Debug: forceDownload = true
+    // forceDownload = true;
+
     final prefs = await SharedPreferences.getInstance();
     _lessons.clear();
     _descriptions.clear();
@@ -129,8 +132,8 @@ class Preferences extends ChangeNotifier {
     }
     _wordListVersion = prefs.getString(_wordListVersionKey) ?? '0.0.0';
     _autoRead = prefs.getBool(_autoReadKey) ?? false;
-    _showTranslation = prefs.getBool(_showTranslationKey) ?? false;
-    _translationType = prefs.getString(_translationTypeKey) ?? 'simplified';
+    _showTranslation = prefs.getBool(_showTranslationKey) ?? true;
+    _translationType = prefs.getString(_translationTypeKey) ?? 'traditional';
 
     // local wordListOnlineVersion
     final wordListOnlineVersion = await SyncData.getOnlineWordListVersion();
@@ -139,7 +142,7 @@ class Preferences extends ChangeNotifier {
     if (wordListOnlineVersion != _wordListVersion || forceDownload) {
       _wordListVersion = wordListOnlineVersion;
       final onlineLessons = await SyncData.getOnlineLessons();
-      // print('[Preferences] lessons: $onlineLessons');
+      //print('[Preferences] lessons: $onlineLessons');
 
       for (final lesson in onlineLessons) {
         _lessons.add(lesson);
