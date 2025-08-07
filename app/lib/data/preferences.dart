@@ -116,8 +116,8 @@ class Preferences extends ChangeNotifier {
     _descriptions.clear();
     final lessons = prefs.getString(_lessonsKey);
     final descriptions = prefs.getString(_descriptionsKey);
-    // print('[Preferences] local lessons: $lessons');
-    // print('[Preferences] local descriptions: $descriptions');
+    print('[Preferences] local lessons: $lessons');
+    print('[Preferences] local descriptions: $descriptions');
 
     if (lessons != null && lessons.isNotEmpty) {
       for (final name in lessons.split(',')) {

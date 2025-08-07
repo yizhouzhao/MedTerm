@@ -1,0 +1,126 @@
+Homeostasis
+Ureter
+Urethra
+Renin
+Erythropoietin
+Renal Cortex
+Renal Medulla
+Renal Pyramid
+Calyx / Calyces
+Renal Pelvis
+Nephron
+Renal Corpuscle
+Renal Tubule
+Glomerulus
+Afferent arteriole
+Efferent arteriole
+Bowman’s capsule
+Proximal Convoluted Tubule
+Nephron loop
+Distal convoluted tubule
+Collecting tubule
+urinary meatus
+Creatinine
+Oliguria
+Anuria
+Polyuria
+Renal Colic
+Nephrolithiasis
+Glomerulonephritis
+Pyelonephritis
+Cystitis
+UTI (Urinary Tract Infection)
+Nephroptosis
+Polycystic Kidneys
+Urinary Incontinence
+Urinary Retention
+Azotemia
+Uremia
+Catheter
+Catheterization
+Hemodialysis
+Peritoneal Dialysis
+Lithotripsy
+Diuretic
+Ovaries
+Fallopian Tubes
+Uterus
+Vagina
+Mammary Glands
+Mons pubis
+Labia majora
+Labia minora
+Clitoris
+Vestibule
+Urethral orifice
+Vaginal orifice
+Perineum
+Estrogen
+Progesterone
+androgens
+Perimetrium
+Myometrium
+Endometrium
+fertilized ovum
+sloughs off
+menstruation
+Anterior pituitary
+Follicle Stimulating Hormone
+Luteinizing Hormone
+Menarche
+Perimenopause
+Menopause
+Embryo
+Fetus
+Placenta
+Umbilical Cord
+Gestation
+Amniotic Fluid
+Dilation Stage
+Expulsion Stage
+Placenta Stage
+Lactation
+Obstetrics
+Neonatology
+Puberty
+Premenstrual Syndrome
+Last Menstrual Period
+Amenorrhea
+Dysmenorrhea
+Oligomenorrhea
+Menometrorrhagia
+Prolapsed Uterus
+Endometriosis
+Pelvic Inflammatory Disease
+Uterine Fibroid Tumor
+Cervical Cancer
+Oral Contraceptive Pills
+In Vitro Fertilization
+Cesarean Section
+Preeclampsia
+Hemolytic Disease of the Newborn
+Pap Smear
+Human Papilloma Virus
+Mastectomy
+Hysterectomy
+sperm
+testosterone
+Penis
+Scrotum
+Testicles
+Epididymis
+Seminal Vesicles
+vas deferens
+ejaculatory duct
+Prostate Gland
+Bulbourethral Glands
+Benign Prostatic Hyperplasia
+Prostatitis
+Erectile dysfunction
+Infertility
+Venereal Disease
+Sterility
+spermatogenesis
+Sterilization
+Vasectomy
+Circumcision
