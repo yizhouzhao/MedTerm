@@ -1,0 +1,280 @@
+{
+    "version": "0.0.1",
+    "words": [
+        {
+            "word": "hypothalamus",
+            "prefix": "hypo-",
+            "root": "thalamus",
+            "suffix": "",
+            "meaning": "A region of the brain located below the thalamus that plays a crucial role in hormone regulation and homeostasis.",
+            "explanation": "The hypothalamus is involved in various body functions including temperature regulation, thirst, hunger, sleep, and emotional activity. It controls the pituitary gland and links the nervous system to the endocrine system, making it critical for maintaining homeostasis.",
+            "chineseTranslation": "下丘脑",
+            "traditionalChineseTranslation": "下丘腦",
+            "lesson": 8
+        },
+        {
+            "word": "pituitary gland",
+            "meaning": "An endocrine gland located at the base of the brain that regulates various hormonal functions.",
+            "chineseTranslation": "垂体腺",
+            "traditionalChineseTranslation": "垂體腺",
+            "explanation": "The pituitary gland, often referred to as the 'master gland', is crucial for controlling growth, metabolism, and reproduction by secreting various hormones into the bloodstream.",
+            "prefix": "",
+            "root": "",
+            "suffix": "",
+            "lesson": 8
+        },
+        {
+            "word": "pineal gland",
+            "prefix": "",
+            "root": "",
+            "suffix": "",
+            "meaning": "a small gland in the brain that produces melatonin, which helps regulate sleep-wake cycles",
+            "explanation": "The pineal gland is an endocrine gland located in the brain. It is responsible for the production of melatonin, a hormone that influences circadian rhythms (sleep patterns) and seasonal biological cycles.",
+            "chineseTranslation": "松果体",
+            "traditionalChineseTranslation": "松果體",
+            "lesson": 8
+        },
+        {
+            "word": "thyroid gland",
+            "prefix": "",
+            "root": "thyroid",
+            "suffix": "",
+            "meaning": "A butterfly-shaped gland located in the front of the neck, responsible for producing hormones that regulate metabolism, growth, and development.",
+            "explanation": "The thyroid gland produces hormones such as thyroxine (T4) and triiodothyronine (T3), which are critical for various bodily functions including energy regulation and proper function of multiple organ systems.",
+            "chineseTranslation": "甲状腺",
+            "traditionalChineseTranslation": "甲狀腺",
+            "lesson": 8
+        },
+        {
+            "word": "parathyroid glands",
+            "prefix": "para-",
+            "root": "thyroid",
+            "suffix": "glands",
+            "meaning": "glands that regulate calcium levels in the blood",
+            "explanation": "The parathyroid glands are small endocrine glands located behind the thyroid gland, and they produce parathyroid hormone, which is crucial for maintaining the body's calcium and phosphate balance.",
+            "chineseTranslation": "甲状旁腺",
+            "traditionalChineseTranslation": "甲狀旁腺",
+            "lesson": 8
+        },
+        {
+            "word": "adrenal glands",
+            "prefix": "",
+            "root": "",
+            "suffix": "",
+            "meaning": "Glands located on top of each kidney that produce hormones such as adrenaline and cortisol.",
+            "explanation": "The adrenal glands are crucial for regulating metabolism, the immune system, blood pressure, and stress response, as they secrete a variety of hormones including adrenaline, which helps the body respond to stress.",
+            "chineseTranslation": "肾上腺",
+            "traditionalChineseTranslation": "腎上腺",
+            "lesson": 8
+        },
+        {
+            "word": "cortisol",
+            "prefix": "",
+            "root": "corti-",
+            "suffix": "-sol",
+            "meaning": "a steroid hormone produced by the adrenal cortex that regulates metabolism, immune response, and stress response",
+            "explanation": "Cortisol plays a crucial role in the body's response to stress and helps control blood sugar levels, reduce inflammation, and regulate metabolism of fats, proteins, and carbohydrates.",
+            "chineseTranslation": "皮质醇",
+            "traditionalChineseTranslation": "皮質醇",
+            "lesson": 8
+        },
+        {
+            "word": "aldosterone",
+            "prefix": "aldo-",
+            "root": "sterone",
+            "suffix": "",
+            "meaning": "A hormone produced by the adrenal glands that regulates sodium and potassium levels in the body.",
+            "explanation": "Aldosterone helps control blood pressure and the balance of fluids and electrolytes in the body. It is part of the renin-angiotensin-aldosterone system (RAAS), which is crucial for maintaining blood pressure homeostasis.",
+            "chineseTranslation": "醛固酮",
+            "traditionalChineseTranslation": "醛固酮",
+            "lesson": 8
+        },
+        {
+            "word": "adrenaline",
+            "prefix": "ad-",
+            "root": "renal",
+            "suffix": "-ine",
+            "meaning": "A hormone produced by the adrenal glands, particularly in response to stress, that increases heart rate, blood pressure, and energy supplies.",
+            "explanation": "Adrenaline is part of the body's fight-or-flight response. It prepares the body to respond to a perceived threat.",
+            "chineseTranslation": "肾上腺素",
+            "traditionalChineseTranslation": "腎上腺素",
+            "lesson": 8
+        },
+        {
+            "word": "pancreas",
+            "prefix": "",
+            "root": "pancreas",
+            "suffix": "",
+            "meaning": "a gland in the abdomen that produces insulin and other important substances.",
+            "explanation": "The pancreas plays a crucial role in digestion and blood sugar regulation by secreting digestive enzymes and hormones, including insulin, which helps control blood glucose levels.",
+            "chineseTranslation": "胰腺",
+            "traditionalChineseTranslation": "胰腺",
+            "lesson": 8
+        },
+        {
+            "word": "insulin",
+            "prefix": "",
+            "root": "",
+            "suffix": "",
+            "meaning": "a hormone produced by the pancreas that regulates blood glucose levels",
+            "explanation": "Insulin plays a crucial role in carbohydrate and fat metabolism. It allows cells to take in sugar (glucose) from the bloodstream to be used for energy or stored for future use.",
+            "chineseTranslation": "胰岛素",
+            "traditionalChineseTranslation": "胰島素",
+            "lesson": 8
+        },
+        {
+            "word": "glucagon",
+            "prefix": "",
+            "root": "gluc-",
+            "suffix": "-agon",
+            "meaning": "a hormone that raises blood glucose levels by promoting the conversion of glycogen to glucose in the liver.",
+            "explanation": "Glucagon is produced by the alpha cells of the pancreas and plays a critical role in glucose metabolism, especially during fasting or low blood sugar levels.",
+            "chineseTranslation": "胰高血糖素",
+            "traditionalChineseTranslation": "胰高血糖素",
+            "lesson": 8
+        },
+        {
+            "word": "ovaries",
+            "prefix": "",
+            "root": "ovar",
+            "suffix": "ies",
+            "meaning": "The female reproductive organs that produce ova (egg cells) and hormones.",
+            "explanation": "Ovaries are part of the female reproductive system and are responsible for the production of oocytes (eggs) and hormones such as estrogen and progesterone.",
+            "chineseTranslation": "卵巢",
+            "traditionalChineseTranslation": "卵巢",
+            "lesson": 8
+        },
+        {
+            "word": "estrogen",
+            "prefix": "",
+            "root": "estr",
+            "suffix": "-gen",
+            "meaning": "a hormone that promotes the development and maintenance of female characteristics in the human body",
+            "explanation": "Estrogen is primarily produced in the ovaries and is responsible for regulating various functions in the female reproductive system, including the menstrual cycle and pregnancy. It also plays a role in other bodily systems and has implications for bone health, cardiovascular health, and mood.",
+            "chineseTranslation": "雌激素",
+            "traditionalChineseTranslation": "雌激素",
+            "lesson": 8
+        },
+        {
+            "word": "progesterone",
+            "meaning": "a hormone that regulates various functions in the body, particularly related to the menstrual cycle and pregnancy.",
+            "chineseTranslation": "孕激素",
+            "traditionalChineseTranslation": "孕激素",
+            "explanation": "Progesterone is crucial for maintaining the uterine lining for a possible pregnancy and plays a key role in the menstrual cycle.",
+            "prefix": "",
+            "root": "gest",
+            "suffix": "one",
+            "lesson": 8
+        },
+        {
+            "word": "testes",
+            "prefix": "",
+            "root": "testis",
+            "suffix": "es",
+            "meaning": "the male reproductive organs that produce sperm and hormones.",
+            "explanation": "Testes are responsible for the production of sperm and testosterone, which plays a key role in male sexual development and reproductive functions.",
+            "chineseTranslation": "睾丸",
+            "traditionalChineseTranslation": "睾丸",
+            "lesson": 8
+        },
+        {
+            "word": "testosterone",
+            "prefix": "",
+            "root": "testis",
+            "suffix": "sterone",
+            "meaning": "A steroid hormone produced mainly in the testes that is responsible for the development of male secondary sexual characteristics.",
+            "explanation": "Testosterone plays a key role in male sexual development such as the growth of facial hair, deepening of the voice, and increased muscle mass. It is also important for maintaining libido and overall health.",
+            "chineseTranslation": "睾酮",
+            "traditionalChineseTranslation": "睾酮",
+            "lesson": 8
+        },
+        {
+            "word": "thymus",
+            "prefix": "",
+            "root": "thym-",
+            "suffix": "-us",
+            "meaning": "a gland located in the upper chest that is involved in the immune system, particularly in the development of T-cells",
+            "explanation": "The thymus is a small organ situated behind the sternum and is important for the development of T-lymphocytes or T-cells, which are critical for immune response.",
+            "chineseTranslation": "胸腺",
+            "traditionalChineseTranslation": "胸腺",
+            "lesson": 8
+        },
+        {
+            "word": "thymosin",
+            "prefix": "",
+            "root": "thymus",
+            "suffix": "-in",
+            "meaning": "a hormone produced by the thymus gland that is involved in the development and differentiation of T-cells",
+            "explanation": "Thymosin is crucial in the immune system as it plays a role in the maturation of T-cells, which are vital for the adaptive immune response.",
+            "chineseTranslation": "胸腺素",
+            "traditionalChineseTranslation": "胸腺素",
+            "lesson": 8
+        },
+        {
+            "word": "melatonin",
+            "prefix": "",
+            "root": "melat-",
+            "suffix": "-onin",
+            "meaning": "A hormone that regulates sleep-wake cycles.",
+            "explanation": "Melatonin is produced by the pineal gland in the brain and helps control the body's circadian rhythm, signaling the body when it's time to sleep.",
+            "chineseTranslation": "褪黑激素",
+            "traditionalChineseTranslation": "褪黑激素",
+            "lesson": 8
+        },
+        {
+            "word": "hypothyroidism",
+            "prefix": "hypo-",
+            "root": "thyroid",
+            "suffix": "-ism",
+            "meaning": "a condition where the thyroid gland is underactive and produces insufficient hormones",
+            "explanation": "Hypothyroidism results in a slower metabolism, and may cause symptoms like fatigue, weight gain, and sensitivity to cold due to lowered hormonal levels.",
+            "chineseTranslation": "甲状腺功能减退",
+            "traditionalChineseTranslation": "甲狀腺功能減退",
+            "lesson": 8
+        },
+        {
+            "word": "hyperthyroidism",
+            "prefix": "hyper-",
+            "root": "thyroid",
+            "suffix": "-ism",
+            "meaning": "a condition of excessive thyroid hormone production",
+            "explanation": "Hyperthyroidism is a condition characterized by an overproduction of thyroid hormones by the thyroid gland, leading to a faster metabolism and various symptoms such as weight loss, increased heart rate, and anxiety.",
+            "chineseTranslation": "甲状腺功能亢进症",
+            "traditionalChineseTranslation": "甲狀腺功能亢進症",
+            "lesson": 8
+        },
+        {
+            "word": "goiter",
+            "prefix": "",
+            "root": "",
+            "suffix": "",
+            "meaning": "an enlargement of the thyroid gland",
+            "explanation": "Goiter is often associated with iodine deficiency or thyroid dysfunction, leading to an enlargement of the thyroid gland. This can be due to various factors including autoimmune diseases, infections, or nodular growth.",
+            "chineseTranslation": "甲状腺肿",
+            "traditionalChineseTranslation": "甲狀腺腫",
+            "lesson": 8
+        },
+        {
+            "word": "thyroid nodules",
+            "prefix": "",
+            "root": "",
+            "suffix": "",
+            "meaning": "A growth or lump in the thyroid gland.",
+            "explanation": "Thyroid nodules are abnormal growths or lumps in the thyroid gland, which is located in the neck. While most thyroid nodules are benign, some can be malignant, and they may need to be evaluated for potential cancer.",
+            "chineseTranslation": "甲状腺结节",
+            "traditionalChineseTranslation": "甲狀腺結節",
+            "lesson": 8
+        },
+        {
+            "word": "parathyroid hormone",
+            "prefix": "para-",
+            "root": "thyroid",
+            "suffix": "",
+            "meaning": "a hormone secreted by the parathyroid glands that helps regulate calcium levels in the blood and bone metabolism.",
+            "explanation": "Parathyroid hormone (PTH) is produced by the parathyroid glands and plays a crucial role in maintaining calcium homeostasis by increasing blood calcium levels, stimulating calcium release from bones, and enhancing calcium reabsorption in the kidneys.",
+            "chineseTranslation": "副甲状腺激素",
+            "traditionalChineseTranslation": "副甲狀腺激素",
+            "lesson": 8
+        }
+    ]
+}
